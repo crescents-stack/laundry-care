@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-dark-bg: 222.2 84% 4.9%;
+  --color-light-blue: 214.3 31.8% 91.4%;
+  --color-dark-blue: 217.2 32.6% 17.5%;
+  --color-white: 210 40% 98%;
+  --color-white-muted: 210 40% 96.1%;
+  --color-bright-user: 205 90% 44%;
+  --color-bright-rider: 150 71% 47%;
+  --color-bright-rider: 150 71% 47%;
+  --color-bright-admin: 150 71% 47%;
+  --color-purple: 230 92% 65%;
+}
+
+// theming
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: var(--color-dark-bg);
+
+    --muted: var(--color-white-muted);
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--color-dark-bg);
+
+    --card: 0 0% 100%;
+    --card-foreground: var(--color-dark-bg);
+
+    --border: var(--color-light-blue);
+    --input: var(--color-light-blue);
+
+    --primary: var(--color-bright-user);
+    --primary-foreground: var(--color-white);
+
+    --secondary: var(--color-purple);
+    --secondary-foreground: var(--color-white);
+
+    --accent: var(--color-white-muted);
+    --accent-foreground: var(--color-dark-blue);
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: var(--color-white);
+
+    --ring: 215 20.2% 65.1%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: var(--color-dark-bg);
+    --foreground: var(--color-white);
+
+    --muted: var(--color-dark-blue);
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --popover: var(--color-dark-bg);
+    --popover-foreground: var(--color-white);
+
+    --card: var(--color-dark-bg);
+    --card-foreground: var(--color-white);
+
+    --border: var(--color-dark-blue);
+    --input: var(--color-dark-blue);
+
+    --primary: var(--color-white);
+    --primary-foreground: var(--color-dark-blue);
+
+    --secondary: var(--color-purple);
+    --secondary-foreground: var(--color-white);
+
+    --accent: var(--color-dark-blue);
+    --accent-foreground: var(--color-white);
+
+    --destructive: 0 62.8% 40.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+
+    --ring: var(--color-dark-blue);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.container {
+  @apply max-w-[1440px] mx-auto;
+}
+
+.section-padding {
+  @apply py-16;
+}
+
+.section-margin {
+  @apply my-16;
+}
+
+h1 {
+  @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
+}
+h2 {
+  @apply text-2xl md:text-3xl lg:text-4xl xl:text-5xl;
+}
+h3 {
+  @apply text-xl md:text-2xl lg:text-3xl xl:text-4xl;
+}
