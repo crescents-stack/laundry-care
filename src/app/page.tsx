@@ -24,7 +24,7 @@ const Home = () => {
               </h1>
               <div>
                 <Button className="bg-lighter-50 text-user-500 hover:bg-lighter-200">
-                  Schedule a date
+                  Schedule your pickup
                 </Button>
               </div>
             </div>
