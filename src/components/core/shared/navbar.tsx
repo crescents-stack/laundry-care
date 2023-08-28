@@ -63,7 +63,7 @@ const Navbar = () => {
               <Link
                 key={id}
                 href={link}
-                className={`${!navStyle ? "text-lighter-50" : "text-user-500"}`}
+                className={`${!navStyle ? "text-lighter-50" : "text-user-500"} hidden lg:block`}
               >
                 {text}
               </Link>
