@@ -4,13 +4,14 @@
 import { useEffect, useState } from "react";
 import Logo from "../assets/logo";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Navbar = () => {
   const [navStyle, setNavStyle] = useState(true);
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", () => {
-        console.log(window.scrollY)
+        console.log(window.scrollY);
         if (window.scrollY < 300) {
           setNavStyle(false);
         } else {
@@ -19,10 +20,28 @@ const Navbar = () => {
       });
     }
   }, []);
+
+  const NavItems = [
+    {
+      id: 0,
+      text: "How it works",
+      link: "#how-it-works",
+    },
+    {
+      id: 1,
+      text: "Service & Prices",
+      link: "#service-&-prices",
+    },
+    {
+      id: 2,
+      text: "About",
+      link: "#about",
+    },
+  ];
   return (
     <nav
-      className={`sticky top-0 transition ease-in-out duration-500 ${
-        !navStyle ? "bg-user-500" : "bg-lighter-50"
+      className={`sticky top-0 transition ease-in-out duration-500  ${
+        !navStyle ? "bg-user-500 shadow" : "bg-lighter-50 shadow-md"
       }`}
     >
       <div
@@ -38,7 +57,19 @@ const Navbar = () => {
           <Logo />
           Laundry Care
         </div>
-        <div>
+        <div className="flex items-center justify-end gap-10">
+          {NavItems.map((item) => {
+            const { text, link, id } = item;
+            return (
+              <Link
+                key={id}
+                href={link}
+                className={`${!navStyle ? "text-lighter-50" : "text-user-500"}`}
+              >
+                {text}
+              </Link>
+            );
+          })}
           <Button
             className={`${
               navStyle

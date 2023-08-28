@@ -73,7 +73,7 @@ const Home = () => {
       </section>
       <section className="section-padding container">
         <div className="">
-          <h3 className="text-center font-bold">
+          <h3 className="text-center font-bold" id="#how-it-works">
             We collect, clean, and deliver <br /> your laundry and dry cleaning.
           </h3>
         </div>
