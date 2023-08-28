@@ -1,13 +1,22 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import WaveBack from "@/components/core/assets/backgrounds/wave/wave";
 
 const Home = () => {
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      localStorage.setItem("theme", "light");
+    }
+  }, []);
   return (
     <div>
       <section className="section-padding bg-user-500">
-        <div className="container mx-auto min-h-[40vh] grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="container mx-auto min-h-[30vh] grid grid-cols-1 md:grid-cols-2 gap-10">
           <aside className="flex items-center justify-center">
             <div className="flex flex-col gap-10">
               <h1 className="font-bold text-user-50">
@@ -24,23 +33,25 @@ const Home = () => {
             <Image
               src="/images/hero-cloths.png"
               alt=""
-              height={200}
-              width={200}
+              height={1000}
+              width={1000}
               className="w-full h-full"
             />
           </aside>
         </div>
       </section>
-      <section className="section-padding bg-user-800 text-lighter-50">
-        <div className="flex items-center justify-between gap-10 container">
-          <div className="grid grid-cols-1 gap-3 ">
-            <h3 className="text-3xl font-bold">Ranked #1 by Customers</h3>
-            <p className="text-user-200">
+      <section className="section-padding bg-user-800 text-lighter-50 relative">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-10 container pb-10 lg:pb-20">
+          <div className="grid grid-cols-1 gap-3">
+            <h3 className="text-3xl font-bold text-center md:text-left">
+              Ranked #1 by Customers
+            </h3>
+            <p className="text-user-200 text-center md:text-left">
               in categories Dry cleaner, Laundry service and Laundrette
             </p>
           </div>
-          <div className="flex flex-col items-end gap-3">
-            <div className="flex items-center justify-end gap-1">
+          <div className="flex flex-col item-start md:items-end gap-3">
+            <div className="flex items-center justify-start md:justify-end gap-1">
               {[1, 2, 3, 4, 5].map((item) => {
                 return (
                   <Star
@@ -50,9 +61,15 @@ const Home = () => {
                 );
               })}
             </div>
-            <Link href="/" className="hover:text-user-400">See all reivews</Link>
+            <Link
+              href="/"
+              className="hover:text-user-400 text-center md:text-left"
+            >
+              See all reivews
+            </Link>
           </div>
         </div>
+        <WaveBack />
       </section>
       <section className="section-padding container">
         <div className="">
