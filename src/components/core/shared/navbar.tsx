@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const Navbar = () => {
-  const [navStyle, setNavStyle] = useState(true);
+  const [navStyle, setNavStyle] = useState<Boolean>(false);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", () => {
-        console.log(window.scrollY);
-        if (window.scrollY < 300) {
+        console.log(navStyle);
+        if (window.scrollY < 50) {
           setNavStyle(false);
         } else {
           setNavStyle(true);
@@ -29,8 +30,8 @@ const Navbar = () => {
     },
     {
       id: 1,
-      text: "Service & Prices",
-      link: "#service-&-prices",
+      text: "Services & Prices",
+      link: "#services-&-prices",
     },
     {
       id: 2,
@@ -40,14 +41,12 @@ const Navbar = () => {
   ];
   return (
     <nav
-      className={`sticky top-0 transition ease-in-out duration-500  ${
+      className={`sticky top-0 z-50 transition ease-in-out duration-500  ${
         !navStyle ? "bg-user-500 shadow" : "bg-lighter-50 shadow-md"
       }`}
     >
       <div
-        className={`flex items-center justify-between gap-10 px-10 container ${
-          !navStyle ? "py-8" : "py-5"
-        }`}
+        className={`flex items-center justify-between gap-10 px-10 container py-4`}
       >
         <div
           className={`text-2xl font-bold flex items-center gap-2 ${

@@ -1,9 +1,10 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.scss";
-import "@/components/core/assets/backgrounds/wave/wave.scss"
+import "@/components/core/assets/backgrounds/wave/wave.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/core/shared/navbar";
+import Footer from "@/components/core/assets/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
