@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <nav
       className={`sticky top-0 z-50 transition ease-in-out duration-500  ${
-        !navStyle ? "bg-user-500 shadow" : "bg-lighter-50 shadow-md"
+        !navStyle ? "bg-user-500 shadow" : "bg-lighter-50 shadow-lg"
       }`}
     >
       <div
