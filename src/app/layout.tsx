@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/components/theme-provider";
+
 import "./globals.scss";
 import "@/components/core/assets/backgrounds/wave/wave.scss";
 import type { Metadata } from "next";
@@ -21,11 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        <Navbar />
+        {children}
+        <Footer />
       </body>
     </html>
   );

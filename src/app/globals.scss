@@ -49,37 +49,6 @@
 
     --radius: 0.5rem;
   }
-
-  .dark {
-    --background: var(--color-dark-bg);
-    --foreground: var(--color-white);
-
-    --muted: var(--color-dark-blue);
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --popover: var(--color-dark-bg);
-    --popover-foreground: var(--color-white);
-
-    --card: var(--color-dark-bg);
-    --card-foreground: var(--color-white);
-
-    --border: var(--color-dark-blue);
-    --input: var(--color-dark-blue);
-
-    --primary: var(--color-white);
-    --primary-foreground: var(--color-dark-blue);
-
-    --secondary: var(--color-purple);
-    --secondary-foreground: var(--color-white);
-
-    --accent: var(--color-dark-blue);
-    --accent-foreground: var(--color-white);
-
-    --destructive: 0 62.8% 40.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
-
-    --ring: var(--color-dark-blue);
-  }
 }
 
 @layer base {
@@ -104,11 +73,11 @@
 }
 
 h1 {
-  @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
+  @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold;
 }
 h2 {
-  @apply text-2xl md:text-3xl lg:text-4xl xl:text-5xl;
+  @apply text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold;
 }
 h3 {
-  @apply text-xl md:text-2xl lg:text-3xl xl:text-4xl;
+  @apply text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold;
 }

@@ -26,12 +26,12 @@ const Navbar = () => {
     {
       id: 0,
       text: "How it works",
-      link: "#how-it-works",
+      link: "#howitworks",
     },
     {
       id: 1,
       text: "Services & Prices",
-      link: "#services-&-prices",
+      link: "#services&prices",
     },
     {
       id: 2,
@@ -53,7 +53,11 @@ const Navbar = () => {
             !navStyle ? "text-lighter-50" : "text-user-500"
           }`}
         >
-          <Logo />
+          <Logo
+            color={`${!navStyle ? "fill-yellow-300" : "fill-user-500"}`}
+            height="50"
+            width="50"
+          />
           Laundry Care
         </div>
         <div className="flex items-center justify-end gap-10">
@@ -63,7 +67,9 @@ const Navbar = () => {
               <Link
                 key={id}
                 href={link}
-                className={`${!navStyle ? "text-lighter-50" : "text-user-500"} hidden lg:block`}
+                className={`${
+                  !navStyle ? "text-lighter-50" : "text-user-500"
+                } hidden lg:block`}
               >
                 {text}
               </Link>

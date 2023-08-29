@@ -1,18 +1,11 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 import WaveBack from "@/components/core/assets/backgrounds/wave/wave";
+import HowItWorks from "@/components/core/pages/home/how-it-works";
 
 const Home = () => {
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      localStorage.setItem("theme", "light");
-    }
-  }, []);
   return (
     <div>
       <section className="section-padding bg-user-500">
@@ -20,7 +13,9 @@ const Home = () => {
           <aside className="flex items-center justify-center">
             <div className="flex flex-col gap-10">
               <h1 className="font-bold text-user-50">
-                Laundry & Dry Cleaning With 48h Delivery
+                Laundry & Dry Cleaning with 48h Delivery at
+                <br />
+                <span className="text-yellow-300"> Bashundhara</span>
               </h1>
               <div>
                 <Button className="bg-lighter-50 text-user-500 hover:bg-lighter-200">
@@ -36,6 +31,7 @@ const Home = () => {
               height={1000}
               width={1000}
               className="w-full h-full"
+              priority={true}
             />
           </aside>
         </div>
@@ -73,11 +69,12 @@ const Home = () => {
       </section>
       <section className="section-padding container">
         <div className="">
-          <h3 className="text-center font-bold" id="#how-it-works">
+          <h3 className="text-center font-bold text-user-900">
             We collect, clean, and deliver <br /> your laundry and dry cleaning.
           </h3>
         </div>
       </section>
+      <HowItWorks />
     </div>
   );
 };
