@@ -38,7 +38,7 @@ const HeroSection = () => {
       <section className="section-padding bg-user-800 text-lighter-50 relative">
         <div className="flex flex-col md:flex-row items-center justify-between gap-10 container pb-10 lg:pb-20">
           <div className="grid grid-cols-1 gap-3">
-            <h3 className="text-3xl font-bold text-center md:text-left">
+            <h3 className="text-3xl font-bold text-center md:text-left text-lighter-50">
               Ranked #1 by Customers
             </h3>
             <p className="text-user-200 text-center md:text-left">
@@ -58,7 +58,7 @@ const HeroSection = () => {
             </div>
             <Link
               href="/"
-              className="hover:text-user-400 text-center md:text-left"
+              className="text-lighter-50 hover:text-user-400 text-center md:text-left"
             >
               See all reivews
             </Link>
