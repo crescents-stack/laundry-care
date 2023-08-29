@@ -91,6 +91,13 @@ const HowItWorks = () => {
   ];
   return (
     <>
+      <section className="section-padding container">
+        <div className="">
+          <h3 className="text-center font-bold text-user-900">
+            We collect, clean, and deliver <br /> your laundry and dry cleaning.
+          </h3>
+        </div>
+      </section>
       <section className="container pb-20 grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
         {STEPS.map((item) => {
           const { id, dimmedTitle, title, shortDescription, list } = item;
