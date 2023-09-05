@@ -40,7 +40,7 @@ const CompareServices = () => {
                   <tr
                     key={id}
                     className={`${
-                      id % 2 !== 0 ? "bg-lighter-400" : "bg-lighter-50"
+                      id % 2 !== 0 ? "bg-gray-100" : "bg-white"
                     } ${
                       id === 0
                         ? "rounded-bl-lg"
