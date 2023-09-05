@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { LeafIcon } from "lucide-react";
 
 const CompareServices = () => {
@@ -85,6 +86,8 @@ const CompareServices = () => {
                             {icon}
                             {text}
                           </div>
+                          <br />
+                          {id !== 0 && row.id === 6 ? <Button>Get service</Button> : null}
                         </td>
                       );
                     })}
