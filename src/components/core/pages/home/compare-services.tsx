@@ -109,7 +109,7 @@ const TableData = {
     {
       id: 0,
       color: "#f2f2f2",
-      text: " ",
+      text: "...",
       icon: "",
     },
     {
