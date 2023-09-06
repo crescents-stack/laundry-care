@@ -46,10 +46,10 @@ const Navbar = () => {
       }`}
     >
       <div
-        className={`flex items-center justify-between gap-10 px-10 container py-4`}
+        className={`flex items-center justify-between gap-10 px-4 md:px-10 container py-2 md:py-4`}
       >
         <div
-          className={`text-2xl font-bold flex items-center gap-2 ${
+          className={`text-lg md:text-2xl font-bold flex items-center gap-2 ${
             !navStyle ? "text-lighter-50" : "text-user-500"
           }`}
         >
