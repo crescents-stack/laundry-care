@@ -1,5 +1,5 @@
 
-#### 0.1.6 (2023-09-07)
+#### 0.1.4 (2023-09-07)
 
 ##### Other Changes
 *  [Bug] Heading elements are not in a sequentially-descending order #15 (4eba3929)
