@@ -58,13 +58,13 @@ const CompareServices = () => {
                             id === 0
                               ? "font-semibold text-user-700 bg-[#F2F2F280]"
                               : id === 1
-                              ? "bg-[#BAEBFF40]"
+                              ? "bg-[#BAEBFF10]"
                               : id === 2
-                              ? "bg-[#93ECE540]"
+                              ? "bg-[#93ECE510]"
                               : id === 3
-                              ? "bg-[#FFE5AE40]"
+                              ? "bg-[#FFE5AE10]"
                               : id === 4
-                              ? "bg-[#DCF5FF40]"
+                              ? "bg-[#DCF5FF10]"
                               : ""
                           }
                           ${id !== 0 ? "text-center" : ""}

@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <nav
       className={`sticky top-0 z-50 transition ease-in-out duration-500  ${
-        !navStyle ? "bg-user-500 shadow" : "bg-lighter-50 shadow-lg"
+        !navStyle ? "bg-user-600 shadow" : "bg-lighter-50 shadow-lg"
       }`}
     >
       <div
@@ -50,7 +50,7 @@ const Navbar = () => {
       >
         <div
           className={`text-lg md:text-2xl font-bold flex items-center gap-2 ${
-            !navStyle ? "text-lighter-50" : "text-user-500"
+            !navStyle ? "text-white" : "text-user-600"
           }`}
         >
           <Logo
@@ -68,7 +68,7 @@ const Navbar = () => {
                 key={id}
                 href={link}
                 className={`${
-                  !navStyle ? "text-lighter-50" : "text-user-500"
+                  !navStyle ? "text-white" : "text-user-600"
                 } hidden lg:block`}
               >
                 {text}
@@ -78,8 +78,8 @@ const Navbar = () => {
           <Button
             className={`${
               navStyle
-                ? "text-lighter-50 bg-user-500"
-                : "text-user-500 bg-lighter-50 hover:bg-lighter-200"
+                ? "text-white bg-user-600"
+                : "text-user-600 bg-lighter-50 hover:bg-lighter-200"
             }`}
           >
             Login

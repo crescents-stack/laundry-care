@@ -7,7 +7,7 @@ import { Star } from "lucide-react";
 const HeroSection = () => {
   return (
     <>
-      <section className="section-padding bg-user-500">
+      <section className="section-padding bg-user-600">
         <div className="container mx-auto min-h-[30vh] grid grid-cols-1 md:grid-cols-2 gap-10">
           <aside className="flex items-center justify-center">
             <div className="flex flex-col gap-10">
@@ -17,7 +17,7 @@ const HeroSection = () => {
                 <span className="text-yellow-300"> Bashundhara</span>
               </h1>
               <div>
-                <Button className="bg-lighter-50 text-user-500 hover:bg-lighter-200">
+                <Button className="bg-lighter-50 text-user-600 hover:bg-lighter-200">
                   Schedule your pickup
                 </Button>
               </div>
@@ -35,10 +35,10 @@ const HeroSection = () => {
           </aside>
         </div>
       </section>
-      <section className="section-padding bg-user-800 text-lighter-50 relative">
+      <section className="section-padding bg-user-800 text-white relative">
         <div className="flex flex-col md:flex-row items-center justify-between gap-10 container pb-10 lg:pb-20">
           <div className="grid grid-cols-1 gap-3">
-            <h3 className="text-3xl font-bold text-center md:text-left text-lighter-50">
+            <h3 className="text-3xl font-bold text-center md:text-left text-white">
               Ranked #1 by Customers
             </h3>
             <p className="text-user-200 text-center md:text-left">
@@ -58,7 +58,7 @@ const HeroSection = () => {
             </div>
             <Link
               href="/"
-              className="text-lighter-50 hover:text-user-400 text-center md:text-left"
+              className="text-white hover:text-user-400 text-center md:text-left"
             >
               See all reivews
             </Link>
