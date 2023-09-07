@@ -1,7 +1,9 @@
+
 #### 0.1.3 (2023-09-07)
 
 ##### Other Changes
 
+*  [Feature] Shop list carousel need to be implemented #13 (ca475042)
 *  [Feature] Customer section in use landing page #7 (a9f6e3e3)
 *  [Accessibility] Service compare table header not found! #12 (93212c72)
 *  [Accessibility] Service compare table header not found! #12 (15e01bfd)
