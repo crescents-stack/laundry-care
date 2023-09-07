@@ -1,8 +1,10 @@
 
-#### 0.1.3 (2023-09-07)
+#### 0.1.6 (2023-09-07)
 
 ##### Other Changes
-
+*  [Bug] Heading elements are not in a sequentially-descending order #15 (4eba3929)
+*  [Bug] Background and foreground has not sufficient contrust #14 (78d5ef96)
+*  [Feature] FAQ section in user landing page #9 (618cb072)
 *  [Feature] Shop list carousel need to be implemented #13 (ca475042)
 *  [Feature] Customer section in use landing page #7 (a9f6e3e3)
 *  [Accessibility] Service compare table header not found! #12 (93212c72)
