@@ -93,12 +93,12 @@ const HowItWorks = () => {
     <>
       <section className="section-padding container">
         <div className="">
-          <h2 className="text-user-800 text-center">
+          <h3 className="text-user-800 text-center">
             We <span className="text-rider-400">Collect</span>,{" "}
             <span className="text-shop-400">clean</span>, and{" "}
             <span className="text-user-400">deliver <br /></span> your laundry and dry
             cleaning
-          </h2>
+          </h3>
         </div>
       </section>
       <section className="container pb-20 grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
@@ -106,9 +106,9 @@ const HowItWorks = () => {
           const { id, dimmedTitle, title, shortDescription, list } = item;
           return (
             <div key={id} className="flex flex-col gap-4">
-              <h6 className="font-semibold text-gray-400 uppercase">
+              <p className="font-semibold text-gray-400 uppercase">
                 {dimmedTitle}
-              </h6>
+              </p>
               <h4 className="font-bold text-xl md:text-2xl lg:text-3xl text-user-900">
                 {title}
               </h4>

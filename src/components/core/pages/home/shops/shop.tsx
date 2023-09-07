@@ -20,9 +20,9 @@ const Shop = ({ details }: { details: detailsType }) => {
         <div className="grid grid-cols-1 gap-5">
           <div className="flex items-end justify-between gap-5">
             <div>
-              <h4 className="font-bold text-user-800 text-lg lg:text-xl">
+              <p className="font-bold text-user-800 text-lg lg:text-xl">
                 {title}
-              </h4>
+              </p>
               <p className="text-body-200">{location}</p>
             </div>
             <div className="flex flex-col items-end justify-end gap-1">

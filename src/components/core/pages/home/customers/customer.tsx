@@ -18,7 +18,7 @@ const Customer = ({ details }: { details: ReviewType }) => {
           />
         </div>
         <div className="grid grid-cols-1">
-          <h6 className="font-bold text-user-700">{name}</h6>
+          <p className="font-bold text-user-700">{name}</p>
           <p className="flex items-center justify-start gap-1 text-user-700">
             {rating}
             <Star className="stroke-user-700 h-4 w-4" />

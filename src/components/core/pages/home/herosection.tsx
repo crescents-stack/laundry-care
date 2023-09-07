@@ -38,9 +38,9 @@ const HeroSection = () => {
       <section className="section-padding bg-user-800 text-white relative">
         <div className="flex flex-col md:flex-row items-center justify-between gap-10 container pb-10 lg:pb-20">
           <div className="grid grid-cols-1 gap-3">
-            <h3 className="text-3xl font-bold text-center md:text-left text-white">
+            <h2 className="text-3xl font-bold text-center md:text-left text-white">
               Ranked #1 by Customers
-            </h3>
+            </h2>
             <p className="text-user-200 text-center md:text-left">
               in categories Dry cleaner, Laundry service and Laundrette
             </p>
