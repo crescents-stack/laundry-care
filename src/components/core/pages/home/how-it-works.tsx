@@ -93,9 +93,12 @@ const HowItWorks = () => {
     <>
       <section className="section-padding container">
         <div className="">
-          <h3 className="text-center font-bold text-user-900">
-            We collect, clean, and deliver <br /> your laundry and dry cleaning.
-          </h3>
+          <h2 className="text-user-800 text-center">
+            We <span className="text-rider-400">Collect</span>,{" "}
+            <span className="text-shop-400">clean</span>, and{" "}
+            <span className="text-user-400">deliver <br /></span> your laundry and dry
+            cleaning
+          </h2>
         </div>
       </section>
       <section className="container pb-20 grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
