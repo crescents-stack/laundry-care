@@ -113,7 +113,7 @@ const Footer = () => {
         })}
       </div>
       <div className="py-10 border-t border-user-50 text-gray-400 container">
-        All rights reserved. © Laundryheap 2023. By visiting this page you agree
+        All rights reserved. © Laundrycare 2023. By visiting this page you agree
         to our{" "}
         <Link href="#" className="text-user-600 hover:underline">
           privacy policy
