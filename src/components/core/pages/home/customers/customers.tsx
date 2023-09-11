@@ -2,7 +2,7 @@
 
 import Customer from "./customer";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Pagination, A11y } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -89,8 +89,8 @@ const Customers = () => {
             },
           }}
           pagination={{ clickable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
         >
           {CustomerReviewList.map((item: ReviewType) => {
             return (
@@ -99,6 +99,7 @@ const Customers = () => {
               </SwiperSlide>
             );
           })}
+          <SwiperSlide className="w-full min-h-[250px]"></SwiperSlide>
         </Swiper>
         <div className="container flex justify-end">
           <Link

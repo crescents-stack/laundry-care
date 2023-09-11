@@ -1,0 +1,114 @@
+{
+    "home": {
+        "hero": {
+            "heading": {
+                "white": "Laundry & Dry Cleaning with 48h Delivery at",
+                "highlighted": "Bashundhara"
+            },
+            "btnText": "Schedule you pickup",
+            "footer": {
+                "left": {
+                    "heading": "Ranked #1 by Customers",
+                    "p": "in categories Dry cleaner, Laudnry service and Laundrette"
+                },
+                "right": {
+                    "p": "See all reviews"
+                }
+            }
+        },
+        "howItWorks": {
+            "heading": {
+                "start": "We",
+                "span1": "Collect",
+                "span2": "Clean",
+                "middle": ", and",
+                "span3": "Deliver",
+                "end": "you laundry and dry cleaning"
+            },
+            "steps": [
+                {
+                    "id": 0,
+                    "dimmedTitle": "Flexible",
+                    "title": "1. Schedule your Collection",
+                    "shortDescription": "Plan your day with case. Choose a collection and delivery time at your convenience",
+                    "list": [
+                        {
+                            "id": 0,
+                            "icon": "",
+                            "text": "Book online or with our mobile app"
+                        },
+                        {
+                            "id": 1,
+                            "icon": "",
+                            "text": "Weekend and evening slots available"
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "dimmedTitle": "Quiz & Easy",
+                    "title": "2. Pack your laundry",
+                    "shortDescription": "Packe your items in a disposable bag. Use one bag per service. Our driver will transfer them to reusable Laundryheap bags which you can keep for your next order",
+                    "list": [
+                        {
+                            "id": 0,
+                            "icon": "",
+                            "text": "Pack one bag per service"
+                        },
+                        {
+                            "id": 1,
+                            "icon": "",
+                            "text": "No need to count or weigh your items"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "dimmedTitle": "Transparent",
+                    "title": "3. Wait for our driver",
+                    "shortDescription": "You'll receive a notification when our driver is nearby. They will collect your bags and take them to your local cleaning facility.",
+                    "list": [
+                        {
+                            "id": 0,
+                            "icon": "",
+                            "text": "Regular order updates"
+                        },
+                        {
+                            "id": 1,
+                            "icon": "",
+                            "text": "Live driver tracking"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "dimmedTitle": "Convenient",
+                    "title": "4. Relax while we take care of your laundry",
+                    "shortDescription": "Your local partner facility will clean your items with utmost care. Our driver will then deliver them back to you whenever you like. Your're in full control of your delivery and can always reschedule if not at home",
+                    "list": [
+                        {
+                            "id": 0,
+                            "icon": "",
+                            "text": "24h turnaround time"
+                        },
+                        {
+                            "id": 1,
+                            "icon": "",
+                            "text": "Real-time order status"
+                        },
+                        {
+                            "id": 2,
+                            "icon": "",
+                            "text": "Easy to reschedule"
+                        }
+                    ],
+                    "button": {
+                        "text": "Schedule your pickup",
+                        "icon": "",
+                        "link": "#"
+                    }
+                }
+            ]
+        }
+    }
+}

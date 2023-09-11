@@ -5,6 +5,7 @@ import Shops from "@/components/core/pages/home/shops/shops";
 import Customers from "@/components/core/pages/home/customers/customers";
 import FAQ from "@/components/core/pages/faq";
 
+
 const Home = () => {
   return (
     <div>

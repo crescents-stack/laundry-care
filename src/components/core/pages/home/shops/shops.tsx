@@ -57,14 +57,15 @@ const Shops = () => {
               </SwiperSlide>
             );
           })}
+          <SwiperSlide className="w-full min-h-[250px]"></SwiperSlide>
         </Swiper>
-        <div className="flex justify-end">
-        <Link
-          href="/"
-          className="text-user-500 hover:underline hover:text-user-300 container font-semibold text-right"
-        >
-          All shop partners...
-        </Link>
+        <div className="flex justify-start items-start">
+          <Link
+            href="/"
+            className="text-user-500 hover:underline hover:text-user-300 container font-semibold text-right"
+          >
+            All shop partners...
+          </Link>
         </div>
       </div>
     </div>
