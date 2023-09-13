@@ -5,9 +5,16 @@ import { useEffect, useState } from "react";
 import Logo from "../assets/logo";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import LangSwitch from "../assets/lang-switch";
+import { usePathname } from "next/navigation";
+import Bangla from "@/lib/dictionaries/bangla.json";
+import English from "@/lib/dictionaries/english.json";
 
 const Navbar = () => {
   const [navStyle, setNavStyle] = useState<Boolean>(false);
+  const pathname = usePathname();
+
+  const dictionary = pathname.includes("/bn") ? Bangla : English;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -21,24 +28,6 @@ const Navbar = () => {
       });
     }
   }, []);
-
-  const NavItems = [
-    {
-      id: 0,
-      text: "How it works",
-      link: "#howitworks",
-    },
-    {
-      id: 1,
-      text: "Services & Prices",
-      link: "#services&prices",
-    },
-    {
-      id: 2,
-      text: "About",
-      link: "#about",
-    },
-  ];
   return (
     <nav
       className={`sticky top-0 z-50 transition ease-in-out duration-500  ${
@@ -48,7 +37,8 @@ const Navbar = () => {
       <div
         className={`flex items-center justify-between gap-10 px-4 md:px-10 container py-2 md:py-4`}
       >
-        <div
+        <Link
+          href={pathname.includes("/bn") ? "/bn" : "/en"}
           className={`text-lg md:text-2xl font-bold flex items-center gap-2 ${
             !navStyle ? "text-white" : "text-user-600"
           }`}
@@ -58,10 +48,10 @@ const Navbar = () => {
             height="50"
             width="50"
           />
-          Laundry Care
-        </div>
+          {dictionary.navbar.brandName}
+        </Link>
         <div className="flex items-center justify-end gap-10">
-          {NavItems.map((item) => {
+          {dictionary.navbar.links.map((item: any) => {
             const { text, link, id } = item;
             return (
               <Link
@@ -75,6 +65,11 @@ const Navbar = () => {
               </Link>
             );
           })}
+          <LangSwitch
+            navStyle={navStyle}
+            languages={dictionary.navbar.languageSwitch}
+            pathname={pathname}
+          />
           <Button
             className={`${
               navStyle
@@ -82,7 +77,7 @@ const Navbar = () => {
                 : "text-user-600 bg-lighter-50 hover:bg-lighter-200"
             }`}
           >
-            Login
+            {dictionary.navbar.login}
           </Button>
         </div>
       </div>

@@ -1,0 +1,1 @@
+export type ParamLang = { params: { lang: string } };

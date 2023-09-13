@@ -1,11 +1,37 @@
 {
+    "navbar": {
+        "brandName": "Laundry Care",
+        "links": [
+            {
+                "id": 0,
+                "text": "How it works",
+                "link": "#howitworks"
+            },
+            {
+                "id": 1,
+                "text": "Services & Prices",
+                "link": "#services&Prices"
+            },
+            {
+                "id": 2,
+                "text": "About",
+                "link": "#about"
+            }
+        ],
+        "languageSwitch": {
+            "language": "Language",
+            "english": "English",
+            "bangla": "Bangla"
+        },
+        "login": "Login"
+    },
     "home": {
         "hero": {
             "heading": {
-                "white": "Laundry & Dry Cleaning with 48h Delivery at",
+                "white": "Laundry & Dry Cleaning with 48h Delivery",
                 "highlighted": "Bashundhara"
             },
-            "btnText": "Schedule you pickup",
+            "btnText": "Pickup Schedule ",
             "footer": {
                 "left": {
                     "heading": "Ranked #1 by Customers",

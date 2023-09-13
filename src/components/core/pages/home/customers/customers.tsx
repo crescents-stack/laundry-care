@@ -18,7 +18,7 @@ export type ReviewType = {
   image: string;
 };
 
-const Customers = () => {
+const Customers = ({ dictionary }: { dictionary: any }) => {
   const CustomerReviewList = [
     {
       id: 0,

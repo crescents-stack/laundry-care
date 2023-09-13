@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { LeafIcon } from "lucide-react";
 
-const CompareServices = () => {
+const CompareServices = ({ dictionary }: { dictionary: any }) => {
   return (
     <section className=" section-margin bg-user-700">
       <div className="container section-padding ">

@@ -18,7 +18,7 @@ export type detailsType = {
   image: string;
   rating: [ratingType, ratingType, ratingType, ratingType, ratingType];
 };
-const Shops = () => {
+const Shops = ({ dictionary }: { dictionary: any }) => {
   return (
     <div className="section-padding section-margin">
       <div className="container">

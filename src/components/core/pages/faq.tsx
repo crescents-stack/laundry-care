@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import Link from "next/link";
 
-const FAQ = () => {
+const FAQ = ({ dictionary }: { dictionary: any }) => {
   const FaqItems = [
     {
       id: 0,
