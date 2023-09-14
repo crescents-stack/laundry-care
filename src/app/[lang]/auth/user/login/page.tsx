@@ -103,7 +103,12 @@ const Login = () => {
                 Remember me
               </label>
             </div>
-            <Link href="/" className="hover:text-user-400">
+            <Link
+              href={`${
+                pathname.includes("/bn") ? "/bn" : "/en"
+              }/auth/user/forget-password`}
+              className="hover:text-user-400"
+            >
               Forget password?
             </Link>
           </div>
