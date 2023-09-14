@@ -44,7 +44,7 @@ function PhoneNumberInput({ onChange }: { onChange: Function }) {
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className="w-full sm:w-[180px] justify-between p-2 rounded-lg sm:rounded-l-lg sm:rounded-r-none"
+              className="w-full sm:w-[180px] sm:border-r-0 font-normal justify-between p-2 rounded-lg sm:rounded-l-lg sm:rounded-r-none"
             >
               {label}
               <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -88,7 +88,7 @@ function PhoneNumberInput({ onChange }: { onChange: Function }) {
           name="phone"
           placeholder="123-456-7890"
           onChange={(e) => setPhone(e.target.value)}
-          className="px-2 py-[5px] sm:border-l-0 border border-lighter-400 hover:border-user-400 rounded-lg sm:rounded-r-lg sm:rounded-l-none focus:outline-none flex-1"
+          className="px-2 py-[5px] border border-lighter-400 hover:border-user-400 rounded-lg sm:rounded-r-lg sm:rounded-l-none focus:outline-none flex-1"
         />
       </div>
     </div>

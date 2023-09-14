@@ -70,15 +70,19 @@ const Navbar = () => {
             languages={dictionary.navbar.languageSwitch}
             pathname={pathname}
           />
-          <Button
-            className={`${
-              navStyle
-                ? "text-white bg-user-600"
-                : "text-user-600 bg-lighter-50 hover:bg-lighter-200"
-            }`}
+          <Link
+            href={`${pathname.includes("/bn") ? "/bn" : "/en"}/auth/user/login`}
           >
-            {dictionary.navbar.login}
-          </Button>
+            <Button
+              className={`${
+                navStyle
+                  ? "text-white bg-user-600"
+                  : "text-user-600 bg-lighter-50 hover:bg-lighter-200"
+              }`}
+            >
+              {dictionary.navbar.login}
+            </Button>
+          </Link>
         </div>
       </div>
     </nav>
