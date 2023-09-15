@@ -85,3 +85,13 @@ h2 {
 h3 {
   @apply text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold;
 }
+
+.btn-admin {
+  @apply bg-admin-600 hover:bg-admin-400;
+}
+.btn-shop {
+  @apply bg-shop-600 hover:bg-shop-400;
+}
+.btn-rider {
+  @apply bg-rider-600 hover:bg-rider-400;
+}
