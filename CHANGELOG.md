@@ -1,3 +1,11 @@
+#### 0.1.6 (2023-09-22)
+
+##### Other Changes
+
+*  [Feature] Tailwind+PlainCSS Theme Concept #24 (8d639988)
+*  [Feature] Home > /bn #25 (d721ec60)
+*  [Feature] Forget password link in login page #23 (8e1a3df7)
+
 #### 0.1.5 (2023-09-14)
 
 ##### Changes
