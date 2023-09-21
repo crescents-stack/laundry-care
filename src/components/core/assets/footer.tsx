@@ -88,12 +88,12 @@ const Footer = () => {
     },
   ];
   return (
-    <footer className="section-padding border-t border-user-50">
+    <footer className="section-padding border-t border-[hsl(var(--primary-50))]">
       <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pb-10">
         {Links.map((item) => {
           return (
             <div key={item.id}>
-              <h4 className="text-lg lg:text-xl font-bold">{item.parent}</h4>
+              <h4 className="text-lg lg:text-xl font-bold text-[hsl(var(--primary-800))]">{item.parent}</h4>
               <div className="flex flex-col items-start justify-start gap-3 py-5">
                 {item.childs.map((children) => {
                   const { id, link, child } = children;
@@ -101,7 +101,7 @@ const Footer = () => {
                     <Link
                       key={id}
                       href={link}
-                      className="text-body-600 hover:text-user-600"
+                      className="text-[hsl(var(--primary-900))] hover:text-[hsl(var(--primary-600))]"
                     >
                       {child}
                     </Link>
@@ -115,11 +115,11 @@ const Footer = () => {
       <div className="py-10 border-t border-user-50 text-gray-400 container">
         All rights reserved. © Laundrycare 2023. By visiting this page you agree
         to our{" "}
-        <Link href="#" className="text-user-600 hover:underline">
+        <Link href="#" className="text-[hsl(var(--primary-600))] hover:underline">
           privacy policy
         </Link>{" "}
         and{" "}
-        <Link href="#" className="text-user-600 hover:underline">
+        <Link href="#" className="text-[hsl(var(--primary-600))] hover:underline">
           terms and conditions
         </Link>
         .

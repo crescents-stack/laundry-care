@@ -8,7 +8,7 @@ const Customer = ({ details }: { details: ReviewType }) => {
     <div className="grid grid-cols-1 gap-5 min-w-[250px] w-full">
       <p>{review}</p>
       <div className="flex items-center justify-start gap-3 ">
-        <div className="border-[2px] border-user-700 rounded-full">
+        <div className="border-[2px] border-[hsl(var(--primary-700))] rounded-full">
           <Image
             src={`/avatars/${image}`}
             alt="customer image"
@@ -18,10 +18,10 @@ const Customer = ({ details }: { details: ReviewType }) => {
           />
         </div>
         <div className="grid grid-cols-1">
-          <p className="font-bold text-user-700">{name}</p>
-          <p className="flex items-center justify-start gap-1 text-user-700">
+          <p className="font-bold text-[hsl(var(--primary-700))]">{name}</p>
+          <p className="flex items-center justify-start gap-1 text-[hsl(var(--primary-700))]">
             {rating}
-            <Star className="stroke-user-700 h-4 w-4" />
+            <Star className="stroke-[hsl(var(--primary-700))] h-4 w-4" />
           </p>
         </div>
       </div>

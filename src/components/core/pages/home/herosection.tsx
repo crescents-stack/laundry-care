@@ -7,11 +7,11 @@ import { Star } from "lucide-react";
 const HeroSection = async ({ dictionary }: { dictionary: any }) => {
   return (
     <>
-      <section className="section-padding bg-user-600">
+      <section className="section-padding bg-primary">
         <div className="container mx-auto min-h-[30vh] grid grid-cols-1 md:grid-cols-2 gap-10">
           <aside className="flex items-center justify-center">
             <div className="flex flex-col gap-10">
-              <h1 className="text-user-50">
+              <h1 className="text-[hsl(var(--primary-50))]">
                 {dictionary.home.hero.heading.white}
                 <br />
                 <span className="text-yellow-300">
@@ -20,7 +20,7 @@ const HeroSection = async ({ dictionary }: { dictionary: any }) => {
                 </span>
               </h1>
               <div>
-                <Button className="bg-lighter-50 text-user-600 hover:bg-lighter-200">
+                <Button className="bg-lighter-50 text-primary hover:bg-lighter-200">
                   {dictionary.home.hero.btnText}
                 </Button>
               </div>
@@ -38,13 +38,13 @@ const HeroSection = async ({ dictionary }: { dictionary: any }) => {
           </aside>
         </div>
       </section>
-      <section className="section-padding bg-user-800 text-white relative">
+      <section className="section-padding bg-[hsl(var(--primary-800))] text-white relative">
         <div className="flex flex-col md:flex-row items-center justify-between gap-10 container pb-10 lg:pb-20">
           <div className="grid grid-cols-1 gap-3">
             <h2 className="text-3xl font-bold text-center md:text-left text-white">
               {dictionary.home.hero.footer.left.heading}
             </h2>
-            <p className="text-user-200 text-center md:text-left">
+            <p className="text-[hsl(var(--primary-100))] text-center md:text-left">
               {dictionary.home.hero.footer.left.p}
             </p>
           </div>
@@ -54,14 +54,14 @@ const HeroSection = async ({ dictionary }: { dictionary: any }) => {
                 return (
                   <Star
                     key={item}
-                    className="bg-user-400 stroke-user-50 p-1 rounded h-8 w-8"
+                    className="bg-[hsl(var(--primary-400))] stroke-[hsl(var(--primary-50))] p-1 rounded h-8 w-8"
                   />
                 );
               })}
             </div>
             <Link
               href="/"
-              className="text-white hover:text-user-400 text-center md:text-left"
+              className="text-white hover:text-[hsl(var(--primary-400))] text-center md:text-left"
             >
               {dictionary.home.hero.footer.right.p}
             </Link>

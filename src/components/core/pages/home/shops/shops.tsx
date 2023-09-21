@@ -22,8 +22,8 @@ const Shops = ({ dictionary }: { dictionary: any }) => {
   return (
     <div className="section-padding section-margin">
       <div className="container">
-        <h2 className="text-user-800 text-center pb-10">
-          We are <span className="text-user-400">Partner</span> with
+        <h2 className="text-[hsl(var(--primary-800))] text-center pb-10">
+          We are <span className="text-[hsl(var(--primary-400))]">Partner</span> with
         </h2>
         <Swiper
           modules={[Navigation, Pagination, A11y]}
@@ -62,7 +62,7 @@ const Shops = ({ dictionary }: { dictionary: any }) => {
         <div className="flex justify-start items-start">
           <Link
             href="/"
-            className="text-user-500 hover:underline hover:text-user-300 container font-semibold text-right"
+            className="text-[hsl(var(--primary-500))] hover:underline hover:text-[hsl(var(--primary-300))] container font-semibold text-right"
           >
             All shop partners...
           </Link>

@@ -20,7 +20,7 @@ const Shop = ({ details }: { details: detailsType }) => {
         <div className="grid grid-cols-1 gap-5">
           <div className="flex items-end justify-between gap-5">
             <div>
-              <p className="font-bold text-user-800 text-lg lg:text-xl">
+              <p className="font-bold text-[hsl(var(--primary-800))] text-lg lg:text-xl">
                 {title}
               </p>
               <p className="text-body-200">{location}</p>
@@ -33,8 +33,8 @@ const Shop = ({ details }: { details: detailsType }) => {
                       <Star
                         className={`w-5 h-5 ${
                           starNum.given > 0
-                            ? "stroke-user-700"
-                            : "stroke-user-200"
+                            ? "stroke-[hsl(var(--primary-700))]"
+                            : "stroke-[hsl(var(--primary-200))]"
                         }`}
                       />
                     </div>
@@ -54,7 +54,7 @@ const Shop = ({ details }: { details: detailsType }) => {
         <div>
           <Link
             href={detailsLink}
-            className="text-user-500 underline hover:text-user-300"
+            className="text-[hsl(var(--primary-500))] underline hover:text-[hsl(var(--primary-300))]"
           >
             Details
           </Link>

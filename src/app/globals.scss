@@ -2,24 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-// @import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap");
-
-:root {
-  --color-dark-bg: 222.2 84% 4.9%;
-  --color-light-blue: 214.3 31.8% 91.4%;
-  --color-dark-blue: 217.2 32.6% 17.5%;
-  --color-white: 210 40% 98%;
-  --color-white-muted: 210 40% 96.1%;
-  --color-bright-user: 205 90% 44%;
-  --color-bright-rider: 150 71% 47%;
-  --color-bright-rider: 150 71% 47%;
-  --color-bright-admin: 150 71% 47%;
-  --color-purple: 230 92% 65%;
-}
-
 // theming
 @layer base {
   :root {
+    //colors
+    --color-dark-bg: 222.2 84% 4.9%;
+    --color-light-blue: 214.3 31.8% 91.4%;
+    --color-dark-blue: 217.2 32.6% 17.5%;
+    --color-dark-user: 206 90% 26%; //#074C80
+    --color-dark-rider: 11 75% 27%; //#792411
+    --color-dark-shop: 265 56% 32%; //#4B2480
+    --color-dark-admin: 148 79% 19%; //#0A572E
+    --color-white: 210 40% 98%;
+    --color-white-muted: 210 40% 96.1%;
+    --color-bright-user: 205 90% 44%;
+    --color-bright-rider: 347 77% 50%;
+    --color-bright-shop: 266 78% 58%;
+    --color-bright-admin: 148 80% 35%;
+    --color-purple: 230 92% 65%;
+    --color-user-50: 207 85% 95%; //"#E7F3FD"
+    --color-user-100: 206 83% 84%; // "#B4DBF8"
+    --color-user-200: 205 82% 76%; // "#8FCAF4"
+    --color-user-300: 206 83% 65%; // "#5CB1F0"
+    --color-user-400: 206 83% 58%; // "#3DA2ED"
+    --color-user-500: 205 90% 48%; // "#0C8BE8"
+    --color-user-600: 206 90% 44%; // "#0B7ED3"
+    --color-user-700: 205 90% 34%; // "#0963A5"
+    --color-user-800: 206 90% 26%; // "#074C80"
+    --color-user-900: 205 90% 20%; // "#053A61"
+    --color-shop-50: 265 81% 96%; //"#F3ECFD"
+    --color-shop-100: 265 79% 87%; //"#DAC4F8"
+    --color-shop-200: 266 78% 81%; //"#C9A8F4"
+    --color-shop-300: 266 79% 72%; //"#B080F0"
+    --color-shop-400: 266 79% 67%; //"#A167ED"
+    --color-shop-500: 266 78% 58%; //"#8941E8"
+    --color-shop-600: 266 63% 53%; //"#7D3BD3"
+    --color-shop-700: 266 56% 41%; //"#612EA5"
+    --color-shop-800: 265 56% 32%; //"#4B2480"
+    --color-shop-900: 267 56% 24%; //"#3A1B61"
+    --color-rider-50: 9 6% 95%; //"#FCECE9"
+    --color-rider-100: 347 77% 84%; // "#F4C4BA"
+    --color-rider-200: 347 77% 77%; // "#EFA898"
+    --color-rider-300: 347 77% 66%; // "#E88069"
+    --color-rider-400: 347 77% 59%; // "#E3684C"
+    --color-rider-500: 347 77% 49%; // "#DC421F"
+    --color-rider-600: 347 77% 45%; // "#C83C1C"
+    --color-rider-700: 347 77% 35%; // "#9C2F16"
+    --color-rider-800: 347 77% 27%; // "#792411"
+    --color-rider-900: 347 77% 21%; // "#5C1C0D"
+    --color-admin-50: 150 41% 93%; //"#E7F5EE"
+    --color-admin-100: 148 42% 80%; // "#B6E1CA"
+    --color-admin-200: 148 42% 70%; // "#92D2B0"
+    --color-admin-300: 148 42% 56%; // "#60BE8C"
+    --color-admin-400: 148 46% 47%; // "#41B176"
+    --color-admin-500: 148 80% 35%; // "#129E54"
+    --color-admin-600: 148 80% 31%; // "#10904C"
+    --color-admin-700: 148 79% 25%; // "#0D703C"
+    --color-admin-800: 148 79% 19%; // "#0A572E"
+    --color-admin-900: 148 78% 15%; // "#084223"
+
+    // derived
     --background: 0 0% 100%;
     --foreground: var(--color-dark-bg);
 
@@ -36,6 +78,16 @@
     --input: var(--color-light-blue);
 
     --primary: var(--color-bright-user);
+    --primary-50: var(--color-user-50);
+    --primary-100: var(--color-user-100);
+    --primary-200: var(--color-user-200);
+    --primary-300: var(--color-user-300);
+    --primary-400: var(--color-user-400);
+    --primary-500: var(--color-user-500);
+    --primary-600: var(--color-user-600);
+    --primary-700: var(--color-user-700);
+    --primary-800: var(--color-user-800);
+    --primary-900: var(--color-user-900);
     --primary-foreground: var(--color-white);
 
     --secondary: var(--color-purple);
@@ -51,16 +103,66 @@
 
     --radius: 0.5rem;
   }
+  .user {
+    --primary: var(--color-bright-user);
+    --primary-50: var(--color-user-50);
+    --primary-100: var(--color-user-100);
+    --primary-200: var(--color-user-200);
+    --primary-300: var(--color-user-300);
+    --primary-400: var(--color-user-400);
+    --primary-500: var(--color-user-500);
+    --primary-600: var(--color-user-600);
+    --primary-700: var(--color-user-700);
+    --primary-800: var(--color-user-800);
+    --primary-900: var(--color-user-900);
+  }
+  .rider {
+    --primary: var(--color-bright-rider);
+    --primary-50: var(--color-rider-50);
+    --primary-100: var(--color-rider-100);
+    --primary-200: var(--color-rider-200);
+    --primary-300: var(--color-rider-300);
+    --primary-400: var(--color-rider-400);
+    --primary-500: var(--color-rider-500);
+    --primary-600: var(--color-rider-600);
+    --primary-700: var(--color-rider-700);
+    --primary-800: var(--color-rider-800);
+    --primary-900: var(--color-rider-900);
+  }
+  .shop {
+    --primary: var(--color-bright-shop);
+    --primary-50: var(--color-shop-50);
+    --primary-100: var(--color-shop-100);
+    --primary-200: var(--color-shop-200);
+    --primary-300: var(--color-shop-300);
+    --primary-400: var(--color-shop-400);
+    --primary-500: var(--color-shop-500);
+    --primary-600: var(--color-shop-600);
+    --primary-700: var(--color-shop-700);
+    --primary-800: var(--color-shop-800);
+    --primary-900: var(--color-shop-900);
+  }
+  .admin {
+    --primary: var(--color-bright-admin);
+    --primary-50: var(--color-admin-50);
+    --primary-100: var(--color-admin-100);
+    --primary-200: var(--color-admin-200);
+    --primary-300: var(--color-admin-300);
+    --primary-400: var(--color-admin-400);
+    --primary-500: var(--color-admin-500);
+    --primary-600: var(--color-admin-600);
+    --primary-700: var(--color-admin-700);
+    --primary-800: var(--color-admin-800);
+    --primary-900: var(--color-admin-900);
+  }
 }
 
-@layer base {
-  * {
-    @apply border-border scroll-smooth text-user-900;
-    // font-family: "Hind Siliguri", sans-serif;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+* {
+  @apply border-border scroll-smooth text-user-900;
+}
+
+body {
+  @apply bg-background text-foreground;
 }
 
 .container {

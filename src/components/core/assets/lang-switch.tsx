@@ -23,7 +23,7 @@ const LangSwitch = ({
       <DropdownMenuTrigger className="p-2 focus:outline-none">
         <Languages
           className={`h-5 w-5 ${
-            navStyle ? "stroke-gray-400" : "stroke-blue-200"
+            navStyle ? "stroke-[hsl(var(--primary-400))]" : "stroke-[hsl(var(--primary-100))]"
           }`}
         />
       </DropdownMenuTrigger>

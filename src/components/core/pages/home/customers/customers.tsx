@@ -62,10 +62,10 @@ const Customers = ({ dictionary }: { dictionary: any }) => {
     },
   ];
   return (
-    <div className="section-padding section-margin bg-user-50">
+    <div className="section-padding section-margin bg-[hsl(var(--primary-50))]">
       <div className="container">
-        <h2 className="text-user-800 text-center pb-10">
-          Our happy <span className="text-user-400">Customers</span>
+        <h2 className="text-[hsl(var(--primary-800))] text-center pb-10">
+          Our happy <span className="text-[hsl(var(--primary-400))]">Customers</span>
         </h2>
         <Swiper
           modules={[Navigation, Pagination, A11y]}
@@ -104,7 +104,7 @@ const Customers = ({ dictionary }: { dictionary: any }) => {
         <div className="container flex justify-end">
           <Link
             href="/"
-            className="text-user-500 hover:underline hover:text-user-300 font-semibold"
+            className="text-[hsl(var(--primary-500))] hover:underline hover:text-[hsl(var(--primary-300))] font-semibold"
           >
             All reviews...
           </Link>

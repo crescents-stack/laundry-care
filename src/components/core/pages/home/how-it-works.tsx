@@ -5,8 +5,8 @@ const HowItWorks = ({ dictionary }: { dictionary: any }) => {
     <>
       <section className="section-padding container">
         <div className="">
-          <h3 className="text-user-800 text-center">
-            {dictionary.home.howItWorks.heading.start}
+          <h3 className="text-[hsl(var(--primary-800))] text-center">
+            {dictionary.home.howItWorks.heading.start}{" "}
             <span className="text-rider-400">
               {dictionary.home.howItWorks.heading.span1}
             </span>
@@ -30,7 +30,7 @@ const HowItWorks = ({ dictionary }: { dictionary: any }) => {
               <p className="font-semibold text-gray-400 uppercase">
                 {dimmedTitle}
               </p>
-              <h4 className="font-bold text-xl md:text-2xl lg:text-3xl text-user-900">
+              <h4 className="font-bold text-xl md:text-2xl lg:text-3xl text-[hsl(var(--primary-900))]">
                 {title}
               </h4>
               <p className="text-gray-600">{shortDescription}</p>
@@ -42,7 +42,7 @@ const HowItWorks = ({ dictionary }: { dictionary: any }) => {
                       key={id}
                       className="flex items-center justify-start gap-3 text-gray-600"
                     >
-                      <CheckCircleIcon className="stroke-user-600" /> {text}
+                      <CheckCircleIcon className="stroke-[hsl(var(--primary-600))]" /> {text}
                     </li>
                   );
                 })}

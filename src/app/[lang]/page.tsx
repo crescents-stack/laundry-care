@@ -12,11 +12,11 @@ const Home = async ({ params }: ParamLang) => {
   return (
     <div>
       <HeroSection dictionary={dictionary} />
-      <HowItWorks dictionary={dictionary}/>
-      <CompareServices dictionary={dictionary}/>
-      <Shops dictionary={dictionary}/>
-      <Customers dictionary={dictionary}/>
-      <FAQ dictionary={dictionary}/>
+      <HowItWorks dictionary={dictionary} />
+      <CompareServices dictionary={dictionary} />
+      <Shops dictionary={dictionary} />
+      <Customers dictionary={dictionary} />
+      <FAQ dictionary={dictionary} />
     </div>
   );
 };

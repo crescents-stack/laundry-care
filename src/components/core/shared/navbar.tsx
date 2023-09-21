@@ -9,6 +9,7 @@ import LangSwitch from "../assets/lang-switch";
 import { usePathname } from "next/navigation";
 import Bangla from "@/lib/dictionaries/bangla.json";
 import English from "@/lib/dictionaries/english.json";
+import { ModeToggle } from "@/components/ui/toggle-mode";
 
 const Navbar = () => {
   const [navStyle, setNavStyle] = useState<Boolean>(false);
@@ -31,7 +32,7 @@ const Navbar = () => {
   return (
     <nav
       className={`sticky top-0 z-50 transition ease-in-out duration-500  ${
-        !navStyle ? "bg-user-600 shadow" : "bg-lighter-50 shadow-lg"
+        !navStyle ? "bg-[hsl(var(--primary-600))] shadow" : "bg-lighter-50 shadow-lg"
       }`}
     >
       <div
@@ -40,11 +41,11 @@ const Navbar = () => {
         <Link
           href={pathname.includes("/bn") ? "/bn" : "/en"}
           className={`text-lg md:text-2xl font-bold flex items-center gap-2 ${
-            !navStyle ? "text-white" : "text-user-600"
+            !navStyle ? "text-white" : "text-[hsl(var(--primary-600))]"
           }`}
         >
           <Logo
-            color={`${!navStyle ? "fill-yellow-300" : "fill-user-500"}`}
+            color={`${!navStyle ? "fill-yellow-300" : "fill-[hsl(var(--primary-500))]"}`}
             height="50"
             width="50"
           />
@@ -58,7 +59,7 @@ const Navbar = () => {
                 key={id}
                 href={link}
                 className={`${
-                  !navStyle ? "text-white" : "text-user-600"
+                  !navStyle ? "text-white" : "text-[hsl(var(--primary-600))]"
                 } hidden lg:block`}
               >
                 {text}
@@ -70,19 +71,22 @@ const Navbar = () => {
             languages={dictionary.navbar.languageSwitch}
             pathname={pathname}
           />
+          <div className="flex items-center gap-1">
+          <ModeToggle />
           <Link
             href={`${pathname.includes("/bn") ? "/bn" : "/en"}/auth/user/login`}
           >
             <Button
               className={`${
                 navStyle
-                  ? "text-white bg-user-600"
-                  : "text-user-600 bg-lighter-50 hover:bg-lighter-200"
+                  ? "text-white bg-[hsl(var(--primary-600))]"
+                  : "text-[hsl(var(--primary-600))] bg-lighter-50 hover:bg-lighter-200"
               }`}
             >
               {dictionary.navbar.login}
             </Button>
           </Link>
+          </div>
         </div>
       </div>
     </nav>

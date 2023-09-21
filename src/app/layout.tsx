@@ -22,15 +22,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" id="customThemes">
       <body className={hindSiliguri.className}>
-        <ContextWrapper>
-          <>
-            <Navbar />
-            {children}
-            <Footer />
-          </>
-        </ContextWrapper>
+          <ContextWrapper>
+            <>
+              <Navbar />
+              {children}
+              <Footer />
+            </>
+          </ContextWrapper>
       </body>
     </html>
   );

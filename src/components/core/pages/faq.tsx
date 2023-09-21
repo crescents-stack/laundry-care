@@ -35,7 +35,7 @@ const FAQ = ({ dictionary }: { dictionary: any }) => {
   ];
   return (
     <div className="container section-margin section-padding">
-      <h3 className="pb-10 text-user-800 text-center">
+      <h3 className="pb-10 text-[hsl(var(--primary-800))] text-center">
         Do you have any question?
       </h3>
       <div className="max-w-[700px] mx-auto">
@@ -56,7 +56,7 @@ const FAQ = ({ dictionary }: { dictionary: any }) => {
       <div className="flex justify-center pt-10">
         <Link
           href="/"
-          className="text-center hover:underline text-user-500 hover:text-user-700"
+          className="text-center hover:underline text-[hsl(var(--primary-500))] hover:text-[hsl(var(--primary-700))]"
         >
           Visit our help center
         </Link>

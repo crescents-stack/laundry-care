@@ -3,7 +3,7 @@ import { LeafIcon } from "lucide-react";
 
 const CompareServices = ({ dictionary }: { dictionary: any }) => {
   return (
-    <section className=" section-margin bg-user-700">
+    <section className=" section-margin bg-[hsl(var(--primary-700))]">
       <div className="container section-padding ">
         <h2 className="text-lighter-50 text-center">
           <span className="text-yellow-400">Compare</span> our services
@@ -56,7 +56,7 @@ const CompareServices = ({ dictionary }: { dictionary: any }) => {
                           key={id}
                           className={`p-5 text-body-400 text-xs md:text-sm ${
                             id === 0
-                              ? "font-semibold text-user-700 bg-[#F2F2F280]"
+                              ? "font-semibold text-[hsl(var(--primary-700))] bg-[#F2F2F280]"
                               : id === 1
                               ? "bg-[#BAEBFF10]"
                               : id === 2
