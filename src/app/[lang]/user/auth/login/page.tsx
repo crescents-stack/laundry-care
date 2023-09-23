@@ -77,7 +77,7 @@ const Login = () => {
               name="password"
               onChange={handleOnChange}
               type={showPass ? "text" : "password"}
-              className="border border-lighter-400 hover:border-admin-400 p-2 rounded-lg focus:outline-none"
+              className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
             />
             <ErrorMessage errors={errors} name="password" />
             <div className="absolute top-[40px] right-[10px]">
@@ -107,13 +107,13 @@ const Login = () => {
             <Link
               href={`${
                 pathname.includes("/bn") ? "/bn" : "/en"
-              }/auth/admin/forget-password`}
-              className="hover:text-admin-400"
+              }/user/auth/forget-password`}
+              className="hover:text-[hsl(var(--primary-400))]"
             >
               Forget password?
             </Link>
           </div>
-          <Button className="mt-5 btn-admin" onClick={handleOnClick}>
+          <Button className="mt-5" onClick={handleOnClick}>
             Login
           </Button>
         </form>
@@ -122,8 +122,8 @@ const Login = () => {
           <Link
             href={`${
               pathname.includes("/bn") ? "/bn" : "/en"
-            }/auth/admin/register`}
-            className="pl-1 hover:text-admin-600"
+            }/user/auth/register`}
+            className="pl-1 hover:text-[hsl(var(--primary-600))]"
           >
             Register
           </Link>

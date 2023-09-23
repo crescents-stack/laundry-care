@@ -5,7 +5,7 @@ import Shops from "@/components/core/pages/home/shops/shops";
 import Customers from "@/components/core/pages/home/customers/customers";
 import FAQ from "@/components/core/pages/faq";
 import { ParamLang } from "@/types/types";
-import { getDictionary } from "./dictionaries";
+import { getDictionary } from "../dictionaries";
 
 const Home = async ({ params }: ParamLang) => {
   const dictionary = await getDictionary(params.lang);

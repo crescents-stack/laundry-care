@@ -9,14 +9,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { setTheme } from "@/lib/themes/theme-setter";
 
 export function ModeToggle() {
-  const setTheme = (theme: string) => {
-    let currentTheme = document.getElementById("customThemes");
-    if (currentTheme) {
-      currentTheme.className = theme;
-    }
-  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

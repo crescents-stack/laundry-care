@@ -88,7 +88,7 @@ function PhoneNumberInput({ onChange }: { onChange: Function }) {
           name="phone"
           placeholder="123-456-7890"
           onChange={(e) => setPhone(e.target.value)}
-          className="px-2 py-[5px] border border-lighter-400 hover:border-user-400 rounded-lg sm:rounded-r-lg sm:rounded-l-none focus:outline-none flex-1"
+          className="px-2 py-[5px] border border-lighter-400 hover:border-[hsl(var(--primary-400))] rounded-lg sm:rounded-r-lg sm:rounded-l-none focus:outline-none flex-1"
         />
       </div>
     </div>

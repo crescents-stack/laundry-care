@@ -20,7 +20,6 @@ const Navbar = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", () => {
-        console.log(navStyle);
         if (window.scrollY < 50) {
           setNavStyle(false);
         } else {
@@ -38,14 +37,14 @@ const Navbar = () => {
       }`}
     >
       <div className="py-1 text-center bg-[hsl(var(--primary-900))] text-white font-bold  animate-pulse">
-      Under Maintenance
+        Under Maintenance
       </div>
       <div
         className={`flex items-center justify-between gap-10 px-4 md:px-10 container py-2 md:py-4`}
       >
         <Link
-          href={pathname.includes("/bn") ? "/bn" : "/en"}
-          className={`text-lg md:text-2xl font-bold flex items-center gap-2 ${
+          href="/"
+          className={`flex items-center gap-2 ${
             !navStyle ? "text-white" : "text-[hsl(var(--primary-600))]"
           }`}
         >
@@ -56,7 +55,13 @@ const Navbar = () => {
             height="50"
             width="50"
           />
-          {dictionary.navbar.brandName}
+          <span
+            className={`text-sm sm:text-lg md:text-2xl font-bold ${
+              !navStyle ? "text-white" : "text-[hsl(var(--primary-600))]"
+            }`}
+          >
+            {dictionary.navbar.brandName}
+          </span>
         </Link>
         <div className="flex items-center justify-end gap-10">
           {dictionary.navbar.links.map((item: any) => {
@@ -73,17 +78,24 @@ const Navbar = () => {
               </Link>
             );
           })}
-          <LangSwitch
-            navStyle={navStyle}
-            languages={dictionary.navbar.languageSwitch}
-            pathname={pathname}
-          />
-          <div className="flex items-center gap-1">
+
+          <div className="flex items-center gap-2">
+            <LangSwitch
+              navStyle={navStyle}
+              languages={dictionary.navbar.languageSwitch}
+              pathname={pathname}
+            />
             <ModeToggle />
             <Link
-              href={`${
-                pathname.includes("/bn") ? "/bn" : "/en"
-              }/auth/user/login`}
+              href={`${pathname.includes("/bn") ? "/bn" : "/en"}/${
+                pathname.includes("/user")
+                  ? "/user"
+                  : pathname.includes("/rider")
+                  ? "/rider"
+                  : pathname.includes("/admin")
+                  ? "/admin"
+                  : "shop"
+              }/auth/login`}
             >
               <Button
                 className={`${

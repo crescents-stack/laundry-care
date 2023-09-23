@@ -86,7 +86,7 @@ const Register = () => {
               type="text"
               name="name"
               onChange={handleOnChange}
-              className="border border-lighter-400 hover:border-user-400 p-2 rounded-lg focus:outline-none"
+              className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
             />
             <ErrorMessage errors={errors} name="name" />
           </div>
@@ -96,7 +96,7 @@ const Register = () => {
               type="text"
               name="nid"
               onChange={handleOnChange}
-              className="border border-lighter-400 hover:border-user-400 p-2 rounded-lg focus:outline-none"
+              className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
             />
             <ErrorMessage errors={errors} name="nid" />
           </div>
@@ -110,7 +110,7 @@ const Register = () => {
               type="email"
               name="email"
               onChange={handleOnChange}
-              className="border border-lighter-400 hover:border-user-400 p-2 rounded-lg focus:outline-none"
+              className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
             />
             <ErrorMessage errors={errors} name="email" />
           </div>
@@ -120,7 +120,7 @@ const Register = () => {
               name="password"
               onChange={handleOnChange}
               type={showPass ? "text" : "password"}
-              className="border border-lighter-400 hover:border-user-400 p-2 rounded-lg focus:outline-none"
+              className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
             />
             <ErrorMessage errors={errors} name="password" />
             <div className="absolute top-[40px] right-[10px]">
@@ -139,8 +139,8 @@ const Register = () => {
           </div>
           <div className="text-gray-400">
             By registering you agree to our{" "}
-            <span className="text-user-400">Terms of Service</span> &{" "}
-            <span className="text-user-400">Privacy Policy</span> .
+            <span className="text-[hsl(var(--primary-400))]">Terms of Service</span> &{" "}
+            <span className="text-[hsl(var(--primary-400))]">Privacy Policy</span> .
           </div>
           <Button className="mt-5" onClick={handleOnClick}>
             Register
@@ -149,8 +149,8 @@ const Register = () => {
         <div>
           Already have an account?
           <Link
-            href={`${pathname.includes("/bn") ? "/bn" : "/en"}/auth/user/login`}
-            className="pl-1 hover:text-user-600"
+            href={`${pathname.includes("/bn") ? "/bn" : "/en"}/user/auth/login`}
+            className="pl-1 hover:text-[hsl(var(--primary-600))]"
           >
             Login
           </Link>
