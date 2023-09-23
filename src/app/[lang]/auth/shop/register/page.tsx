@@ -2,6 +2,7 @@
 
 import ErrorMessage from "@/components/core/shared/error-message";
 import PhoneNumberInput from "@/components/core/shared/phone-input";
+import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
@@ -76,7 +77,7 @@ const Register = () => {
   return (
     <div className="container section-padding">
       <div className="max-w-[500px] mx-auto">
-        <h3 className="text-center">Welcome to Laundrycare!</h3>
+        <H3 className="text-center" text="Welcome to Laundrycare!" />
 
         <form className="grid grid-col-1 gap-4 my-10">
           <div className="grid grid-cols-1 gap-2">

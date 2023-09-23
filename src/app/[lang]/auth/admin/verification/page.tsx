@@ -1,6 +1,7 @@
 "use client";
 
 import ErrorMessage from "@/components/core/shared/error-message";
+import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -11,7 +12,7 @@ const Verification = () => {
   return (
     <div className="container section-padding">
       <div className="max-w-[500px] mx-auto grid grid-cols-1">
-        <h3 className="text-center">Recover your account!</h3>
+      <H3 className="text-center" text="Verify your account!" />
         <form className="grid grid-col-1 gap-4 my-10">
           <div className="grid grid-cols-1 gap-2">
             <input
