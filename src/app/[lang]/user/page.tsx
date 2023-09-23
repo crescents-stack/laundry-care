@@ -6,7 +6,11 @@ import Customers from "@/components/core/pages/home/customers/customers";
 import FAQ from "@/components/core/pages/faq";
 import { ParamLang } from "@/types/types";
 import { getDictionary } from "../dictionaries";
-
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Laundry Care | User",
+  description: "Laundry solution",
+};
 const Home = async ({ params }: ParamLang) => {
   const dictionary = await getDictionary(params.lang);
   return (

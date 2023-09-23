@@ -2,7 +2,7 @@
 
 import "./globals.scss";
 import "@/components/core/assets/backgrounds/wave/wave.scss";
-import type { Metadata } from "next";
+
 import { Hind_Siliguri } from "next/font/google";
 import Navbar from "@/components/core/shared/navbar";
 import Footer from "@/components/core/assets/footer";
@@ -16,10 +16,7 @@ const hindSiliguri = Hind_Siliguri({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "Laundry Care",
-  description: "Laundry solution",
-};
+
 
 export default function RootLayout({
   children,
