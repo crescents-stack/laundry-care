@@ -16,8 +16,6 @@ const hindSiliguri = Hind_Siliguri({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-
-
 export default function RootLayout({
   children,
 }: {
@@ -26,13 +24,14 @@ export default function RootLayout({
   const pathname = usePathname();
   const router = useRouter();
   useEffect(() => {
+    console.log(window.location);
     if (localStorage) {
       const themeLS = localStorage.getItem("theme");
       themeLS && setTheme(themeLS);
       const lang = localStorage.getItem("lang");
       pathname.replace("/en/", lang!);
       pathname.replace("/bn/", lang!);
-      router.push(pathname);
+      router.push(window.location.href);
     }
   }, []);
   return (

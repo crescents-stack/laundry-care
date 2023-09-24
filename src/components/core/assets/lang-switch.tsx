@@ -1,3 +1,5 @@
+// "use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Languages } from "lucide-react";
 import Link from "next/link";
+// import { useRouter } from "next/navigation";
 
 const LangSwitch = ({
   navStyle,
@@ -18,6 +21,16 @@ const LangSwitch = ({
   languages: any;
   pathname: string;
 }) => {
+  // const router = useRouter();
+  const setLanguage = (lang: string) => {
+    if (localStorage) {
+      localStorage.setItem("lang", lang);
+      // lang === "/bn/"
+      //   ? window.location.href.replace("/bn/", "/en/")
+      //   : window.location.href.replace("/en/", "/bn/");
+      // router.push(window.location.href);
+    }
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="p-2 focus:outline-none">
@@ -33,22 +46,14 @@ const LangSwitch = ({
         <DropdownMenuLabel>{languages.language}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link
-          href={pathname.replace("/bn/", "/en/")}
-          onClick={() => {
-            if (localStorage) {
-              localStorage.setItem("lang", "/en/");
-            }
-          }}
+          href={`${window ? window.location.href.replace("/bn/", "/en/") : ""}`}
+          onClick={() => setLanguage("/en/")}
         >
           <DropdownMenuItem>{languages.english}</DropdownMenuItem>
         </Link>
         <Link
-          href={pathname.replace("/en/", "/bn/")}
-          onClick={() => {
-            if (localStorage) {
-              localStorage.setItem("lang", "/bn/");
-            }
-          }}
+          href={`${window ? window.location.href.replace("/en/", "/bn/") : ""}`}
+          onClick={() => setLanguage("/bn/")}
         >
           <DropdownMenuItem>{languages.bangla}</DropdownMenuItem>
         </Link>
