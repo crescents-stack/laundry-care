@@ -24,7 +24,6 @@ export default function RootLayout({
   const pathname = usePathname();
   const router = useRouter();
   useEffect(() => {
-    console.log(window.location);
     if (localStorage) {
       const themeLS = localStorage.getItem("theme");
       themeLS && setTheme(themeLS);
@@ -39,9 +38,24 @@ export default function RootLayout({
       <body className={hindSiliguri.className}>
         <ContextWrapper>
           <>
-            <Navbar />
+          {pathname === "/" ||
+            pathname.includes("/register") ||
+            pathname.includes("/login") ||
+            pathname.includes("/reset-password") ||
+            pathname.includes("/forget-password") ||
+            pathname.includes("/verification") ? null : (
+              <Navbar />
+            )}
             {children}
-            <Footer />
+
+            {pathname === "/" ||
+            pathname.includes("/register") ||
+            pathname.includes("/login") ||
+            pathname.includes("/reset-password") ||
+            pathname.includes("/forget-password") ||
+            pathname.includes("/verification") ? null : (
+              <Footer />
+            )}
           </>
         </ContextWrapper>
       </body>

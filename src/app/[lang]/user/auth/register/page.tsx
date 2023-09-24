@@ -8,6 +8,7 @@ import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChangeEvent, MouseEvent, useState } from "react";
+import axios from "axios";
 
 type FormDataType = {
   nid: String;
@@ -31,6 +32,15 @@ const Register = () => {
   const [errors, setErrors] = useState<FormDataType | {}>(formData);
   const pathname = usePathname();
 
+  const FetchRegisterAPI = async (data: any) => {
+    try{
+      const response = await axios.post(`${process.env.BACKEND_URL}/users/register`, data);
+      console.log(response);
+    }catch(error){
+      console.log(error)
+    }
+  }
+
   const handleOnChange = (
     e:
       | ChangeEvent<HTMLInputElement>
@@ -46,7 +56,10 @@ const Register = () => {
 
     if (Object.keys(catchedErrors).length === 0) {
       setErrors({});
-      console.log(formData);
+      const Data = {...formData,
+        clientUrl: window.location.href.replace("/register", "/verification"),
+      };
+      FetchRegisterAPI(Data);
     } else {
       setErrors(catchedErrors);
     }
@@ -139,8 +152,14 @@ const Register = () => {
           </div>
           <div className="text-gray-400">
             By registering you agree to our{" "}
-            <span className="text-[hsl(var(--primary-400))]">Terms of Service</span> &{" "}
-            <span className="text-[hsl(var(--primary-400))]">Privacy Policy</span> .
+            <span className="text-[hsl(var(--primary-400))]">
+              Terms of Service
+            </span>{" "}
+            &{" "}
+            <span className="text-[hsl(var(--primary-400))]">
+              Privacy Policy
+            </span>{" "}
+            .
           </div>
           <Button className="mt-5" onClick={handleOnClick}>
             Register

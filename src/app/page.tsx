@@ -41,7 +41,7 @@ const Home = () => {
   ];
   return (
     <div className="min-h-[40vh]">
-      <div className="container section-padding flex flex-col md:flex-row items-center justify-center gap-10">
+      <div className="p-10 container section-padding flex flex-col md:flex-row flex-wrap items-center justify-center gap-10">
         {Links.map((item: any) => {
           const { id, text, link, color } = item;
           return (

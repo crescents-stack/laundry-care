@@ -88,13 +88,13 @@ const Navbar = () => {
             <ModeToggle />
             <Link
               href={`${pathname.includes("/bn") ? "/bn" : "/en"}/${
-                pathname.includes("/user")
-                  ? "/user"
+                pathname.includes("/shop")
+                  ? "/shop"
                   : pathname.includes("/rider")
                   ? "/rider"
                   : pathname.includes("/admin")
                   ? "/admin"
-                  : "shop"
+                  : "user"
               }/auth/login`}
             >
               <Button
