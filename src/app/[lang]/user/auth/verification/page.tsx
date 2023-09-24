@@ -2,15 +2,20 @@
 
 import { H3 } from "@/components/core/typegraphy/headings";
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Verification = () => {
   const params = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const verifyAccount = async () => {
     try {
       const response = await axios.post(`${process.env.BACKEND_URL}/users/verification?token=${params.get("token")}`);
       console.log(response);
+      if(response.status == 200){
+        router.push(pathname.replace("/verification", ""))
+      }
     } catch (error) {
       console.log(error)
     }
