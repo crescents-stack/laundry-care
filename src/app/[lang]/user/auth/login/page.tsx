@@ -12,12 +12,12 @@ import { usePathname } from "next/navigation";
 import { ChangeEvent, MouseEvent, useState } from "react";
 
 type FormDataType = {
-  phone: String;
+  email: String;
   password: String;
 };
 
 const FormDataDefaultValues: FormDataType = {
-  phone: "",
+  email: "",
   password: "",
 };
 
@@ -60,10 +60,8 @@ const Login = () => {
 
   const validation = (data: FormDataType) => {
     let obj: any = {};
-    if (!data.phone.trim()) {
-      obj.phone = "Phone number is required!";
-    } else if (data.phone.length < 7) {
-      obj.phone = "Phone number is invalid!";
+    if (!data.email.trim()) {
+      obj.email = "Email is required!";
     }
     if (data.password.length < 8) {
       obj.password = "Password should have 8 characters!";
@@ -78,8 +76,14 @@ const Login = () => {
 
         <form className="grid grid-col-1 gap-4 my-10">
           <div className="grid grid-cols-1 gap-2">
-            <PhoneNumberInput onChange={handleOnChange} />
-            <ErrorMessage errors={errors} name="phone" />
+            <label>Email</label>
+            <input
+              name="email"
+              onChange={handleOnChange}
+              type="email"
+              className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
+            />
+            <ErrorMessage errors={errors} name="email" />
           </div>
 
           <div className="grid grid-cols-1 gap-2 relative">
