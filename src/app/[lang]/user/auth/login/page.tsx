@@ -5,6 +5,7 @@ import PhoneNumberInput from "@/components/core/shared/phone-input";
 import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -34,6 +35,15 @@ const Login = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [`${name}`]: value });
   };
+
+  const FetchLoginAPI = async (data: any) => {
+    try {
+      const response = await axios.post(`${process.env.BACKEND_URL}/users/login`, data);
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
@@ -41,7 +51,8 @@ const Login = () => {
 
     if (Object.keys(catchedErrors).length === 0) {
       setErrors({});
-      console.log(formData);
+      const data = {...formData, clientUrl: window.location.href}
+      FetchLoginAPI(data);
     } else {
       setErrors(catchedErrors);
     }
