@@ -1,14 +1,14 @@
 "use client";
 
 import ErrorMessage from "@/components/core/shared/error-message";
-import PhoneNumberInput from "@/components/core/shared/phone-input";
+// import PhoneNumberInput from "@/components/core/shared/phone-input";
 import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ChangeEvent, MouseEvent, useState } from "react";
 
 type FormDataType = {
@@ -26,6 +26,7 @@ const Login = () => {
   const [formData, setFormData] = useState<FormDataType>(FormDataDefaultValues);
   const [errors, setErrors] = useState<FormDataType | {}>(formData);
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleOnChange = (
     e:
@@ -38,12 +39,19 @@ const Login = () => {
 
   const FetchLoginAPI = async (data: any) => {
     try {
-      const response = await axios.post(`${process.env.BACKEND_URL}/users/login`, data);
-      console.log(response)
+      const response = await axios.post(
+        `${process.env.BACKEND_URL}/users/login`,
+        data
+      );
+      console.log(response);
+      if (response.status === 200) {
+        let newPath = pathname.replace("/auth/login", "/dashboard");
+        router.push(newPath);
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   const handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
@@ -51,7 +59,7 @@ const Login = () => {
 
     if (Object.keys(catchedErrors).length === 0) {
       setErrors({});
-      const data = {...formData, clientUrl: window.location.href}
+      const data = { ...formData, clientUrl: window.location.href };
       FetchLoginAPI(data);
     } else {
       setErrors(catchedErrors);
