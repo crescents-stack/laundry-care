@@ -5,7 +5,7 @@ export const setTheme = (theme: string, router: any, pathname: any) => {
     let tempTheme = "/" + theme;
     if (router && pathname) {
       if (!pathname.includes(tempTheme)) {
-        let tempPath = pathname;
+        let tempPath = window.location.href;
         tempPath = tempPath.replace("/rider", tempTheme);
         tempPath = tempPath.replace("/user", tempTheme);
         tempPath = tempPath.replace("/shop", tempTheme);

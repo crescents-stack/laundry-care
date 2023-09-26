@@ -47,8 +47,8 @@ const Shops = ({ dictionary }: { dictionary: any }) => {
             },
           }}
           pagination={{ clickable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
+          onSwiper={(swiper) => {}}
+          onSlideChange={() => {}}
         >
           {ShopList.map((item: detailsType) => {
             return (
