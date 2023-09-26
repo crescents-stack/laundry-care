@@ -24,21 +24,25 @@ export default function RootLayout({
   const pathname = usePathname();
   const router = useRouter();
   useEffect(() => {
-    if (localStorage) {
-      const themeLS = localStorage.getItem("theme");
-      themeLS && setTheme(themeLS, undefined, undefined);
-      const lang = localStorage.getItem("lang");
-      pathname.replace("/en/", lang!);
-      pathname.replace("/bn/", lang!);
-      router.push(window.location.href);
-    }
+    setTimeout(() => {
+      if (localStorage) {
+        const themeLS = localStorage.getItem("theme");
+        themeLS && setTheme(themeLS, undefined, undefined);
+        const lang = localStorage.getItem("lang");
+        let tempPathname = pathname;
+        tempPathname = tempPathname.replace("/en/", lang!);
+        tempPathname = tempPathname.replace("/bn/", lang!);
+        console.log(tempPathname)
+        router.push(tempPathname);
+      }
+    }, 0);
   }, []);
   return (
     <html lang="en" id="customThemes">
       <body className={hindSiliguri.className}>
         <ContextWrapper>
           <>
-          {pathname === "/" ||
+            {pathname === "/" ||
             pathname.includes("/register") ||
             pathname.includes("/login") ||
             pathname.includes("/reset-password") ||
