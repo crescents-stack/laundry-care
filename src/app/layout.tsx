@@ -1,6 +1,6 @@
 "use client";
 
-import "./globals.scss";
+import "@/app/globals.scss";
 import "@/components/core/assets/backgrounds/wave/wave.scss";
 
 import { Hind_Siliguri } from "next/font/google";
@@ -10,6 +10,7 @@ import ContextWrapper from "@/context/context-wrapper";
 import { useEffect } from "react";
 import { setTheme } from "@/lib/themes/theme-setter";
 import { usePathname, useRouter } from "next/navigation";
+import { Toaster } from "@/components/ui/toaster";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["latin"],
@@ -29,10 +30,9 @@ export default function RootLayout({
         const themeLS = localStorage.getItem("theme");
         themeLS && setTheme(themeLS, undefined, undefined);
         const lang = localStorage.getItem("lang");
-        let tempPathname = pathname;
+        let tempPathname = window.location.href;
         tempPathname = tempPathname.replace("/en/", lang!);
         tempPathname = tempPathname.replace("/bn/", lang!);
-        console.log(tempPathname)
         router.push(tempPathname);
       }
     }, 0);
@@ -51,7 +51,7 @@ export default function RootLayout({
               <Navbar />
             )}
             {children}
-
+            <Toaster />
             {pathname === "/" ||
             pathname.includes("/register") ||
             pathname.includes("/login") ||
