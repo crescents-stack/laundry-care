@@ -4,7 +4,10 @@ import ErrorMessage from "@/components/core/shared/error-message";
 // import PhoneNumberInput from "@/components/core/shared/phone-input";
 import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
+import { ButtonLoading } from "@/components/ui/button-loading";
 import { Checkbox } from "@/components/ui/checkbox";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/components/ui/use-toast";
 import { TokenContext, useTokenProvider } from "@/context/token-provider";
 import PublicRoute from "@/layouts/public-route";
 import axios from "axios";
@@ -27,6 +30,7 @@ const Login = () => {
   const [showPass, setShowPass] = useState<Boolean>(false);
   const [formData, setFormData] = useState<FormDataType>(FormDataDefaultValues);
   const [errors, setErrors] = useState<FormDataType | {}>(formData);
+  const [spinner, setSpinner] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const { setToken } = useTokenProvider();
@@ -40,22 +44,32 @@ const Login = () => {
     setFormData({ ...formData, [`${name}`]: value });
   };
 
-  const FetchLoginAPI = async (data: any) => {
+  const FetchLoginAPI = async () => {
+    setSpinner(true);
     try {
       const response = await axios.post(
         `${process.env.BACKEND_URL}/users/login`,
-        data
+        { ...formData, clientUrl: window.location.href }
       );
-      console.log(response);
+
       if (response.status === 200) {
+        toast({
+          title: "Login",
+          description: "Successful!",
+        });
         let token = response.data.token;
         setToken(token);
         localStorage.setItem("token", token);
         let newPath = pathname.replace("/auth/login", "/dashboard");
         router.push(newPath);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error?.response?.data?.message,
+      });
+      setSpinner(false);
     }
   };
   const handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -65,8 +79,7 @@ const Login = () => {
 
     if (Object.keys(catchedErrors).length === 0) {
       setErrors({});
-      const data = { ...formData, clientUrl: window.location.href };
-      FetchLoginAPI(data);
+      FetchLoginAPI();
     } else {
       setErrors(catchedErrors);
     }
@@ -143,9 +156,13 @@ const Login = () => {
                 Forget password?
               </Link>
             </div>
-            <Button className="mt-5" onClick={handleOnClick}>
-              Login
-            </Button>
+            {spinner ? (
+              <ButtonLoading className="mt-5"/>
+            ) : (
+              <Button className="mt-5" onClick={handleOnClick}>
+                Login
+              </Button>
+            )}
           </form>
           <div>
             Already have an account?
