@@ -10,10 +10,12 @@ import { usePathname } from "next/navigation";
 import Bangla from "@/lib/dictionaries/bangla.json";
 import English from "@/lib/dictionaries/english.json";
 import { ModeToggle } from "@/components/ui/toggle-mode";
+import { useTokenProvider } from "@/context/token-provider";
 
 const Navbar = () => {
   const [navStyle, setNavStyle] = useState<Boolean>(false);
   const pathname = usePathname();
+  const {token} = useTokenProvider();
 
   const dictionary = pathname.includes("/bn") ? Bangla : English;
 
@@ -69,7 +71,7 @@ const Navbar = () => {
             return (
               <Link
                 key={id}
-                href={link}
+                href={`${pathname.includes("/bn") ? "/bn" : "/en"}/${link}`}
                 className={`${
                   !navStyle ? "text-white" : "text-[hsl(var(--primary-600))]"
                 } hidden lg:block`}
@@ -95,7 +97,7 @@ const Navbar = () => {
                   : pathname.includes("/admin")
                   ? "/admin"
                   : "user"
-              }/auth/login`}
+              }/${token ? "dashboard": "auth/login"}`}
             >
               <Button
                 className={`${
@@ -104,7 +106,7 @@ const Navbar = () => {
                     : "text-[hsl(var(--primary-600))] bg-lighter-50 hover:bg-lighter-200"
                 }`}
               >
-                {dictionary.navbar.login}
+                {token ? dictionary.navbar.loginT: dictionary.navbar.login}
               </Button>
             </Link>
           </div>
