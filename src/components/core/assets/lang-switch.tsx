@@ -46,13 +46,13 @@ const LangSwitch = ({
         <DropdownMenuLabel>{languages.language}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link
-          href={`${window ? window.location.href.replace("/bn/", "/en/") : ""}`}
+          href={`${pathname.replace("/bn/", "/en/")}`}
           onClick={() => setLanguage("/en/")}
         >
           <DropdownMenuItem>{languages.english}</DropdownMenuItem>
         </Link>
         <Link
-          href={`${window ? window.location.href.replace("/en/", "/bn/") : ""}`}
+          href={`${pathname.replace("/en/", "/bn/")}`}
           onClick={() => setLanguage("/bn/")}
         >
           <DropdownMenuItem>{languages.bangla}</DropdownMenuItem>
