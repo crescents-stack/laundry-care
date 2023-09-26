@@ -26,7 +26,7 @@ export default function RootLayout({
   useEffect(() => {
     if (localStorage) {
       const themeLS = localStorage.getItem("theme");
-      themeLS && setTheme(themeLS);
+      themeLS && setTheme(themeLS, undefined, undefined);
       const lang = localStorage.getItem("lang");
       pathname.replace("/en/", lang!);
       pathname.replace("/bn/", lang!);

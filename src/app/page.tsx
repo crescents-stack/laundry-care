@@ -12,33 +12,8 @@ const Home = () => {
         (localStorage.getItem("lang") ? localStorage.getItem("lang") : "/bn/")!
       );
     }
-  });
-  const Links = [
-    {
-      id: 0,
-      text: "User",
-      link: "user",
-      color: "bg-user-600",
-    },
-    {
-      id: 1,
-      text: "Rider",
-      link: "rider",
-      color: "bg-rider-600",
-    },
-    {
-      id: 2,
-      text: "Shop",
-      link: "shop",
-      color: "bg-shop-600",
-    },
-    {
-      id: 3,
-      text: "Admin",
-      link: "admin",
-      color: "bg-admin-600",
-    },
-  ];
+  }, []);
+  
   return (
     <div className="min-h-[40vh]">
       <div className="p-10 container section-padding flex flex-col md:flex-row flex-wrap items-center justify-center gap-10">
@@ -50,7 +25,7 @@ const Home = () => {
               href={`${lang}${link}`}
               className={`px-20 py-10 rounded-md font-bold text-xl mg:text-2xl ${color} text-white hover:opacity-[90%]`}
               onClick={() => {
-                setTheme(link);
+                setTheme(link, undefined, undefined);
                 if (localStorage) {
                   localStorage.setItem("theme", link);
                 }
@@ -82,3 +57,31 @@ const Home = () => {
 };
 
 export default Home;
+
+
+const Links = [
+  {
+    id: 0,
+    text: "User",
+    link: "user",
+    color: "bg-user-600",
+  },
+  {
+    id: 1,
+    text: "Rider",
+    link: "rider",
+    color: "bg-rider-600",
+  },
+  {
+    id: 2,
+    text: "Shop",
+    link: "shop",
+    color: "bg-shop-600",
+  },
+  {
+    id: 3,
+    text: "Admin",
+    link: "admin",
+    color: "bg-admin-600",
+  },
+];

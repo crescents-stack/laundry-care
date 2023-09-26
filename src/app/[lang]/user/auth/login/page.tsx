@@ -5,6 +5,8 @@ import ErrorMessage from "@/components/core/shared/error-message";
 import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { TokenContext, useTokenProvider } from "@/context/token-provider";
+import PublicRoute from "@/layouts/public-route";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
@@ -27,6 +29,7 @@ const Login = () => {
   const [errors, setErrors] = useState<FormDataType | {}>(formData);
   const pathname = usePathname();
   const router = useRouter();
+  const { setToken } = useTokenProvider();
 
   const handleOnChange = (
     e:
@@ -45,6 +48,9 @@ const Login = () => {
       );
       console.log(response);
       if (response.status === 200) {
+        let token = response.data.token;
+        setToken(token);
+        localStorage.setItem("token", token);
         let newPath = pathname.replace("/auth/login", "/dashboard");
         router.push(newPath);
       }
@@ -78,81 +84,83 @@ const Login = () => {
   };
 
   return (
-    <div className="container section-padding">
-      <div className="max-w-[500px] mx-auto">
-        <H3 className="text-center" text="Welcome to Laundrycare!" />
+    <PublicRoute>
+      <div className="container section-padding">
+        <div className="max-w-[500px] mx-auto">
+          <H3 className="text-center" text="Welcome to Laundrycare!" />
 
-        <form className="grid grid-col-1 gap-4 my-10">
-          <div className="grid grid-cols-1 gap-2">
-            <label>Email</label>
-            <input
-              name="email"
-              onChange={handleOnChange}
-              type="email"
-              className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
-            />
-            <ErrorMessage errors={errors} name="email" />
-          </div>
-
-          <div className="grid grid-cols-1 gap-2 relative">
-            <label>Password</label>
-            <input
-              name="password"
-              onChange={handleOnChange}
-              type={showPass ? "text" : "password"}
-              className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
-            />
-            <ErrorMessage errors={errors} name="password" />
-            <div className="absolute top-[40px] right-[10px]">
-              {!showPass ? (
-                <Eye
-                  className="stroke-lighter-600 hover:stroke-lighter-900"
-                  onClick={() => setShowPass(!showPass)}
-                />
-              ) : (
-                <EyeOff
-                  className="stroke-lighter-600 hover:stroke-lighter-900"
-                  onClick={() => setShowPass(!showPass)}
-                />
-              )}
+          <form className="grid grid-col-1 gap-4 my-10">
+            <div className="grid grid-cols-1 gap-2">
+              <label>Email</label>
+              <input
+                name="email"
+                onChange={handleOnChange}
+                type="email"
+                className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
+              />
+              <ErrorMessage errors={errors} name="email" />
             </div>
-          </div>
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="rememberme" />
-              <label
-                htmlFor="rememberme"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+
+            <div className="grid grid-cols-1 gap-2 relative">
+              <label>Password</label>
+              <input
+                name="password"
+                onChange={handleOnChange}
+                type={showPass ? "text" : "password"}
+                className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
+              />
+              <ErrorMessage errors={errors} name="password" />
+              <div className="absolute top-[40px] right-[10px]">
+                {!showPass ? (
+                  <Eye
+                    className="stroke-lighter-600 hover:stroke-lighter-900"
+                    onClick={() => setShowPass(!showPass)}
+                  />
+                ) : (
+                  <EyeOff
+                    className="stroke-lighter-600 hover:stroke-lighter-900"
+                    onClick={() => setShowPass(!showPass)}
+                  />
+                )}
+              </div>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox id="rememberme" />
+                <label
+                  htmlFor="rememberme"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Remember me
+                </label>
+              </div>
+              <Link
+                href={`${
+                  pathname.includes("/bn") ? "/bn" : "/en"
+                }/user/auth/forget-password`}
+                className="hover:text-[hsl(var(--primary-400))]"
               >
-                Remember me
-              </label>
+                Forget password?
+              </Link>
             </div>
+            <Button className="mt-5" onClick={handleOnClick}>
+              Login
+            </Button>
+          </form>
+          <div>
+            Already have an account?
             <Link
               href={`${
                 pathname.includes("/bn") ? "/bn" : "/en"
-              }/user/auth/forget-password`}
-              className="hover:text-[hsl(var(--primary-400))]"
+              }/user/auth/register`}
+              className="pl-1 hover:text-[hsl(var(--primary-600))]"
             >
-              Forget password?
+              Register
             </Link>
           </div>
-          <Button className="mt-5" onClick={handleOnClick}>
-            Login
-          </Button>
-        </form>
-        <div>
-          Already have an account?
-          <Link
-            href={`${
-              pathname.includes("/bn") ? "/bn" : "/en"
-            }/user/auth/register`}
-            className="pl-1 hover:text-[hsl(var(--primary-600))]"
-          >
-            Register
-          </Link>
         </div>
       </div>
-    </div>
+    </PublicRoute>
   );
 };
 

@@ -4,18 +4,18 @@
         "links": [
             {
                 "id": 0,
-                "text": "কিভাবে কাজ করে",
-                "link": "#howitworks"
+                "text": "রাইডার হোন",
+                "link": "/rider/auth/register"
             },
             {
                 "id": 1,
-                "text": "সেবা এবং মূল্য",
-                "link": "#services&Prices"
+                "text": "দোকান মালিক হোন",
+                "link": "/shop/auth/register"
             },
             {
                 "id": 2,
-                "text": "সম্পর্কিত",
-                "link": "#about"
+                "text": "আমাদের জানুন",
+                "link": "/about"
             }
         ],
         "languageSwitch": {
@@ -23,7 +23,8 @@
             "english": "ইংরেজি",
             "bangla": "বাংলা"
         },
-        "login": "লগইন"
+        "login": "লগইন",
+        "loginT": "ড্যাসবোর্ড"
     },
     "home": {
         "hero": {

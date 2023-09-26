@@ -4,18 +4,18 @@
         "links": [
             {
                 "id": 0,
-                "text": "How it works",
-                "link": "#howitworks"
+                "text": "Become Rider",
+                "link": "/rider/auth/register"
             },
             {
                 "id": 1,
-                "text": "Services & Prices",
-                "link": "#services&Prices"
+                "text": "Become Shop Owner",
+                "link": "/shop/auth/register"
             },
             {
                 "id": 2,
                 "text": "About",
-                "link": "#about"
+                "link": "/about"
             }
         ],
         "languageSwitch": {
@@ -23,7 +23,8 @@
             "english": "English",
             "bangla": "Bangla"
         },
-        "login": "Login"
+        "login": "Login",
+        "loginT": "Dashboard"
     },
     "home": {
         "hero": {

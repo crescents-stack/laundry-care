@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Shop from "./shop";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Pagination, A11y } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
