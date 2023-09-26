@@ -1,3 +1,10 @@
+#### 0.1.7 (2023-09-26)
+
+##### Other Changes
+
+- Features #39 #40 #41 (1612c5f9)
+- Login to Dashboard after login #39 (17649272)
+
 #### 0.1.6 (2023-09-22)
 
 ##### Other Changes
