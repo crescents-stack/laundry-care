@@ -64,11 +64,52 @@ const Login = () => {
         router.push(newPath);
       }
     } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: error?.response?.data?.message,
-      });
+      const EmailVerify = async () => {
+        setSpinner(true);
+        try {
+          const verifyResponse = await axios.post(
+            `${process.env.BACKEND_URL}/users/verification-latter`,
+            { email: formData.email, clientUrl: window.location.href.replace("login", "verification") }
+          );
+          if (verifyResponse.status === 201) {
+            toast({
+              title: "Registration",
+              description: "Check you email inbox to verify your account!",
+            });
+            setSpinner(false);
+          }
+        } catch (error: any) {
+          console.log(error)
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: error?.response?.data?.message,
+          });
+          setSpinner(false);
+        }
+      };
+      if (error.response.status === 401) {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: error?.response?.data?.message,
+          action: (
+            <div
+              onClick={EmailVerify}
+              className="bg-green-400 text-white rounded-md px-2 py-1 cursor-pointer"
+            >
+              Verify email!
+            </div>
+          ),
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: error?.response?.data?.message,
+        });
+      }
+
       setSpinner(false);
     }
   };
@@ -157,7 +198,7 @@ const Login = () => {
               </Link>
             </div>
             {spinner ? (
-              <ButtonLoading className="mt-5"/>
+              <ButtonLoading className="mt-5" />
             ) : (
               <Button className="mt-5" onClick={handleOnClick}>
                 Login

@@ -30,7 +30,7 @@ export default function RootLayout({
         const themeLS = localStorage.getItem("theme");
         themeLS && setTheme(themeLS, undefined, undefined);
         const lang = localStorage.getItem("lang");
-        let tempPathname = pathname;
+        let tempPathname = window.location.href;
         tempPathname = tempPathname.replace("/en/", lang!);
         tempPathname = tempPathname.replace("/bn/", lang!);
         router.push(tempPathname);

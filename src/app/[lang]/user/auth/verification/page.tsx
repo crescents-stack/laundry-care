@@ -1,6 +1,7 @@
 "use client";
 
 import { H3 } from "@/components/core/typegraphy/headings";
+import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -11,16 +12,29 @@ const Verification = () => {
 
   const verifyAccount = async () => {
     try {
-      const response = await axios.post(`${process.env.BACKEND_URL}/users/verification?token=${params.get("token")}`);
+      const response = await axios.post(
+        `${process.env.BACKEND_URL}/users/verification?token=${params.get(
+          "token"
+        )}`
+      );
       console.log(response);
-      if(response.status == 200){
-        router.push(pathname.replace("/verification", ""))
+      if (response.status == 200) {
+        toast({
+          title: "Email verification",
+          description: "Successful!",
+        });
+        router.push(pathname.replace("/verification", "/login"));
       }
-    } catch (error) {
-      console.log(error)
+    } catch (error: any) {
+      console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error?.response?.data?.message,
+      });
     }
   };
-  
+
   verifyAccount();
 
   return (
