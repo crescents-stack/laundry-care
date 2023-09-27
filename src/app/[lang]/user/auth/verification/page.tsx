@@ -17,7 +17,6 @@ const Verification = () => {
           "token"
         )}`
       );
-      console.log(response);
       if (response.status == 200) {
         toast({
           title: "Email verification",
@@ -26,7 +25,6 @@ const Verification = () => {
         router.push(pathname.replace("/verification", "/login"));
       }
     } catch (error: any) {
-      console.log(error);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
