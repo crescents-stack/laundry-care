@@ -6,9 +6,8 @@ import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { ButtonLoading } from "@/components/ui/button-loading";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/components/ui/use-toast";
-import { TokenContext, useTokenProvider } from "@/context/token-provider";
+import { useTokenProvider } from "@/context/token-provider";
 import PublicRoute from "@/layouts/public-route";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
@@ -44,6 +43,33 @@ const Login = () => {
     setFormData({ ...formData, [`${name}`]: value });
   };
 
+  const EmailVerify = async () => {
+    setSpinner(true);
+    try {
+      const verifyResponse = await axios.post(
+        `${process.env.BACKEND_URL}/users/verification-latter`,
+        {
+          email: formData.email,
+          clientUrl: window.location.href.replace("login", "verification"),
+        }
+      );
+      if (verifyResponse.status === 201) {
+        toast({
+          title: "Registration",
+          description: "Check you email inbox to verify your account!",
+        });
+        setSpinner(false);
+      }
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error?.response?.data?.message,
+      });
+      setSpinner(false);
+    }
+  };
+
   const FetchLoginAPI = async () => {
     setSpinner(true);
     try {
@@ -64,42 +90,21 @@ const Login = () => {
         router.push(newPath);
       }
     } catch (error: any) {
-      const EmailVerify = async () => {
-        setSpinner(true);
-        try {
-          const verifyResponse = await axios.post(
-            `${process.env.BACKEND_URL}/users/verification-latter`,
-            { email: formData.email, clientUrl: window.location.href.replace("login", "verification") }
-          );
-          if (verifyResponse.status === 201) {
-            toast({
-              title: "Registration",
-              description: "Check you email inbox to verify your account!",
-            });
-            setSpinner(false);
-          }
-        } catch (error: any) {
-          console.log(error)
-          toast({
-            variant: "destructive",
-            title: "Uh oh! Something went wrong.",
-            description: error?.response?.data?.message,
-          });
-          setSpinner(false);
-        }
-      };
       if (error.response.status === 401) {
+        let errMsg = error?.response?.data?.message;
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: error?.response?.data?.message,
-          action: (
+          description: errMsg,
+          action: errMsg.includes("Email is not verified") ? (
             <div
               onClick={EmailVerify}
               className="bg-green-400 text-white rounded-md px-2 py-1 cursor-pointer"
             >
               Verify email!
             </div>
+          ) : (
+            <div></div>
           ),
         });
       } else {
