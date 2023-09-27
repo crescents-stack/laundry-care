@@ -43,7 +43,6 @@ const Register = () => {
         `${process.env.BACKEND_URL}/users/register`,
         data
       );
-      console.log(response);
       if (response.status === 201) {
         toast({
           title: "Registration",
