@@ -3,7 +3,11 @@
 import ErrorMessage from "@/components/core/shared/error-message";
 import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
+import { ButtonLoading } from "@/components/ui/button-loading";
+import { toast } from "@/components/ui/use-toast";
+import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, MouseEvent, useState } from "react";
 
 type FormDataType = {
@@ -18,6 +22,42 @@ const ResetPassword = () => {
   const [showPass, setShowPass] = useState<Boolean>(false);
   const [formData, setFormData] = useState<FormDataType>(FormDataDefaultValues);
   const [errors, setErrors] = useState<FormDataType | {}>(formData);
+  const [spinner, setSpinner] = useState<boolean>(false);
+  const params = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const ResetPassword = async () => {
+    setSpinner(true);
+    try {
+      const token = params.get("token");
+      const verifyResponse = await axios.post(
+        `${process.env.BACKEND_URL}/users/reset-password?token=${token}`,
+        {
+          password: formData.password,
+        }
+      );
+      if (verifyResponse.status === 200) {
+        toast({
+          title: "Password Recover",
+          description: "Password reset succesful.",
+        });
+        setSpinner(false);
+        setTimeout(() => {
+          let tempPath = pathname;
+          tempPath = tempPath.replace("/reset-password", "/login");
+          router.push(tempPath);
+        }, 0);
+      }
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error?.response?.data?.message,
+      });
+      setSpinner(false);
+    }
+  };
 
   const handleOnChange = (
     e:
@@ -34,7 +74,7 @@ const ResetPassword = () => {
 
     if (Object.keys(catchedErrors).length === 0) {
       setErrors({});
-      console.log(formData);
+      ResetPassword();
     } else {
       setErrors(catchedErrors);
     }
@@ -76,9 +116,13 @@ const ResetPassword = () => {
               )}
             </div>
           </div>
-          <Button className="mt-5" onClick={handleOnClick}>
-            Reset password
-          </Button>
+          {spinner ? (
+            <ButtonLoading className="mt-5" />
+          ) : (
+            <Button className="mt-5" onClick={handleOnClick}>
+              Reset password
+            </Button>
+          )}
         </form>
       </div>
     </div>
