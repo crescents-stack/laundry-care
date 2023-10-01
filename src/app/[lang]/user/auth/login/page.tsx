@@ -47,7 +47,7 @@ const Login = () => {
     setSpinner(true);
     try {
       const verifyResponse = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/verification-latter`,
+        `${process.env.BACKEND_URL}/users/verification-latter`,
         {
           email: formData.email,
           clientUrl: window.location.href.replace("login", "verification"),
@@ -74,7 +74,7 @@ const Login = () => {
     setSpinner(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login`,
+        `${process.env.BACKEND_URL}/users/login`,
         { ...formData, clientUrl: window.location.href }
       );
 
