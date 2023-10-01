@@ -40,7 +40,7 @@ const Register = () => {
     setSpinner(true);
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_URL}/users/register`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/register`,
         data
       );
       if (response.status === 201) {
