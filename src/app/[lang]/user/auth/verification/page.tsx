@@ -9,13 +9,20 @@ const Verification = () => {
   const params = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-
+  const token = params.get("token");
+  
   const verifyAccount = async () => {
     try {
+      console.log(token);
       const response = await axios.post(
-        `${process.env.BACKEND_URL}/users/verification?token=${params.get(
-          "token"
-        )}`
+        `${process.env.BACKEND_URL}/users/verification`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       if (response.status == 200) {
         toast({

@@ -28,7 +28,13 @@ const Dashboard = () => {
     setSpinner(true);
     try {
       const verifyResponse = await axios.delete(
-        `${process.env.BACKEND_URL}/users/delete?token=${token}`
+        `${process.env.BACKEND_URL}/users/delete`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       if (verifyResponse.status === 200) {
         toast({
@@ -37,6 +43,64 @@ const Dashboard = () => {
         });
         setSpinner(false);
         Logout();
+      }
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error?.response?.data?.message,
+      });
+      setSpinner(false);
+    }
+  };
+
+  const GetUserData = async () => {
+    setSpinner(true);
+    try {
+      const verifyResponse = await axios.get(
+        `${process.env.BACKEND_URL}/users`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (verifyResponse.status === 200) {
+        toast({
+          title: "User Data Fetch!",
+          description: "Data fetched Successfully",
+        });
+        setSpinner(false);
+      }
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error?.response?.data?.message,
+      });
+      setSpinner(false);
+    }
+  };
+  const UpdateUserData = async () => {
+    setSpinner(true);
+    try {
+      const verifyResponse = await axios.put(
+        `${process.env.BACKEND_URL}/users`,
+        { name: "Sultan Suleman", address: "Istanbul, Turkeye" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (verifyResponse.status === 200) {
+        toast({
+          title: "User Data Update!",
+          description: "Data updated Successfully",
+        });
+        setSpinner(false);
       }
     } catch (error: any) {
       toast({
@@ -57,6 +121,20 @@ const Dashboard = () => {
         ) : (
           <Button variant="secondary" className="mt-5" onClick={DeleteAccount}>
             Delete Account
+          </Button>
+        )}
+        {spinner ? (
+          <ButtonLoading className="mt-5" />
+        ) : (
+          <Button className="mt-5" onClick={GetUserData}>
+            Get User Data
+          </Button>
+        )}
+        {spinner ? (
+          <ButtonLoading className="mt-5" />
+        ) : (
+          <Button className="mt-5" onClick={UpdateUserData}>
+            Update User Data
           </Button>
         )}
         <Button variant="destructive" onClick={Logout}>
