@@ -32,9 +32,15 @@ const ResetPassword = () => {
     try {
       const token = params.get("token");
       const verifyResponse = await axios.post(
-        `${process.env.BACKEND_URL}/users/reset-password?token=${token}`,
+        `${process.env.BACKEND_URL}/users/reset-password`,
         {
           password: formData.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       if (verifyResponse.status === 200) {
