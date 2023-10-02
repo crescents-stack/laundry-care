@@ -3,6 +3,7 @@
 import Customer from "./customer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -68,30 +69,32 @@ const Customers = ({ dictionary }: { dictionary: any }) => {
           Our happy <span className="text-[hsl(var(--primary-400))]">Customers</span>
         </h2>
         <Swiper
-          modules={[Navigation, Pagination, A11y]}
-          spaceBetween={50}
-          breakpoints={{
-            576: {
-              width: 576,
-              slidesPerView: 1,
-            },
-            768: {
-              width: 768,
-              slidesPerView: 2,
-            },
-            1024: {
-              width: 1024,
-              slidesPerView: 3,
-            },
-            1536: {
-              width: 1536,
-              slidesPerView: 4,
-            },
-          }}
-          pagination={{ clickable: true }}
-          // onSwiper={(swiper) => console.log(swiper)}
-          // onSlideChange={() => console.log("slide change")}
-        >
+        modules={[Navigation, Pagination, A11y,Autoplay]} // Add Autoplay module here
+        spaceBetween={50}
+        breakpoints={{
+          576: {
+            width: 576,
+            slidesPerView: 1,
+          },
+          768: {
+            width: 768,
+            slidesPerView: 2,
+          },
+          1024: {
+            width: 1024,
+            slidesPerView: 3,
+          },
+          1536: {
+            width: 1536,
+            slidesPerView: 4,
+          },
+        }}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 5000 }} // Add autoplay configuration here (5 seconds delay)
+        speed={1200}
+        onSwiper={(swiper) => {}}
+        onSlideChange={() => {}}
+      >
           {CustomerReviewList.map((item: ReviewType) => {
             return (
               <SwiperSlide key={item.id} className="pb-20 cursor-default">
