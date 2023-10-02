@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import WaveBack from "../../assets/backgrounds/wave/wave";
 import { Star } from "lucide-react";
