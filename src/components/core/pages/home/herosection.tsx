@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import WaveBack from "../../assets/backgrounds/wave/wave";
 import { Star } from "lucide-react";
@@ -8,8 +8,8 @@ const HeroSection = async ({ dictionary }: { dictionary: any }) => {
   return (
     <>
       <section className="section-padding bg-primary">
-        <div className="container mx-auto min-h-[30vh] grid grid-cols-1 md:grid-cols-2 gap-10">
-          <aside className="flex items-center justify-center">
+        <div className="container  min-h-[30vh] grid grid-cols-1 gap-10">
+          <aside className="flex items-center justify-center text-center max-w-[700px] mx-auto">
             <div className="flex flex-col gap-10">
               <h1 className="text-[hsl(var(--primary-50))]">
                 {dictionary.home.hero.heading.white}
@@ -26,7 +26,7 @@ const HeroSection = async ({ dictionary }: { dictionary: any }) => {
               </div>
             </div>
           </aside>
-          <aside className="hidden md:block">
+          {/* <aside className="hidden md:block">
             <Image
               src="/images/hero-cloths.png"
               alt=""
@@ -35,7 +35,7 @@ const HeroSection = async ({ dictionary }: { dictionary: any }) => {
               className="w-full h-full"
               priority={true}
             />
-          </aside>
+          </aside> */}
         </div>
       </section>
       <section className="section-padding bg-[hsl(var(--primary-800))] text-white relative">
