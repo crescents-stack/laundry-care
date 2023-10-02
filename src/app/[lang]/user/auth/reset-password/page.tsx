@@ -105,7 +105,7 @@ const ResetPassword = () => {
               name="password"
               onChange={handleOnChange}
               type={showPass ? "text" : "password"}
-              className="border border-lighter-400 hover:border-user-400 p-2 rounded-lg focus:outline-none"
+              className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
             />
             <ErrorMessage errors={errors} name="password" />
             <div className="absolute top-[40px] right-[10px]">

@@ -13,7 +13,6 @@ const Verification = () => {
   
   const verifyAccount = async () => {
     try {
-      console.log(token);
       const response = await axios.post(
         `${process.env.BACKEND_URL}/users/verification`,
         {},
