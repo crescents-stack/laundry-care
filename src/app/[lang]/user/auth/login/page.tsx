@@ -13,7 +13,7 @@ import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 
 type FormDataType = {
   email: String;
@@ -27,6 +27,7 @@ const FormDataDefaultValues: FormDataType = {
 
 const Login = () => {
   const [showPass, setShowPass] = useState<Boolean>(false);
+  const [rememberme, setRememberme] = useState<Boolean>(false);
   const [formData, setFormData] = useState<FormDataType>(FormDataDefaultValues);
   const [errors, setErrors] = useState<FormDataType | {}>(formData);
   const [spinner, setSpinner] = useState(false);
@@ -86,6 +87,11 @@ const Login = () => {
         let token = response.data.token;
         setToken(token);
         localStorage.setItem("token", token);
+
+        if (rememberme) {
+          localStorage.setItem("formData", JSON.stringify(formData));
+        };
+
         let newPath = pathname.replace("/auth/login", "/dashboard");
         router.push(newPath);
       }
@@ -129,6 +135,10 @@ const Login = () => {
     } else {
       setErrors(catchedErrors);
     }
+
+
+
+
   };
 
   const validation = (data: FormDataType) => {
@@ -139,6 +149,8 @@ const Login = () => {
     if (data.password.length < 8) {
       obj.password = "Password should have 8 characters!";
     }
+
+
     return obj;
   };
 
@@ -185,7 +197,9 @@ const Login = () => {
             </div>
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center space-x-2">
-                <Checkbox id="rememberme" />
+                <Checkbox onClick={(e) => {
+                  setRememberme(!rememberme)
+                }} id="rememberme" />
                 <label
                   htmlFor="rememberme"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -194,9 +208,8 @@ const Login = () => {
                 </label>
               </div>
               <Link
-                href={`${
-                  pathname.includes("/bn") ? "/bn" : "/en"
-                }/user/auth/forget-password`}
+                href={`${pathname.includes("/bn") ? "/bn" : "/en"
+                  }/user/auth/forget-password`}
                 className="hover:text-[hsl(var(--primary-400))]"
               >
                 Forget password?
@@ -213,9 +226,8 @@ const Login = () => {
           <div>
             Already have an account?
             <Link
-              href={`${
-                pathname.includes("/bn") ? "/bn" : "/en"
-              }/user/auth/register`}
+              href={`${pathname.includes("/bn") ? "/bn" : "/en"
+                }/user/auth/register`}
               className="pl-1 hover:text-[hsl(var(--primary-600))]"
             >
               Register
