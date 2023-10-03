@@ -96,7 +96,9 @@ const Login = () => {
           title: "Login",
           description: "Successful!",
         });
-        localStorage.setItem("formData", JSON.stringify(formData));
+        if (rememberme) {
+          localStorage.setItem("formData", JSON.stringify(formData));
+        }
         let token = response.data.token;
         setToken(token);
         localStorage.setItem("token", token);
