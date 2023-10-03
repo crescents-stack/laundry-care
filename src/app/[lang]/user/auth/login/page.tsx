@@ -12,8 +12,8 @@ import PublicRoute from "@/layouts/public-route";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 
 type FormDataType = {
   email: String;
@@ -25,8 +25,17 @@ const FormDataDefaultValues: FormDataType = {
   password: "",
 };
 
+
+
 const Login = () => {
+
+  useEffect(() => {
+    let data: FormDataType = JSON.parse(localStorage.getItem("formData") as string);
+    setFormData({ ...formData, email: data?.email, password: data?.password });
+  }, [])
+
   const [showPass, setShowPass] = useState<Boolean>(false);
+  const [rememberme, setRememberme] = useState<Boolean>(false);
   const [formData, setFormData] = useState<FormDataType>(FormDataDefaultValues);
   const [errors, setErrors] = useState<FormDataType | {}>(formData);
   const [spinner, setSpinner] = useState(false);
@@ -86,6 +95,11 @@ const Login = () => {
         let token = response.data.token;
         setToken(token);
         localStorage.setItem("token", token);
+
+        if (rememberme) {
+          localStorage.setItem("formData", JSON.stringify(formData));
+        };
+
         let newPath = pathname.replace("/auth/login", "/dashboard");
         router.push(newPath);
       }
@@ -142,18 +156,21 @@ const Login = () => {
     return obj;
   };
 
+
   return (
     <PublicRoute>
+
+
       <div className="container section-padding">
         <div className="max-w-[500px] mx-auto">
           <H3 className="text-center" text="Welcome to Laundrycare!" />
-
           <form className="grid grid-col-1 gap-4 my-10">
             <div className="grid grid-cols-1 gap-2">
               <label>Email</label>
               <input
                 name="email"
                 onChange={handleOnChange}
+                value={formData?.email as string}
                 type="email"
                 className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
               />
@@ -164,6 +181,7 @@ const Login = () => {
               <label>Password</label>
               <input
                 name="password"
+                value={formData?.password as string}
                 onChange={handleOnChange}
                 type={showPass ? "text" : "password"}
                 className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
@@ -185,7 +203,9 @@ const Login = () => {
             </div>
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center space-x-2">
-                <Checkbox id="rememberme" />
+                <Checkbox onClick={(e) => {
+                  setRememberme(!rememberme)
+                }} id="rememberme" />
                 <label
                   htmlFor="rememberme"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -194,9 +214,8 @@ const Login = () => {
                 </label>
               </div>
               <Link
-                href={`${
-                  pathname.includes("/bn") ? "/bn" : "/en"
-                }/user/auth/forget-password`}
+                href={`${pathname.includes("/bn") ? "/bn" : "/en"
+                  }/user/auth/forget-password`}
                 className="hover:text-[hsl(var(--primary-400))]"
               >
                 Forget password?
@@ -213,9 +232,8 @@ const Login = () => {
           <div>
             Already have an account?
             <Link
-              href={`${
-                pathname.includes("/bn") ? "/bn" : "/en"
-              }/user/auth/register`}
+              href={`${pathname.includes("/bn") ? "/bn" : "/en"
+                }/user/auth/register`}
               className="pl-1 hover:text-[hsl(var(--primary-600))]"
             >
               Register
