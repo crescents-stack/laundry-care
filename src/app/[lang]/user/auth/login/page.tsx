@@ -12,7 +12,7 @@ import PublicRoute from "@/layouts/public-route";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 
 type FormDataType = {
@@ -25,7 +25,15 @@ const FormDataDefaultValues: FormDataType = {
   password: "",
 };
 
+
+
 const Login = () => {
+
+  useEffect(() => {
+    let data: FormDataType = JSON.parse(localStorage.getItem("formData") as string);
+    setFormData({ ...formData, email: data?.email, password: data?.password });
+  }, [])
+
   const [showPass, setShowPass] = useState<Boolean>(false);
   const [rememberme, setRememberme] = useState<Boolean>(false);
   const [formData, setFormData] = useState<FormDataType>(FormDataDefaultValues);
@@ -135,10 +143,6 @@ const Login = () => {
     } else {
       setErrors(catchedErrors);
     }
-
-
-
-
   };
 
   const validation = (data: FormDataType) => {
@@ -149,23 +153,24 @@ const Login = () => {
     if (data.password.length < 8) {
       obj.password = "Password should have 8 characters!";
     }
-
-
     return obj;
   };
 
+
   return (
     <PublicRoute>
+
+
       <div className="container section-padding">
         <div className="max-w-[500px] mx-auto">
           <H3 className="text-center" text="Welcome to Laundrycare!" />
-
           <form className="grid grid-col-1 gap-4 my-10">
             <div className="grid grid-cols-1 gap-2">
               <label>Email</label>
               <input
                 name="email"
                 onChange={handleOnChange}
+                value={formData?.email as string}
                 type="email"
                 className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
               />
@@ -176,6 +181,7 @@ const Login = () => {
               <label>Password</label>
               <input
                 name="password"
+                value={formData?.password as string}
                 onChange={handleOnChange}
                 type={showPass ? "text" : "password"}
                 className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
