@@ -6,8 +6,11 @@ import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ChangeEvent, MouseEvent, useState } from "react";
+import axios from "axios";
+import { toast } from "@/components/ui/use-toast";
+import { ButtonLoading } from "@/components/ui/button-loading";
 
 type FormDataType = {
   nid: String;
@@ -29,7 +32,38 @@ const Register = () => {
   const [showPass, setShowPass] = useState<Boolean>(false);
   const [formData, setFormData] = useState<FormDataType>(FormDataDefaultValues);
   const [errors, setErrors] = useState<FormDataType | {}>(formData);
+  const [spinner, setSpinner] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+
+  const FetchRegisterAPI = async (data: any) => {
+    setSpinner(true);
+    try {
+      const response = await axios.post(
+        `${process.env.BACKEND_URL}/admin/register`,
+        data
+      );
+      if (response.status === 201) {
+        toast({
+          title: "Registration",
+          description: "Check you email inbox to verify your account!",
+        });
+        setTimeout(() => {
+          let tempPath = pathname;
+          tempPath = tempPath.replace("/register", "/login");
+          router.push(tempPath);
+        }, 0);
+      }
+      setSpinner(false);
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error?.response?.data?.message,
+      });
+      setSpinner(false);
+    }
+  };
 
   const handleOnChange = (
     e:
@@ -46,7 +80,11 @@ const Register = () => {
 
     if (Object.keys(catchedErrors).length === 0) {
       setErrors({});
-      console.log(formData);
+      const Data = {
+        ...formData,
+        clientUrl: window.location.href.replace("/register", "/verification"),
+      };
+      FetchRegisterAPI(Data);
     } else {
       setErrors(catchedErrors);
     }
@@ -78,6 +116,7 @@ const Register = () => {
     <div className="container section-padding">
       <div className="max-w-[500px] mx-auto">
         <H3 className="text-center" text="Welcome to Laundrycare!" />
+
         <form className="grid grid-col-1 gap-4 my-10">
           <div className="grid grid-cols-1 gap-2">
             <label>Name</label>
@@ -138,19 +177,27 @@ const Register = () => {
           </div>
           <div className="text-gray-400">
             By registering you agree to our{" "}
-            <span className="text-[hsl(var(--primary-400))]">Terms of Service</span> &{" "}
-            <span className="text-[hsl(var(--primary-400))]">Privacy Policy</span> .
+            <span className="text-[hsl(var(--primary-400))]">
+              Terms of Service
+            </span>{" "}
+            &{" "}
+            <span className="text-[hsl(var(--primary-400))]">
+              Privacy Policy
+            </span>{" "}
+            .
           </div>
-          <Button className="mt-5 btn-admin" onClick={handleOnClick}>
-            Register
-          </Button>
+          {spinner ? (
+            <ButtonLoading className="mt-5" />
+          ) : (
+            <Button className="mt-5" onClick={handleOnClick}>
+              Register
+            </Button>
+          )}
         </form>
         <div>
           Already have an account?
           <Link
-            href={`${
-              pathname.includes("/bn") ? "/bn" : "/en"
-            }/admin/auth/login`}
+            href={`${pathname.includes("/bn") ? "/bn" : "/en"}/shop/auth/login`}
             className="pl-1 hover:text-[hsl(var(--primary-600))]"
           >
             Login
