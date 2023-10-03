@@ -53,7 +53,6 @@ const Dashboard = () => {
       setSpinner(false);
     }
   };
-
   const GetUserData = async () => {
     setSpinner(true);
     try {
@@ -111,6 +110,7 @@ const Dashboard = () => {
       setSpinner(false);
     }
   };
+  
   return (
     <PrivateRoute>
       <div className="container section-padding">

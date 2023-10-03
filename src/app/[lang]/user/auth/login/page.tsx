@@ -6,11 +6,12 @@ import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { ButtonLoading } from "@/components/ui/button-loading";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Toggle } from "@/components/ui/toggle";
 import { toast } from "@/components/ui/use-toast";
 import { useTokenProvider } from "@/context/token-provider";
 import PublicRoute from "@/layouts/public-route";
 import axios from "axios";
-import { Eye, EyeOff } from "lucide-react";
+import { Check, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
@@ -25,15 +26,7 @@ const FormDataDefaultValues: FormDataType = {
   password: "",
 };
 
-
-
 const Login = () => {
-
-  useEffect(() => {
-    let data: FormDataType = JSON.parse(localStorage.getItem("formData") as string);
-    setFormData({ ...formData, email: data?.email, password: data?.password });
-  }, [])
-
   const [showPass, setShowPass] = useState<Boolean>(false);
   const [rememberme, setRememberme] = useState<Boolean>(false);
   const [formData, setFormData] = useState<FormDataType>(FormDataDefaultValues);
@@ -43,6 +36,19 @@ const Login = () => {
   const router = useRouter();
   const { setToken } = useTokenProvider();
 
+  useEffect(() => {
+    let data: FormDataType = JSON.parse(
+      localStorage.getItem("formData") as string
+    );
+    if (data) {
+      setFormData({
+        ...formData,
+        email: data?.email,
+        password: data?.password,
+      });
+      setRememberme(true);
+    }
+  }, []);
   const handleOnChange = (
     e:
       | ChangeEvent<HTMLInputElement>
@@ -51,7 +57,6 @@ const Login = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [`${name}`]: value });
   };
-
   const EmailVerify = async () => {
     setSpinner(true);
     try {
@@ -78,7 +83,6 @@ const Login = () => {
       setSpinner(false);
     }
   };
-
   const FetchLoginAPI = async () => {
     setSpinner(true);
     try {
@@ -95,10 +99,6 @@ const Login = () => {
         let token = response.data.token;
         setToken(token);
         localStorage.setItem("token", token);
-
-        if (rememberme) {
-          localStorage.setItem("formData", JSON.stringify(formData));
-        };
 
         let newPath = pathname.replace("/auth/login", "/dashboard");
         router.push(newPath);
@@ -144,7 +144,6 @@ const Login = () => {
       setErrors(catchedErrors);
     }
   };
-
   const validation = (data: FormDataType) => {
     let obj: any = {};
     if (!data.email.trim()) {
@@ -156,11 +155,8 @@ const Login = () => {
     return obj;
   };
 
-
   return (
     <PublicRoute>
-
-
       <div className="container section-padding">
         <div className="max-w-[500px] mx-auto">
           <H3 className="text-center" text="Welcome to Laundrycare!" />
@@ -202,10 +198,20 @@ const Login = () => {
               </div>
             </div>
             <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center space-x-2">
-                <Checkbox onClick={(e) => {
-                  setRememberme(!rememberme)
-                }} id="rememberme" />
+              <div
+                className="flex items-center space-x-2"
+                onClick={() => {
+                  setRememberme(!rememberme);
+                  if (rememberme) {
+                    localStorage.removeItem("formData");
+                  } else {
+                    localStorage.setItem("formData", JSON.stringify(formData));
+                  }
+                }}
+              >
+                <Toggle size="sm" variant="outline">
+                  {rememberme ? <Check className="h-3 w-3" /> : null}
+                </Toggle>
                 <label
                   htmlFor="rememberme"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -214,8 +220,9 @@ const Login = () => {
                 </label>
               </div>
               <Link
-                href={`${pathname.includes("/bn") ? "/bn" : "/en"
-                  }/user/auth/forget-password`}
+                href={`${
+                  pathname.includes("/bn") ? "/bn" : "/en"
+                }/user/auth/forget-password`}
                 className="hover:text-[hsl(var(--primary-400))]"
               >
                 Forget password?
@@ -232,8 +239,9 @@ const Login = () => {
           <div>
             Already have an account?
             <Link
-              href={`${pathname.includes("/bn") ? "/bn" : "/en"
-                }/user/auth/register`}
+              href={`${
+                pathname.includes("/bn") ? "/bn" : "/en"
+              }/user/auth/register`}
               className="pl-1 hover:text-[hsl(var(--primary-600))]"
             >
               Register
