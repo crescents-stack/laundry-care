@@ -38,8 +38,10 @@ const Login = () => {
 
   useEffect(() => {
     let data: FormDataType = JSON.parse(
-      localStorage.getItem("formData") as string
+      localStorage.getItem("formDataAdmin") as string
     );
+    
+
     if (data) {
       setFormData({
         ...formData,
@@ -101,7 +103,7 @@ const Login = () => {
         });
 
         if (rememberme) {
-          localStorage.setItem("formData", JSON.stringify(formData))
+          localStorage.setItem("formDataAdmin", JSON.stringify(formData))
         }
 
         let token = response.data.token;

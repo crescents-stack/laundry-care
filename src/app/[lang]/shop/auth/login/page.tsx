@@ -39,7 +39,7 @@ const Login = () => {
 
   useEffect(() => {
     let data: FormDataType = JSON.parse(
-      localStorage.getItem("formData") as string
+      localStorage.getItem("formDataShop") as string
     );
     if (data) {
       setFormData({
@@ -104,7 +104,7 @@ const Login = () => {
         setToken(token);
         localStorage.setItem("token", token);
         if (rememberme) {
-          localStorage.setItem("formData", JSON.stringify(formData))
+          localStorage.setItem("formDataShop", JSON.stringify(formData))
         }
         let newPath = pathname.replace("/auth/login", "/dashboard");
         router.push(newPath);

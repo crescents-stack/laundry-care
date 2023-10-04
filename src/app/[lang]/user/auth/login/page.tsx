@@ -37,8 +37,9 @@ const Login = () => {
   const { setToken } = useTokenProvider();
 
   useEffect(() => {
+    console.log("shaith")
     let data: FormDataType = JSON.parse(
-      localStorage.getItem("formData") as string
+      localStorage.getItem("formDataUser") as string
     );
     if (data) {
       setFormData({
@@ -97,7 +98,7 @@ const Login = () => {
           description: "Successful!",
         });
         if (rememberme) {
-          localStorage.setItem("formData", JSON.stringify(formData));
+          localStorage.setItem("formDataUser", JSON.stringify(formData));
         }
         let token = response.data.token;
         setToken(token);
