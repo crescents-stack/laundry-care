@@ -40,7 +40,6 @@ const Login = () => {
     let data: FormDataType = JSON.parse(
       localStorage.getItem("formDataAdmin") as string
     );
-    
 
     if (data) {
       setFormData({
@@ -103,7 +102,7 @@ const Login = () => {
         });
 
         if (rememberme) {
-          localStorage.setItem("formDataAdmin", JSON.stringify(formData))
+          localStorage.setItem("formDataAdmin", JSON.stringify(formData));
         }
 
         let token = response.data.token;
@@ -214,7 +213,7 @@ const Login = () => {
                 onClick={() => {
                   setRememberme(!rememberme);
                   if (rememberme) {
-                    localStorage.removeItem("formData");
+                    localStorage.removeItem("formDataAdmin");
                   }
                 }}
               >
@@ -230,8 +229,9 @@ const Login = () => {
               </div>
 
               <Link
-                href={`${pathname.includes("/bn") ? "/bn" : "/en"
-                  }/shop/auth/forget-password`}
+                href={`${
+                  pathname.includes("/bn") ? "/bn" : "/en"
+                }/shop/auth/forget-password`}
                 className="hover:text-[hsl(var(--primary-400))]"
               >
                 Forget password?
@@ -248,8 +248,9 @@ const Login = () => {
           <div>
             Already have an account?
             <Link
-              href={`${pathname.includes("/bn") ? "/bn" : "/en"
-                }/shop/auth/register`}
+              href={`${
+                pathname.includes("/bn") ? "/bn" : "/en"
+              }/shop/auth/register`}
               className="pl-1 hover:text-[hsl(var(--primary-600))]"
             >
               Register
