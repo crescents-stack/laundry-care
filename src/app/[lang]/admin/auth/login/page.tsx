@@ -209,17 +209,6 @@ const Login = () => {
               </div>
             </div>
             <div className="flex items-center justify-between gap-4">
-
-              {/* <div className="flex items-center space-x-2">
-                <Checkbox id="rememberme" />
-                <label
-                  htmlFor="rememberme"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  Remember me
-                </label>
-              </div> */}
-
               <div
                 className="flex items-center space-x-2"
                 onClick={() => {
