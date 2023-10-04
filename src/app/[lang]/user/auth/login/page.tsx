@@ -5,7 +5,6 @@ import ErrorMessage from "@/components/core/shared/error-message";
 import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { ButtonLoading } from "@/components/ui/button-loading";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Toggle } from "@/components/ui/toggle";
 import { toast } from "@/components/ui/use-toast";
 import { useTokenProvider } from "@/context/token-provider";
@@ -13,7 +12,7 @@ import PublicRoute from "@/layouts/public-route";
 import axios from "axios";
 import { Check, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 
 type FormDataType = {
@@ -207,7 +206,7 @@ const Login = () => {
                 onClick={() => {
                   setRememberme(!rememberme);
                   if (rememberme) {
-                    localStorage.removeItem("formData");
+                    localStorage.removeItem("formDataUser");
                   }
                 }}
               >

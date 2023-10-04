@@ -211,7 +211,7 @@ const Login = () => {
                 onClick={() => {
                   setRememberme(!rememberme);
                   if (rememberme) {
-                    localStorage.removeItem("formData");
+                    localStorage.removeItem("formDataShop");
                   }
                 }}
               >
