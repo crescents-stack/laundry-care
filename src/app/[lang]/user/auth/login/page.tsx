@@ -221,9 +221,8 @@ const Login = () => {
                 </label>
               </div>
               <Link
-                href={`${
-                  pathname.includes("/bn") ? "/bn" : "/en"
-                }/user/auth/forget-password`}
+                href={`${pathname.includes("/bn") ? "/bn" : "/en"
+                  }/user/auth/forget-password`}
                 className="hover:text-[hsl(var(--primary-400))]"
               >
                 Forget password?
@@ -240,9 +239,8 @@ const Login = () => {
           <div>
             Already have an account?
             <Link
-              href={`${
-                pathname.includes("/bn") ? "/bn" : "/en"
-              }/user/auth/register`}
+              href={`${pathname.includes("/bn") ? "/bn" : "/en"
+                }/user/auth/register`}
               className="pl-1 hover:text-[hsl(var(--primary-600))]"
             >
               Register

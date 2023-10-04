@@ -9,11 +9,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/components/ui/use-toast";
 import { useTokenProvider } from "@/context/token-provider";
 import PublicRoute from "@/layouts/public-route";
+import { Toggle } from "@/components/ui/toggle";
 import axios from "axios";
-import { Eye, EyeOff } from "lucide-react";
+import { Check, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 
 type FormDataType = {
   email: String;
@@ -27,12 +28,28 @@ const FormDataDefaultValues: FormDataType = {
 
 const Login = () => {
   const [showPass, setShowPass] = useState<Boolean>(false);
+  const [rememberme, setRememberme] = useState<Boolean>(false);
+
   const [formData, setFormData] = useState<FormDataType>(FormDataDefaultValues);
   const [errors, setErrors] = useState<FormDataType | {}>(formData);
   const [spinner, setSpinner] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const { setToken } = useTokenProvider();
+
+  useEffect(() => {
+    let data: FormDataType = JSON.parse(
+      localStorage.getItem("formData") as string
+    );
+    if (data) {
+      setFormData({
+        ...formData,
+        email: data?.email,
+        password: data?.password,
+      });
+      setRememberme(true);
+    }
+  }, []);
 
   const handleOnChange = (
     e:
@@ -86,6 +103,9 @@ const Login = () => {
         let token = response.data.token;
         setToken(token);
         localStorage.setItem("token", token);
+        if (rememberme) {
+          localStorage.setItem("formData", JSON.stringify(formData))
+        }
         let newPath = pathname.replace("/auth/login", "/dashboard");
         router.push(newPath);
       }
@@ -153,6 +173,7 @@ const Login = () => {
               <label>Email</label>
               <input
                 name="email"
+                value={formData?.email as string}
                 onChange={handleOnChange}
                 type="email"
                 className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
@@ -164,6 +185,7 @@ const Login = () => {
               <label>Password</label>
               <input
                 name="password"
+                value={formData?.password as string}
                 onChange={handleOnChange}
                 type={showPass ? "text" : "password"}
                 className="border border-lighter-400 hover:border-[hsl(var(--primary-400))] p-2 rounded-lg focus:outline-none"
@@ -184,8 +206,27 @@ const Login = () => {
               </div>
             </div>
             <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center space-x-2">
+              {/* <div className="flex items-center space-x-2">
                 <Checkbox id="rememberme" />
+                <label
+                  htmlFor="rememberme"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Remember me
+                </label>
+              </div> */}
+              <div
+                className="flex items-center space-x-2"
+                onClick={() => {
+                  setRememberme(!rememberme);
+                  if (rememberme) {
+                    localStorage.removeItem("formData");
+                  }
+                }}
+              >
+                <Toggle size="sm" variant="outline">
+                  {rememberme ? <Check className="h-3 w-3" /> : null}
+                </Toggle>
                 <label
                   htmlFor="rememberme"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -194,9 +235,8 @@ const Login = () => {
                 </label>
               </div>
               <Link
-                href={`${
-                  pathname.includes("/bn") ? "/bn" : "/en"
-                }/shop/auth/forget-password`}
+                href={`${pathname.includes("/bn") ? "/bn" : "/en"
+                  }/shop/auth/forget-password`}
                 className="hover:text-[hsl(var(--primary-400))]"
               >
                 Forget password?
@@ -213,9 +253,8 @@ const Login = () => {
           <div>
             Already have an account?
             <Link
-              href={`${
-                pathname.includes("/bn") ? "/bn" : "/en"
-              }/shop/auth/register`}
+              href={`${pathname.includes("/bn") ? "/bn" : "/en"
+                }/shop/auth/register`}
               className="pl-1 hover:text-[hsl(var(--primary-600))]"
             >
               Register
