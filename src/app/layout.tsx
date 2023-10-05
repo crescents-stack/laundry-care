@@ -27,8 +27,11 @@ export default function RootLayout({
   useEffect(() => {
     setTimeout(() => {
       if (localStorage) {
+        // theme setter
         const themeLS = localStorage.getItem("theme");
+        console.log("Theme: ", themeLS)
         themeLS && setTheme(themeLS, undefined, undefined);
+        // language setter
         const lang = localStorage.getItem("lang");
         if (lang) {
           let tempPathname = window.location.href;
