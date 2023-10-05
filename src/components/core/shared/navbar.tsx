@@ -6,7 +6,7 @@ import Logo from "../assets/logo";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import LangSwitch from "../assets/lang-switch";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Bangla from "@/lib/dictionaries/bangla.json";
 import English from "@/lib/dictionaries/english.json";
 import { ModeToggle } from "@/components/ui/toggle-mode";
@@ -15,7 +15,8 @@ import { useTokenProvider } from "@/context/token-provider";
 const Navbar = () => {
   const [navStyle, setNavStyle] = useState<Boolean>(false);
   const pathname = usePathname();
-  const {token} = useTokenProvider();
+  const router = useRouter();
+  const { token } = useTokenProvider();
 
   const dictionary = pathname.includes("/bn") ? Bangla : English;
 
@@ -69,15 +70,28 @@ const Navbar = () => {
           {dictionary.navbar.links.map((item: any) => {
             const { text, link, id } = item;
             return (
-              <Link
+              <div
                 key={id}
-                href={`${pathname.includes("/bn") ? "/bn" : "/en"}/${link}`}
+                // href={`${pathname.includes("/bn") ? "/bn" : "/en"}/${link}`}
                 className={`${
                   !navStyle ? "text-white" : "text-[hsl(var(--primary-600))]"
-                } hidden lg:block`}
+                } hidden lg:block cursor-pointer`}
+                onClick={() => {
+                  if (id === 0) {
+                    localStorage.setItem("theme", "rider");
+                  }
+                  if (id === 1) {
+                    localStorage.setItem("theme", "shop");
+                  }
+                  setTimeout(() => {
+                    router.push(
+                      `${pathname.includes("/bn") ? "/bn" : "/en"}/${link}`
+                    );
+                  }, 0);
+                }}
               >
                 {text}
-              </Link>
+              </div>
             );
           })}
 
@@ -87,7 +101,7 @@ const Navbar = () => {
               languages={dictionary.navbar.languageSwitch}
               pathname={pathname}
             />
-            <ModeToggle />
+            {/* <ModeToggle /> */}
             <Link
               href={`${pathname.includes("/bn") ? "/bn" : "/en"}/${
                 pathname.includes("/shop")
@@ -97,7 +111,7 @@ const Navbar = () => {
                   : pathname.includes("/admin")
                   ? "/admin"
                   : "user"
-              }/${token ? "dashboard": "auth/login"}`}
+              }/${token ? "dashboard" : "auth/login"}`}
             >
               <Button
                 className={`${
@@ -106,7 +120,7 @@ const Navbar = () => {
                     : "text-[hsl(var(--primary-600))] bg-lighter-50 hover:bg-lighter-200"
                 }`}
               >
-                {token ? dictionary.navbar.loginT: dictionary.navbar.login}
+                {token ? dictionary.navbar.loginT : dictionary.navbar.login}
               </Button>
             </Link>
           </div>

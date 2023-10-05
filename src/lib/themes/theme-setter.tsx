@@ -1,3 +1,5 @@
+
+
 export const setTheme = (theme: string, router: any, pathname: any) => {
   let currentTheme = document.getElementById("customThemes");
 
@@ -10,6 +12,7 @@ export const setTheme = (theme: string, router: any, pathname: any) => {
         tempPath = tempPath.replace("/user", tempTheme);
         tempPath = tempPath.replace("/shop", tempTheme);
         tempPath = tempPath.replace("/admin", tempTheme);
+
         router.push(tempPath);
       }
     }
