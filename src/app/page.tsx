@@ -1,7 +1,5 @@
 "use client";
 
-import { H3 } from "@/components/core/typegraphy/headings";
-import { Button } from "@/components/ui/button";
 import { setTheme } from "@/lib/themes/theme-setter";
 import Image from "next/image";
 import Link from "next/link";
@@ -76,15 +74,6 @@ const Home = () => {
           <div className="sm:flex sm:items-center mt-[-3rem]">
             {/* photo */}
             <div className="flex sm:justify-end justify-center" >
-              {/* <img width="80" height="10" className='sm:w-[80%]' src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" /> */}
-              {/* <Image 
-              alt="sahith"
-              src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
-              unoptimized
-              width={10}
-              height={10}
-              /> */}
-
               <Image
                 src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
                 alt="sample image"
@@ -116,7 +105,6 @@ const Home = () => {
           {/* block3 left*/}
           <div className="sm:min-w-[50%] flex items-center">
             <div className="sm:max-w-[80%]">
-              {/* <img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" /> */}
               <Image
                 src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
                 alt="sample image"
@@ -172,7 +160,6 @@ const Home = () => {
 
       {/* Block5  big picture */}
       <div className="">
-        {/* <img className="sm:w-[100%] my-10" src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" /> */}
         <Image
           className="w-[100%]"
           src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
@@ -199,7 +186,6 @@ const Home = () => {
             <p className="mt-6 text-slate-500">We created the app that allows you to schedule an order in less than 2 minutes, whether at home, at the office or on the go. No need to speak to any representative, you can now manage all your orders with our easy-to-use website or mobile app.</p>
 
             <div className="mt-7 items-center flex justify-center">
-              {/* <img className="sm:w-[80%]" src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" /> */}
               <Image
                 src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
                 alt="sample image"
@@ -218,7 +204,6 @@ const Home = () => {
 
           {/* block6 right */}
           <div className="mt-7 flex items-center justify-center">
-            {/* <img className="sm:w-[80%]" src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" /> */}
             <Image
               src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
               alt="sample image"
@@ -245,8 +230,6 @@ const Home = () => {
           {/* block7 right */}
           <div className="">
             <div className="mt-7 flex items-center justify-center">
-              {/* <img className="sm:w-[80%]" src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" /> */}
-
               <Image
                 src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
                 alt="sample image"
