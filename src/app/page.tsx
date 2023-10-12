@@ -1,5 +1,7 @@
 "use client";
 
+import BoxOfLinks from "@/components/core/pages/home/homepage/box-of-links";
+import ImageDescCard from "@/components/core/pages/home/homepage/image-desc-card";
 import { setTheme } from "@/lib/themes/theme-setter";
 import Image from "next/image";
 import Link from "next/link";
@@ -226,9 +228,13 @@ const Home = () => {
         <div className="my-[3rem] border-b-[.07rem] border-slate-400"></div>
 
         {/* block7 */}
+
         <div className="flex flex-col-reverse sm:flex-row sm:align sm:justify-center">
-          {/* block7 right */}
+          {/* this is in mobile website to change the direction of flex */}
+          <p className="mt-6 sm:hidden">We never compromise when it comes to quality and speed. We compensate our partner drivers fairly and are proud to work with dozens of reliable local cleaning facilities to keep transport to a minimum.</p>
           <div className="">
+
+            {/* block7 left*/}
             <div className="mt-7 flex items-center justify-center">
               <Image
                 src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
@@ -244,23 +250,157 @@ const Home = () => {
                 height={400}
               />
             </div>
-
-
-
           </div>
-          {/* block7 left */}
+
+          {/* block7 right*/}
           <div className="flex sm:max-w-[50%] justify-center items-center">
-            <div className="max-w-[100%] text-center">
+            <div className="max-w-[90%] text-center">
               <h2 className=" ">Quality without compromise</h2>
               <h3 className="  font-bold mt-6 text-[1.3rem]">We partner with carefully-selected local cleaning and delivery partners to ensure your items are treated with the utmost care.</h3>
               <p className="mt-6 hidden sm:block">We never compromise when it comes to quality and speed. We compensate our partner drivers fairly and are proud to work with dozens of reliable local cleaning facilities to keep transport to a minimum.</p>
             </div>
-          </div>
 
+          </div>
         </div>
-        <p className="mt-6 sm:hidden">We never compromise when it comes to quality and speed. We compensate our partner drivers fairly and are proud to work with dozens of reliable local cleaning facilities to keep transport to a minimum.</p>
+        {/* block7 end */}
       </div>
 
+      {/* block8 */}
+      <div className="bg-gray-100 pb-20  my-10 px-6 sm:px-14">
+        <h2 className="sm:py-20 py-5 ">Want to work with us?</h2>
+
+        <div className="flex flex-col sm:justify-evenly gap-9">
+          <div className="">
+            <h3>Careers</h3>
+            <p>Check open positions</p>
+          </div>
+
+          <div className="">
+            <h3>Cleaning partners</h3>
+            <p>Want to grow your customer base completely hassle free?</p>
+          </div>
+
+          <div className="">
+            <h3>Partner drivers</h3>
+            <p>Get flexible slots and fair, competitive fees.</p>
+          </div>
+
+          <div className="">
+            <h3>Hotel partnerships</h3>
+            <p>Offer laundry, ironing & dry cleaning services to your guests.</p>
+          </div>
+        </div>
+      </div>
+      {/* block8 ends */}
+
+
+      <div className="container">
+
+        {/* block9 */}
+        <div className="sm:flex sm:justify-between sm:min-h-[80vh] items-center">
+
+          {/* block9 left */}
+          <div className="sm:w-[50%]">
+            <h3 className="py-5">Growth, sustainability and expansion are integral to strong customer relationships</h3>
+            <h4>Deyan Dimitrov, CEO of Laundryheap</h4>
+          </div>
+
+          {/* block9 right */}
+          <div className="sm:w-[50%]">
+            <Image
+              src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+              alt="sample image"
+              loader={({ src, width, quality }) => {
+                const url = new URL("https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80");
+                url.searchParams.append("src", src);
+                url.searchParams.append("w", width + "");
+                url.searchParams.append("q", quality + "");
+                return url.toString();
+              }}
+              width={600}
+              height={400}
+            />
+          </div>
+        </div>
+        {/* block9 ends */}
+
+      </div>
+      {/* block10  */}
+      <div className="my-10">
+
+        <Image
+          className="w-[100%]"
+          src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+          alt="sample image"
+          loader={({ src, width, quality }) => {
+            const url = new URL("https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80");
+            url.searchParams.append("src", src);
+            url.searchParams.append("w", width + "");
+            url.searchParams.append("q", quality + "");
+            return url.toString();
+          }}
+          width={600}
+          height={400}
+        />
+      </div>
+      {/* block10 ends*/}
+
+      <div className="container">
+        {/* block11 */}
+        <div className="my-20">
+          <div className="mb-8 flex justify-between">
+            <h3>Our blog</h3>
+            <Link href="/" className="mt-2 font-bold text-blue-900">View all (this is a link)</Link>
+          </div>
+
+          <div className="flex gap-10 sm:flex-row flex-col">
+            <ImageDescCard link={true} description="Things To Do In Paris With Your Kids (this is a link)" />
+            <ImageDescCard link={true} description="What To Expect At The Independent Hotel Show This Year (this is a link)" />
+            <ImageDescCard link={true} description="Mastering Laundry Day Top Tips for Organising Your Utility Room (this is a link)" />
+          </div>
+        </div>
+        {/* block11 ends*/}
+
+
+        {/* block 12 */}
+        <div className="my-10">
+          <h3 className="my-8">Get the most of the Laundryheap</h3>
+          <div className="sm:flex gap-10 ">
+            <ImageDescCard link={false} description="Satisfied with our service? Send a gift card to someone you love." />
+            <ImageDescCard link={false} description="Want to get a discount code? Refer friends and earn." />
+          </div>
+        </div>
+        {/* block12 ends */}
+
+        {/* block13 */}
+        <div className="sm:w-[50vw]">
+          <h3>Our other offers</h3>
+          <ImageDescCard description="Check our solutions for on-demand linen & towels rental for your short-let." />
+        </div>
+        {/* block13 ends */}
+
+        {/* Line */}
+        <div className="my-[3rem] border-b-[.07rem] border-slate-400"></div>
+
+        {/* block14  */}
+        <div className="">
+
+          <h4>
+            <Link href="/" className="inline-block mt-2 font-bold text-blue-900">Home (this is a link)</Link>
+            <div className="inline-block mx-4">--</div>
+            <h4 className="inline-block">About us</h4>
+          </h4>
+
+          <div className="flex mb-10 flex-wrap justify-between">
+            <BoxOfLinks {...obj1} />
+            <BoxOfLinks {...obj2} />
+            <BoxOfLinks {...obj2} />
+            <BoxOfLinks {...obj2} />
+          </div>
+        </div>
+        {/* block14 end */}
+
+      </div>
     </>
 
   );
@@ -269,6 +409,19 @@ const Home = () => {
 
 export default Home;
 
+const obj1 = { heading: "heading", links: { "How it works": "/", "Prices & Services": "/", "Help Center": "/" } }
+const obj2 = {
+  heading: "Our solutions",
+  links: {
+    "Xyx": "/",
+    "Xyz": "/",
+    "abc": "/",
+    "abd": "/",
+    "abm": "/",
+    "mab": "/",
+    "cat": "/",
+  }
+}
 
 const Links = [
   {
