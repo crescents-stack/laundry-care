@@ -388,7 +388,7 @@ const Home = () => {
           <h4>
             <Link href="/" className="inline-block mt-2 font-bold text-blue-900">Home (this is a link)</Link>
             <div className="inline-block mx-4">--</div>
-            <h4 className="inline-block">About us</h4>
+            <p className="inline-block">About us</p>
           </h4>
 
           <div className="flex mb-10 flex-wrap justify-between">
@@ -409,7 +409,15 @@ const Home = () => {
 
 export default Home;
 
-const obj1 = { heading: "heading", links: { "How it works": "/", "Prices & Services": "/", "Help Center": "/" } }
+const obj1 = {
+  heading: "heading",
+  links: {
+    "How it works": "/",
+    "Prices & Services": "/",
+    "Help Center": "/"
+  }
+}
+
 const obj2 = {
   heading: "Our solutions",
   links: {
