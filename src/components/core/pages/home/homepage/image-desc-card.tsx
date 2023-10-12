@@ -1,7 +1,7 @@
 "use client"
-import Link from 'next/link'
-import Image from 'next/image'
-import React from 'react'
+import Link from "next/link"
+import Image from "next/image"
+import React from "react"
 const Block11Card = (props: any) => {
     return (
         <>

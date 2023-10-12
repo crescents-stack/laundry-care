@@ -1,13 +1,13 @@
 "use client";
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
 const BoxOfLinks = (props: any) => {
     return (
         <>
 
             <div>
-                <h3 className='my-5'>{props.heading}</h3>
+                <h3 className="my-5">{props.heading}</h3>
                 {
                     Object.keys(props.links).map((key, index) => {
                         return (
