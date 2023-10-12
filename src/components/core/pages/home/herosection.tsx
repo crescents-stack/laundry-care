@@ -1,10 +1,12 @@
+"use client";
 import { Button } from "@/components/ui/button";
-// import Image from "next/image";
 import Link from "next/link";
 import WaveBack from "../../assets/backgrounds/wave/wave";
 import { Star } from "lucide-react";
+import { usePathname } from "next/navigation";
 
-const HeroSection = async ({ dictionary }: { dictionary: any }) => {
+const HeroSection = ({ dictionary }: { dictionary: any }) => {
+  const pathname = usePathname();
   return (
     <>
       <section className="section-padding bg-primary">
@@ -20,22 +22,14 @@ const HeroSection = async ({ dictionary }: { dictionary: any }) => {
                 </span>
               </h1>
               <div>
-                <Button className="bg-lighter-50 text-primary hover:bg-lighter-200">
-                  {dictionary.home.hero.btnText}
-                </Button>
+                <Link href={pathname + "/pickup-schedule"}>
+                  <Button className="bg-lighter-50 text-primary hover:bg-lighter-200">
+                    {dictionary.home.hero.btnText}
+                  </Button>
+                </Link>
               </div>
             </div>
           </aside>
-          {/* <aside className="hidden md:block">
-            <Image
-              src="/images/hero-cloths.png"
-              alt=""
-              height={1000}
-              width={1000}
-              className="w-full h-full"
-              priority={true}
-            />
-          </aside> */}
         </div>
       </section>
       <section className="section-padding bg-[hsl(var(--primary-800))] text-white relative">
