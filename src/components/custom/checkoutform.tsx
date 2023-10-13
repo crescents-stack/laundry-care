@@ -10,9 +10,6 @@ import { useState } from "react";
 
 const CheckoutForm = () => {
   const [spinner, setSpinner] = useState(false);
-//   const { user } = useUserProvider();
-//   const { cart, setCart } = useCartProvider();
-//   const { setToast } = useToastProvider();
   const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
@@ -39,65 +36,43 @@ const CheckoutForm = () => {
       redirect: "if_required",
     });
 
-    const CreateOrderInDatabase = async (amount: number) => {
-      const token = localStorage.getItem("token");
-      try {
-        const response = await axios.post(
-          `${process.env.BACKEND_URL}/orders/create`,
-          {
-            userId: "asdfads",
-            orderItems: "asdfads",
-            totalPrice: amount,
-            shippingAddress: "Bangladesh",
-            paymentMethod: "Credit Card",
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        console.log(response);
-        if (response.status === 200) {
-        //   setCart([]);
-        //   localStorage.setItem("cart", [])
-        //   toast({
-        //     title: "Payment Process",
-        //     message: "Payment successful!",
-        //     variant: "solid",
-        //     action: undefined,
-        //     type: "success",
-        //   });
-        }
-        router.push("/dashboard/orders");
-        setSpinner(false);
-      } catch (error) {
-        console.log(error);
-        // setToast({
-        //   title: "Payment Process",
-        //   message: error.response.data.message || "Something went wrong!",
-        //   variant: "solid",
-        //   action: undefined,
-        //   type: "error",
-        // });
-        setSpinner(false);
-      }
-    };
-
+    // const CreateOrderInDatabase = async (amount: number) => {
+    //   const token = localStorage.getItem("token");
+    //   try {
+    //     const response = await axios.post(
+    //       `${process.env.BACKEND_URL}/orders/create`,
+    //       {
+    //         userId: "asdfads",
+    //         orderItems: "asdfads",
+    //         totalPrice: amount,
+    //         shippingAddress: "Bangladesh",
+    //         paymentMethod: "Credit Card",
+    //       },
+    //       {
+    //         headers: {
+    //           Authorization: `Bearer ${token}`,
+    //         },
+    //       }
+    //     );
+    //     console.log(response);
+    //     if (response.status === 200) {
+    //     }
+    //     router.push("/dashboard/orders");
+    //     setSpinner(false);
+    //   } catch (error) {
+    //     console.log(error);
+    //     setSpinner(false);
+    //   }
+    // };
+    console.log(result, "<<<")
     if (result.error) {
       // Show error to your customer (for example, payment details incomplete)
       console.log(result.error.message);
-    //   setToast({
-    //     title: "Payment Process",
-    //     message: result.error.message || "Something went wrong!",
-    //     variant: "solid",
-    //     action: undefined,
-    //     type: "error",
-    //   });
       setSpinner(false);
     } else {
       const { amount } = result.paymentIntent;
-      CreateOrderInDatabase(amount);
+      console.log(amount, ">>")
+      // CreateOrderInDatabase(amount);
     }
   };
 
