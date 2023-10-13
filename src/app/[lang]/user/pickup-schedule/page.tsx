@@ -59,18 +59,20 @@ const FormSchema: any = z.object({
     message: "Delivery time is required.",
   }),
   messageForRider: z.string(),
-  services: z.array(serviceSchema, {
-    required_error: "Selected at least one service!",
+  services: z.array(serviceSchema).refine((services) => services.length > 0, {
+    message: "At least one service is required.",
   }),
 });
 
 export default function PickupSchedule() {
+  const [showCheckout, setShowCheckout] = useState(false);
   const [stripeClientSecret, setStripeClientSecret] = useState(null);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    setShowCheckout(true);
     toast({
       title: "You submitted the following values:",
       description: (
@@ -113,180 +115,199 @@ export default function PickupSchedule() {
       <div className="">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 items-start">
-              <div className="grid grid-cols-1 gap-8">
-                <h4 className="text-xl lg:text-2xl font-medium">
-                  Collection & Delivery
-                </h4>
-                <FormField
-                  control={form.control}
-                  name="address"
-                  render={({ field }: { field: any }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>Your address for pickup</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="e.g. Bashundhara R/A, Block #F, Road ..."
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="collectionDate"
-                  render={({ field }: { field: any }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>Collection Date</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant={"outline"}
-                              className={cn(
-                                "w-full pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
-                              )}
-                            >
-                              {field.value ? (
-                                format(field.value, "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) => date < new Date()}
-                            initialFocus
+            <div
+              className={`grid grid-cols-1 md:grid-cols-2 gap-10 items-start`}
+            >
+              {!showCheckout ? (
+                <div className="grid grid-cols-1 gap-8">
+                  <h4 className="text-xl lg:text-2xl font-medium">
+                    Collection & Delivery
+                  </h4>
+                  <FormField
+                    control={form.control}
+                    name="address"
+                    render={({ field }: { field: any }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel>Your address for pickup</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="e.g. Bashundhara R/A, Block #F, Road ..."
+                            {...field}
                           />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="collectionTime"
-                  render={({ field }: { field: any }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>Collection Time</FormLabel>
-                      <TimePicker field={field} />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="deliveryDate"
-                  render={({ field }: { field: any }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>Delivery Date</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant={"outline"}
-                              className={cn(
-                                "w-full pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
-                              )}
-                            >
-                              {field.value ? (
-                                format(field.value, "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date: Date) =>
-                              date < form.getValues("collectionDate")
-                            }
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="deliveryTime"
-                  render={({ field }: { field: any }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>Delivery Time</FormLabel>
-                      <TimePicker field={field} />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="messageForRider"
-                  render={({ field }: { field: any }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>Any special message for Rider</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="grid grid-cols-1 gap-8">
-                <h4 className="text-xl lg:text-2xl font-medium">
-                  What services do you need?
-                </h4>
-                <FormField
-                  control={form.control}
-                  name="services"
-                  render={({ field }: { field: any }) => (
-                    <FormItem className="flex flex-col">
-                      <FormMessage />
-                      <FormControl>
-                        <ServiceSelector field={field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="grid grid-cols-1 gap-8">
-                <h4 className="text-xl lg:text-2xl font-medium">Checkout</h4>
-                {stripeClientSecret ? (
-                  <Elements
-                    stripe={stripePromise}
-                    options={{
-                      clientSecret: stripeClientSecret || "",
-                    }}
-                  >
-                    <CheckoutForm />
-                  </Elements>
-                ) : (
-                  "Loading form..."
-                )}
-              </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="collectionDate"
+                    render={({ field }: { field: any }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel>Collection Date</FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
+                              >
+                                {field.value ? (
+                                  format(field.value, "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              disabled={(date) => date < new Date()}
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="collectionTime"
+                    render={({ field }: { field: any }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel>Collection Time</FormLabel>
+                        <TimePicker field={field} />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="deliveryDate"
+                    render={({ field }: { field: any }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel>Delivery Date</FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
+                              >
+                                {field.value ? (
+                                  format(field.value, "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              disabled={(date: Date) =>
+                                date < form.getValues("collectionDate")
+                              }
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="deliveryTime"
+                    render={({ field }: { field: any }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel>Delivery Time</FormLabel>
+                        <TimePicker field={field} />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="messageForRider"
+                    render={({ field }: { field: any }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel>Any special message for Rider</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              ) : null}
+              {!showCheckout ? (
+                <div className="grid grid-cols-1 gap-8">
+                  <h4 className="text-xl lg:text-2xl font-medium">
+                    What services do you need?
+                  </h4>
+                  <FormField
+                    control={form.control}
+                    name="services"
+                    render={({ field }: { field: any }) => (
+                      <FormItem className="flex flex-col">
+                        <FormMessage />
+                        <FormControl>
+                          <ServiceSelector field={field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              ) : null}
             </div>
-            <Button type="submit">Confirm Schedule</Button>
+            <div className="flex justify-center pb-10">
+              {showCheckout ? (
+                <div
+                  onClick={() => setShowCheckout(false)}
+                  className="cursor-pointer underline"
+                >
+                  Reschedule
+                </div>
+              ) : (
+                <Button type="submit">Confirm Schedule</Button>
+              )}
+            </div>
           </form>
         </Form>
       </div>
+      {showCheckout ? (
+        <div className="grid grid-cols-1 gap-8 max-w-[400px] mx-auto">
+          <h4 className="text-xl lg:text-2xl font-medium">Checkout</h4>
+          {stripeClientSecret ? (
+            <Elements
+              stripe={stripePromise}
+              options={{
+                clientSecret: stripeClientSecret || "",
+              }}
+            >
+              <CheckoutForm />
+            </Elements>
+          ) : (
+            "Loading form..."
+          )}
+        </div>
+      ) : null}
     </div>
   );
 }
