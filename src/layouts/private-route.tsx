@@ -7,10 +7,8 @@ const PrivateRoute = ({ children }: { children: ReactElement }) => {
   const { token } = useTokenProvider();
   const router = useRouter();
   useEffect(() => {
-    console.log("In private route")
     setTimeout(() => {
       if (!token) {
-        console.log("token pynai")
         router.push(
           window.location.origin +
             localStorage.getItem("lang") +
