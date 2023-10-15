@@ -29,7 +29,7 @@ export default function RootLayout({
       if (localStorage) {
         // theme setter
         const themeLS = localStorage.getItem("theme");
-        console.log("Theme: ", themeLS)
+        console.log("Theme: ", themeLS);
         themeLS && setTheme(themeLS, undefined, undefined);
         // language setter
         const lang = localStorage.getItem("lang");
@@ -52,7 +52,8 @@ export default function RootLayout({
             pathname.includes("/login") ||
             pathname.includes("/reset-password") ||
             pathname.includes("/forget-password") ||
-            pathname.includes("/verification") ? null : (
+            pathname.includes("/verification") ||
+            pathname.includes("/dashboard") ? null : (
               <Navbar />
             )}
             {children}
@@ -62,7 +63,8 @@ export default function RootLayout({
             pathname.includes("/login") ||
             pathname.includes("/reset-password") ||
             pathname.includes("/forget-password") ||
-            pathname.includes("/verification") ? null : (
+            pathname.includes("/verification") ||
+            pathname.includes("/dashboard") ? null : (
               <Footer />
             )}
           </>

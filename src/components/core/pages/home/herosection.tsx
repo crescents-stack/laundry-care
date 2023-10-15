@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 
 const HeroSection = ({ dictionary }: { dictionary: any }) => {
   const pathname = usePathname();
+  
   return (
     <>
       <section className="section-padding bg-primary">
