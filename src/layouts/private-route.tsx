@@ -1,26 +1,3 @@
-// "use client";
-
-// import { useTokenProvider } from "@/context/token-provider";
-// import { ReactElement, useEffect } from "react";
-
-// const PrivateRoute = ({ children }: { children: ReactElement }) => {
-//   const {token} = useTokenProvider();
-//   useEffect(() => {
-//     if (!token) {
-//       let toRoute = window.location.href.replace("/dashboard", "/auth/login");
-//       window.location.replace(toRoute);
-//     }
-//   }, [token]);
-
-//   if (token) {
-//     return <div>{children}</div>;
-//   } else {
-//     return <div></div>;
-//   }
-// };
-
-// export default PrivateRoute;
-
 "use client";
 import { useTokenProvider } from "@/context/token-provider";
 import { useRouter } from "next/navigation";
@@ -30,12 +7,18 @@ const PrivateRoute = ({ children }: { children: ReactElement }) => {
   const { token } = useTokenProvider();
   const router = useRouter();
   useEffect(() => {
+    console.log("In private route")
     setTimeout(() => {
       if (!token) {
-        let toRoute = window.location.href.replace("/dashboard", "");
-        router.push(toRoute + "/auth/login");
+        console.log("token pynai")
+        router.push(
+          window.location.origin +
+            localStorage.getItem("lang") +
+            localStorage.getItem("theme") +
+            "/auth/login"
+        );
       }
-    }, 0);
+    }, 100);
   }, [token]);
   return token ? <div>{children}</div> : <div></div>;
 };

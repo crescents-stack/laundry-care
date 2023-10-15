@@ -7,9 +7,17 @@ const PublicRoute = ({ children }: { children: ReactElement }) => {
   const { token } = useTokenProvider();
   const router = useRouter();
   useEffect(() => {
+    const fromLocation = localStorage.getItem("from");
     if (token) {
-      let toRoute = window.location.href.replace("/auth/login", "");
-      router.push(toRoute + "/dashboard");
+      const path =
+        window.location.origin +
+        localStorage.getItem("lang") +
+        localStorage.getItem("theme");
+      if (fromLocation) {
+        router.push(path + fromLocation);
+      } else {
+        router.push(path + "/dashboard");
+      }
     }
   }, [token]);
   return !token ? <div>{children}</div> : <div></div>;
