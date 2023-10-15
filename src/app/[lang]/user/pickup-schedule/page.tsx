@@ -109,7 +109,6 @@ export default function PickupSchedule() {
 
   useEffect(() => {
     GetClientSecret();
-    localStorage.setItem("from", "/pickup-schedule");
   }, []);
 
   return (

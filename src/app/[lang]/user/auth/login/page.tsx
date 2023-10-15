@@ -101,7 +101,6 @@ const Login = () => {
         let token = response.data.token;
         setToken(token);
         localStorage.setItem("token", token);
-        localStorage.removeItem("from")
       }
     } catch (error: any) {
       if (error.response.status === 401) {
