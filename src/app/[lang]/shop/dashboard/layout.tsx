@@ -5,7 +5,7 @@ import { useTokenProvider } from "@/context/token-provider";
 import PrivateRoute from "@/layouts/private-route";
 import { Calendar, LogOut, Settings } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
 
 const DashboardLayout = ({ children }: { children: ReactElement }) => {
@@ -17,8 +17,8 @@ const DashboardLayout = ({ children }: { children: ReactElement }) => {
   };
   return (
     <PrivateRoute>
-      <div className="flex gap-10 min-h-[100vh] max-h-[100vh]">
-        <div className="flex flex-col justify-between border-r bg-[hsl(var(--primary-600))]  w-[250px] pl-10 pr-5 py-10">
+      <div className="grid grid-cols-12 gap-10 h-[100vh]">
+        <div className="col-span-4 lg:col-span-3 xl:col-span-2 flex flex-col items-center justify-between border-r bg-[hsl(var(--primary-600))] p-10">
           <div className="flex flex-col gap-3">
             <Link
               href={
@@ -27,7 +27,7 @@ const DashboardLayout = ({ children }: { children: ReactElement }) => {
                 localStorage.getItem("theme")
               }
             >
-              <h3 className="text-white mb-5 pl-2">Shopboard</h3>
+              <h3 className="text-white pb-5">Shopboard</h3>
             </Link>
             {Links.map((link: any) => {
               return (
@@ -56,11 +56,11 @@ const DashboardLayout = ({ children }: { children: ReactElement }) => {
               );
             })}
           </div>
-          <Button variant="destructive" onClick={Logout}>
+          <Button variant="destructive" onClick={Logout} className="w-full">
             Logout <LogOut className="w-4 h-4 stroke-white ml-2" />
           </Button>
         </div>
-        <div>{children}</div>
+        <div className="col-span-8 lg:col-span-9 xl:col-span-10 pr-10 py-10">{children}</div>
       </div>
     </PrivateRoute>
   );

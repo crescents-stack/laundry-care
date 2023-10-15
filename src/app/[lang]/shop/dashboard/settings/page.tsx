@@ -99,14 +99,14 @@ const Settings = () => {
   };
   return (
     <PrivateRoute>
-      <div className="mt-10">
+      <div>
         <h3>Settings</h3>
 
         <div className="flex flex-col max-w-[200px] gap-10 mt-10">
           {spinner ? (
             <ButtonLoading className="" />
           ) : (
-            <Button variant="secondary" className="" onClick={DeleteAccount}>
+            <Button variant="destructive" className="" onClick={DeleteAccount}>
               Delete Account
             </Button>
           )}
@@ -120,7 +120,7 @@ const Settings = () => {
           {spinner ? (
             <ButtonLoading className="" />
           ) : (
-            <Button className="" onClick={UpdateUserData}>
+            <Button variant="secondary" className="" onClick={UpdateUserData}>
               Update Shop Data
             </Button>
           )}
