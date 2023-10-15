@@ -1,7 +1,6 @@
 "use client";
 
 import ErrorMessage from "@/components/core/shared/error-message";
-// import PhoneNumberInput from "@/components/core/shared/phone-input";
 import { H3 } from "@/components/core/typegraphy/headings";
 import { Button } from "@/components/ui/button";
 import { ButtonLoading } from "@/components/ui/button-loading";
@@ -36,7 +35,7 @@ const Login = () => {
   const { setToken } = useTokenProvider();
 
   useEffect(() => {
-    console.log("shaith")
+    console.log("shaith");
     let data: FormDataType = JSON.parse(
       localStorage.getItem("formDataUser") as string
     );
@@ -102,9 +101,7 @@ const Login = () => {
         let token = response.data.token;
         setToken(token);
         localStorage.setItem("token", token);
-
-        let newPath = pathname.replace("/auth/login", "/dashboard");
-        router.push(newPath);
+        localStorage.removeItem("from")
       }
     } catch (error: any) {
       if (error.response.status === 401) {
@@ -221,8 +218,9 @@ const Login = () => {
                 </label>
               </div>
               <Link
-                href={`${pathname.includes("/bn") ? "/bn" : "/en"
-                  }/user/auth/forget-password`}
+                href={`${
+                  pathname.includes("/bn") ? "/bn" : "/en"
+                }/user/auth/forget-password`}
                 className="hover:text-[hsl(var(--primary-400))]"
               >
                 Forget password?
@@ -239,8 +237,9 @@ const Login = () => {
           <div>
             Already have an account?
             <Link
-              href={`${pathname.includes("/bn") ? "/bn" : "/en"
-                }/user/auth/register`}
+              href={`${
+                pathname.includes("/bn") ? "/bn" : "/en"
+              }/user/auth/register`}
               className="pl-1 hover:text-[hsl(var(--primary-600))]"
             >
               Register
