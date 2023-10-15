@@ -154,7 +154,6 @@ const Home = () => {
 
         <div className="sm:w-[70%] mx-auto">
           <h2 className="">We are investing into one of the largest fleets of electric delivery vehicles.</h2>
-          <div className="text-[4rem] text-center ">"</div>
           <h3 className="text-center text-xl">Amazing! That will become the single largest fleet of trikes/quadricycles in operation! So positive to witness a shift from token orders from companies (look good) to full commercial roll out.</h3>
           <h3 className="text-center text-[1.2rem] mt-5 text-blue-800 font-semibold">FOUNDER OF GREENAER</h3>
         </div>
