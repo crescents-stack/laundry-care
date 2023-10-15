@@ -20,7 +20,15 @@ const DashboardLayout = ({ children }: { children: ReactElement }) => {
       <div className="flex gap-10 min-h-[100vh] max-h-[100vh]">
         <div className="flex flex-col justify-between border-r bg-[hsl(var(--primary-600))]  w-[250px] pl-10 pr-5 py-10">
           <div className="flex flex-col gap-3">
-            <h3 className="text-white mb-5 pl-2">Shopboard</h3>
+            <Link
+              href={
+                window.location.origin +
+                localStorage.getItem("lang") +
+                localStorage.getItem("theme")
+              }
+            >
+              <h3 className="text-white mb-5 pl-2">Shopboard</h3>
+            </Link>
             {Links.map((link: any) => {
               return (
                 <Link
@@ -49,7 +57,7 @@ const DashboardLayout = ({ children }: { children: ReactElement }) => {
             })}
           </div>
           <Button variant="destructive" onClick={Logout}>
-            Logout <LogOut className="w-4 h-4 stroke-white ml-2"/>
+            Logout <LogOut className="w-4 h-4 stroke-white ml-2" />
           </Button>
         </div>
         <div>{children}</div>
