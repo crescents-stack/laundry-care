@@ -37,7 +37,7 @@ import PrivateRoute from "@/layouts/private-route";
 const stripePromise = loadStripe("pk_test_qblFNYngBkEdjEZ16jxxoWSM");
 
 const serviceSchema = z.object({
-  id: z.number(),
+  _id: z.string(),
   service: z.string(),
   price: z.number(),
   description: z.string(),
@@ -71,9 +71,11 @@ export default function PickupSchedule() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+  const [dataForCheckout, setDataForCheckout] = useState(null);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setShowCheckout(true);
+    setDataForCheckout(data);
     toast({
       title: "You submitted the following values:",
       description: (
@@ -128,7 +130,7 @@ export default function PickupSchedule() {
                     <FormField
                       control={form.control}
                       name="address"
-                      render={({ field }: { field: any }) => (
+                      render={({ field }) => (
                         <FormItem className="flex flex-col">
                           <FormLabel>Your address for pickup</FormLabel>
                           <FormControl>
@@ -144,7 +146,7 @@ export default function PickupSchedule() {
                     <FormField
                       control={form.control}
                       name="collectionDate"
-                      render={({ field }: { field: any }) => (
+                      render={({ field }) => (
                         <FormItem className="flex flex-col">
                           <FormLabel>Collection Date</FormLabel>
                           <Popover>
@@ -186,7 +188,7 @@ export default function PickupSchedule() {
                     <FormField
                       control={form.control}
                       name="collectionTime"
-                      render={({ field }: { field: any }) => (
+                      render={({ field }) => (
                         <FormItem className="flex flex-col">
                           <FormLabel>Collection Time</FormLabel>
                           <TimePicker field={field} />
@@ -197,7 +199,7 @@ export default function PickupSchedule() {
                     <FormField
                       control={form.control}
                       name="deliveryDate"
-                      render={({ field }: { field: any }) => (
+                      render={({ field }) => (
                         <FormItem className="flex flex-col">
                           <FormLabel>Delivery Date</FormLabel>
                           <Popover>
@@ -252,7 +254,7 @@ export default function PickupSchedule() {
                     <FormField
                       control={form.control}
                       name="messageForRider"
-                      render={({ field }: { field: any }) => (
+                      render={({ field }) => (
                         <FormItem className="flex flex-col">
                           <FormLabel>Any special message for Rider</FormLabel>
                           <FormControl>
@@ -272,7 +274,7 @@ export default function PickupSchedule() {
                     <FormField
                       control={form.control}
                       name="services"
-                      render={({ field }: { field: any }) => (
+                      render={({ field }) => (
                         <FormItem className="flex flex-col">
                           <FormMessage />
                           <FormControl>
@@ -309,7 +311,7 @@ export default function PickupSchedule() {
                   clientSecret: stripeClientSecret || "",
                 }}
               >
-                <CheckoutForm />
+                <CheckoutForm formdata={dataForCheckout} />
               </Elements>
             ) : (
               "Loading form..."

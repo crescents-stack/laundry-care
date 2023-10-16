@@ -14,9 +14,9 @@ const schedules = [
   {
     _id: "ID001",
     services: [{ _id: "adsf", service: "Wash" }],
-    customer: {
+    shop: {
       _id: "234rqef",
-      name: "Musiur Alam Opu",
+      name: "Laundry House",
       phone: "435345432534",
       address: "Bashundhara R/A, Block #F, Road #02, House #92",
     },
@@ -41,9 +41,9 @@ const schedules = [
       { _id: "adsf", service: "Wash & Iron" },
       { _id: "adsf", service: "Wash & Tumble Dry" },
     ],
-    customer: {
+    shop: {
       _id: "234rqef",
-      name: "Musiur Alam Opu",
+      name: "Dry Care",
       phone: "435345432534",
       address: "Bashundhara R/A, Block #F, Road #02, House #92",
     },
@@ -66,7 +66,7 @@ const schedules = [
 const headers = [
   "ID",
   "Service",
-  "Customer",
+  "Shop",
   "Rider",
   "Payment",
   "Collection",
@@ -101,7 +101,7 @@ export default function Schedules() {
 
           <TableBody>
             {[...schedules].reverse().map((schedule) => (
-              <TableRow key={schedule._id} className="border-b">
+              <TableRow key={schedule._id}>
                 <TableCell className="min-w-[100px]">{schedule._id}</TableCell>
                 <TableCell className="min-w-[100px]">
                   {schedule.services.map((service: any) => {
@@ -111,14 +111,14 @@ export default function Schedules() {
                 <TableCell className="min-w-[250px]">
                   <div className="flex flex-col">
                     <span className="font-semibold">
-                      {schedule.customer.name}
+                      {schedule.shop.name}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Phone className="w-3 h-3" /> {schedule.customer.phone}
+                      <Phone className="w-3 h-3" /> {schedule.shop.phone}
                     </span>
                     <span>
                       <MapPin className="w-3 h-3 mr-1 inline-block" />{" "}
-                      {schedule.customer.address}
+                      {schedule.shop.address}
                     </span>
                   </div>
                 </TableCell>
@@ -181,7 +181,6 @@ export default function Schedules() {
                 </TableCell>
               </TableRow>
             ))}
-            <TableRow />
           </TableBody>
         </Table>
       </div>
