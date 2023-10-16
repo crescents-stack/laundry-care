@@ -10,7 +10,7 @@ const Dashboard = () => {
       window.location.origin +
         localStorage.getItem("lang") +
         localStorage.getItem("theme") +
-        "/dashboard/settings"
+        "/dashboard/schedules"
     );
   }, []);
   return <div></div>;

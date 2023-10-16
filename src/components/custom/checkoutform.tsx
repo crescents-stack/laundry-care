@@ -8,11 +8,12 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ formdata }: { formdata : any }) => {
   const [spinner, setSpinner] = useState(false);
   const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
+  console.log({ formdata });
 
   const handleSubmit = async (event: any) => {
     setSpinner(true);
@@ -64,14 +65,46 @@ const CheckoutForm = () => {
     //     setSpinner(false);
     //   }
     // };
-    console.log(result, "<<<")
+    console.log(result, "<<<");
     if (result.error) {
       // Show error to your customer (for example, payment details incomplete)
       console.log(result.error.message);
       setSpinner(false);
     } else {
       const { amount } = result.paymentIntent;
-      console.log(amount, ">>")
+      console.log(amount, ">>");
+      // const scheduleDataForDB = {
+      //   services: [
+      //     {
+      //       _id: "652c4469fd833cf176089acd",
+      //       service: "Wash",
+      //     },
+      //   ],
+      //   shop: {
+      //     _id: "651adfe80eb8a540b4e7db82",
+      //     name: "Musiur Alam Opu",
+      //     phone: "+8801323260714",
+      //     address: "Bashundhara R/A",
+      //   },
+      //   rider: {
+      //     _id: "651b95130dc63c6aebe74c6a",
+      //     name: "Musiur Alam Opu",
+      //     phone: "+8801323260714",
+      //   },
+      //   collect: {
+      //     date: "10/16/2023",
+      //     time: "04:29 AM",
+      //   },
+      //   deliver: {
+      //     date: "10/16/2023",
+      //     time: "04:29 AM",
+      //   },
+      //   payment: {
+      //     amount: 75,
+      //     status: "PAID",
+      //   },
+      //   progress: "PENDING",
+      // };
       // CreateOrderInDatabase(amount);
     }
   };
@@ -92,3 +125,36 @@ const CheckoutForm = () => {
 };
 
 export default CheckoutForm;
+
+const ScheduleTemplate = {
+  services: [
+    {
+      _id: "652c4469fd833cf176089acd",
+      service: "Wash",
+    },
+  ],
+  shop: {
+    _id: "651adfe80eb8a540b4e7db82",
+    name: "Musiur Alam Opu",
+    phone: "+8801323260714",
+    address: "Bashundhara R/A",
+  },
+  rider: {
+    _id: "651b95130dc63c6aebe74c6a",
+    name: "Musiur Alam Opu",
+    phone: "+8801323260714",
+  },
+  collect: {
+    date: "10/16/2023",
+    time: "04:29 AM",
+  },
+  deliver: {
+    date: "10/16/2023",
+    time: "04:29 AM",
+  },
+  payment: {
+    amount: 75,
+    status: "PAID",
+  },
+  progress: "PENDING",
+};
