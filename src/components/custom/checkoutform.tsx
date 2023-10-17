@@ -77,7 +77,7 @@ const CheckoutForm = ({ formdata }: { formdata: any }) => {
           _id: "651adfe80eb8a540b4e7db82",
           name: "Musiur Alam Opu",
           phone: "+8801323260714",
-          address: "Bashundhara R/A",
+          address: formdata.address,
         },
         shop: {
           _id: "651adfe80eb8a540b4e7db82",
@@ -89,7 +89,7 @@ const CheckoutForm = ({ formdata }: { formdata: any }) => {
           _id: "651b95130dc63c6aebe74c6a",
           name: "Musiur Alam Opu",
           phone: "+8801323260714",
-          message: formdata.messageForRider
+          message: formdata.messageForRider,
         },
         collect: {
           date: formdata.collectionDate.toLocaleDateString(),
