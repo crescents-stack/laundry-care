@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -8,63 +10,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import axios from "axios";
 import { Calendar, Clock, Edit, MapPin, Phone, Trash } from "lucide-react";
+import { useState, useEffect } from "react";
 
-const schedules = [
-  {
-    _id: "ID001",
-    services: [{ _id: "adsf", service: "Wash" }],
-    shop: {
-      _id: "234rqef",
-      name: "Laundry House",
-      phone: "435345432534",
-      address: "Bashundhara R/A, Block #F, Road #02, House #92",
-    },
-    rider: { _id: "234rqef", name: "Md. Jahidul Islam", phone: "435345432534" },
-    collection: {
-      date: "02/14/23",
-      time: "10:30PM",
-    },
-    delivery: {
-      date: "02/14/23",
-      time: "10:30PM",
-    },
-    payment: {
-      amount: "15",
-      status: "PAID",
-    },
-    progress: "PENDING",
-  },
-  {
-    _id: "ID002",
-    services: [
-      { _id: "adsf", service: "Wash & Iron" },
-      { _id: "adsf", service: "Wash & Tumble Dry" },
-    ],
-    shop: {
-      _id: "234rqef",
-      name: "Dry Care",
-      phone: "435345432534",
-      address: "Bashundhara R/A, Block #F, Road #02, House #92",
-    },
-    rider: { _id: "234rqef", name: "Md. Jahidul Islam", phone: "435345432534" },
-    collection: {
-      date: "02/14/23",
-      time: "10:30PM",
-    },
-    delivery: {
-      date: "02/14/23",
-      time: "10:30PM",
-    },
-    payment: {
-      amount: "55",
-      status: "PAID",
-    },
-    progress: "DONE",
-  },
-];
 const headers = [
-  "ID",
+  // "ID",
   "Service",
   "Shop",
   "Rider",
@@ -76,6 +27,29 @@ const headers = [
 ];
 
 export default function Schedules() {
+  const [schedules, setSchedules] = useState([]);
+  const FetchScheduleAPI = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(
+        `${process.env.BACKEND_URL}/schedules/user`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      if(response.status === 200){
+        setSchedules(response.data.schedules);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    FetchScheduleAPI();
+  }, []);
   return (
     <div className="flex flex-col gap-5 h-full">
       <h3>Schedules</h3>
@@ -99,20 +73,19 @@ export default function Schedules() {
             </TableRow>
           </TableHeader>
 
-          <TableBody>
-            {[...schedules].reverse().map((schedule) => (
+          {
+            schedules.length ? <TableBody>
+            {[...schedules].reverse().map((schedule: any) => (
               <TableRow key={schedule._id}>
-                <TableCell className="min-w-[100px]">{schedule._id}</TableCell>
-                <TableCell className="min-w-[100px]">
+                {/* <TableCell className="min-w-[100px]">{schedule._id}</TableCell> */}
+                <TableCell className="min-w-[180px]">
                   {schedule.services.map((service: any) => {
                     return <div key={service._id}>{service.service}</div>;
                   })}
                 </TableCell>
                 <TableCell className="min-w-[250px]">
                   <div className="flex flex-col">
-                    <span className="font-semibold">
-                      {schedule.shop.name}
-                    </span>
+                    <span className="font-semibold">{schedule.shop.name}</span>
                     <span className="flex items-center gap-1">
                       <Phone className="w-3 h-3" /> {schedule.shop.phone}
                     </span>
@@ -138,11 +111,11 @@ export default function Schedules() {
                   <div className="flex flex-col">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      {schedule.collection.date}
+                      {schedule.collect.date}
                     </span>
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
-                      {schedule.collection.time}
+                      {schedule.collect.time}
                     </span>
                   </div>
                 </TableCell>
@@ -150,11 +123,11 @@ export default function Schedules() {
                   <div className="flex flex-col">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      {schedule.delivery.date}
+                      {schedule.deliver.date}
                     </span>
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
-                      {schedule.delivery.time}
+                      {schedule.deliver.time}
                     </span>
                   </div>
                 </TableCell>
@@ -181,7 +154,8 @@ export default function Schedules() {
                 </TableCell>
               </TableRow>
             ))}
-          </TableBody>
+          </TableBody> : null
+          }
         </Table>
       </div>
     </div>
