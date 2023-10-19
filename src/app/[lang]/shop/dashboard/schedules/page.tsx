@@ -68,6 +68,20 @@ export default function Schedules() {
   useEffect(() => {
     FetchScheduleAPI();
   }, []);
+
+  const UpdateProgress = async (data: any) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(`${process.env.BACKEND_URL}/schedules`, {_id: data._id}, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="flex flex-col gap-5 h-full">
       <h3>Schedules</h3>
@@ -198,7 +212,7 @@ export default function Schedules() {
                           </Select>
                         </div>
                         <DialogFooter>
-                          <Button type="submit">Save changes</Button>
+                          <Button onClick={() => UpdateProgress(schedule)}>Save changes</Button>
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>
