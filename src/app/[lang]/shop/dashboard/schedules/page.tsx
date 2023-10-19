@@ -1,6 +1,25 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -147,10 +166,43 @@ export default function Schedules() {
                     </Badge>
                   </TableCell>
                   <TableCell className="min-w-[100px] flex flex-col justify-center gap-2">
-                    <div className="flex gap-2 hover:text-[hsl(var(--primary-600))] group cursor-pointer">
-                      <Edit className="w-4 h-4 group-hover:stroke-[hsl(var(--primary-600))]" />
-                      Progress
-                    </div>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <div className="flex gap-2 hover:text-[hsl(var(--primary-600))] group cursor-pointer">
+                          <Edit className="w-4 h-4 group-hover:stroke-[hsl(var(--primary-600))]" />
+                          Progress
+                        </div>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                          <DialogTitle>Edit progress</DialogTitle>
+                          <DialogDescription>
+                            Make changes to serivce progress by selecting
+                            status.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                          <Select>
+                            <SelectTrigger className="w-[180px]">
+                              <SelectValue placeholder="Select status" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem value="PENDING">Pending</SelectItem>
+                                <SelectItem value="PROCESSING">
+                                  Processing
+                                </SelectItem>
+                                <SelectItem value="DONE">Done</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <DialogFooter>
+                          <Button type="submit">Save changes</Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+
                     <div className="flex gap-2 text-red-500 cursor-pointer">
                       <Trash className="w-4 h-4 stroke-red-500" />
                       Service
