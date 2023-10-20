@@ -4,6 +4,7 @@ import DatePicker from "@/components/custom/datepicker";
 import TimePicker from "@/components/custom/timepicker";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ButtonLoading } from "@/components/ui/button-loading";
 import {
   Dialog,
   DialogContent,
@@ -30,6 +31,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { Calendar, Clock, Edit, MapPin, Phone, Trash } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -50,6 +52,7 @@ export default function Schedules() {
   const [schedules, setSchedules] = useState<any>([]);
   const [formData, setFormData] = useState<any>(null);
   const [errors, setErrors] = useState({});
+  const [spinner, setSpinner] = useState(false);
 
   const handleOnChange = (e: any) => {
     const { name, value } = e.target;
@@ -78,6 +81,7 @@ export default function Schedules() {
     return obj;
   };
   const FetchScheduleAPI = async () => {
+    setSpinner(true);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
@@ -92,8 +96,15 @@ export default function Schedules() {
       if (response.status === 200) {
         setSchedules(response.data.schedules);
       }
-    } catch (error) {
+      setSpinner(false);
+    } catch (error: any) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Fetching schedules",
+        description: error.response.message || "Something went wrong!",
+      });
+      setSpinner(false);
     }
   };
   useEffect(() => {
@@ -101,6 +112,7 @@ export default function Schedules() {
   }, []);
 
   const UpdateProgress = async (data: any) => {
+    setSpinner(true);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
@@ -122,9 +134,20 @@ export default function Schedules() {
             return element;
           }),
         ]);
+        toast({
+          variant: "default",
+          title: "Updating schedules",
+          description: response.data.message || "Successful!",
+        });
       }
-    } catch (error) {
-      console.log(error);
+      setSpinner(false);
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Fetching schedules",
+        description: error.response.message || "Something went wrong!",
+      });
+      setSpinner(false);
     }
   };
 
@@ -301,9 +324,13 @@ export default function Schedules() {
                           </div>
                         </div>
                         <DialogFooter>
-                          <Button onClick={() => handleOnSubmit(schedule)}>
-                            Update
-                          </Button>
+                          {spinner ? (
+                            <ButtonLoading className="" />
+                          ) : (
+                            <Button onClick={() => handleOnSubmit(schedule)}>
+                              Update
+                            </Button>
+                          )}
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>
