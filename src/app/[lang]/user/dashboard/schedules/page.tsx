@@ -55,11 +55,21 @@ export default function Schedules() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleOnSubmit = (e: any) => {
-    e.preventDefault();
+  const handleOnSubmit = (data: any) => {
     const validationErrors = validation(formData);
     if (Object.keys(validationErrors).length === 0) {
-      console.log(formData);
+      console.log(data);
+      const collectionDate = new Date(formData.collectionDate);
+      const deliveryDate = new Date(formData.deliveryDate);
+      const collect = {
+        date: collectionDate.toLocaleDateString(),
+        time: formData.collectionTime,
+      };
+      const deliver = {
+        date: deliveryDate.toLocaleDateString(),
+        time: formData.deliveryTime,
+      };
+      UpdateProgress({ _id: data._id, collect, deliver });
     }
     setErrors(validationErrors);
   };
@@ -94,8 +104,8 @@ export default function Schedules() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `${process.env.BACKEND_URL}/schedules`,
-        { data },
+        `${process.env.BACKEND_URL}/schedules/user`,
+        data,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -104,6 +114,14 @@ export default function Schedules() {
       );
       console.log(response);
       if (response.status === 200) {
+        setSchedules([
+          ...schedules.map((element: any) => {
+            if (element._id === data._id) {
+              element = { ...element, ...data };
+            }
+            return element;
+          }),
+        ]);
       }
     } catch (error) {
       console.log(error);
@@ -283,7 +301,9 @@ export default function Schedules() {
                           </div>
                         </div>
                         <DialogFooter>
-                          <Button onClick={handleOnSubmit}>Save changes</Button>
+                          <Button onClick={() => handleOnSubmit(schedule)}>
+                            Update
+                          </Button>
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>

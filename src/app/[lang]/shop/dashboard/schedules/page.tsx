@@ -74,7 +74,7 @@ export default function Schedules() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `${process.env.BACKEND_URL}/schedules`,
+        `${process.env.BACKEND_URL}/schedules/shop`,
         { _id: data._id, progress: status },
         {
           headers: {
