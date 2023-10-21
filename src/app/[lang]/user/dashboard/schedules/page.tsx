@@ -283,7 +283,7 @@ export default function Schedules() {
                             </label>
                             <TimePicker
                               field={{
-                                value: schedule.collect.time,
+                                value: schedule.collect.time || null,
                                 onChange: (e: any) => {
                                   handleOnChange({
                                     target: {
@@ -312,7 +312,7 @@ export default function Schedules() {
                             </label>
                             <TimePicker
                               field={{
-                                value: schedule.deliver.time,
+                                value: schedule.deliver.time || null,
                                 onChange: (e: any) => {
                                   handleOnChange({
                                     target: {
