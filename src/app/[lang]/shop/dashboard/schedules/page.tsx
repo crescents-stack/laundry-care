@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ButtonLoading } from "@/components/ui/button-loading";
 import {
   Dialog,
   DialogContent,
@@ -29,6 +30,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { Calendar, Clock, Edit, MapPin, Phone, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -47,6 +49,7 @@ const headers = [
 export default function Schedules() {
   const [schedules, setSchedules] = useState<any>([]);
   const [status, setStatus] = useState("PENDING");
+  const [spinner, setSpinner] = useState(false);
   const FetchScheduleAPI = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -71,10 +74,11 @@ export default function Schedules() {
   }, []);
 
   const UpdateProgress = async (data: any) => {
+    setSpinner(true);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `${process.env.BACKEND_URL}/schedules`,
+        `${process.env.BACKEND_URL}/schedules/shop`,
         { _id: data._id, progress: status },
         {
           headers: {
@@ -83,17 +87,27 @@ export default function Schedules() {
         }
       );
       console.log(response);
-      if(response.status === 200){
-        const UpdatedSchedules = [...schedules.map((element: any) => {
-          if(element._id === data._id){
-            element.progress = status;
-          }
-          return element;
-        })];
-        setSchedules(UpdatedSchedules)
+      if (response.status === 200) {
+        const UpdatedSchedules = [
+          ...schedules.map((element: any) => {
+            if (element._id === data._id) {
+              element.progress = status;
+            }
+            return element;
+          }),
+        ];
+        setSchedules(UpdatedSchedules);
+        setSpinner(false);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Progress Update",
+        description:
+          error?.response?.data?.message || "Uh oh! Something went wrong.",
+      });
+      setSpinner(false);
     }
   };
   return (
@@ -228,9 +242,13 @@ export default function Schedules() {
                           </Select>
                         </div>
                         <DialogFooter>
-                          <Button onClick={() => UpdateProgress(schedule)}>
-                            Save changes
-                          </Button>
+                          {spinner ? (
+                            <ButtonLoading className="mt-5" />
+                          ) : (
+                            <Button onClick={() => UpdateProgress(schedule)}>
+                              Save changes
+                            </Button>
+                          )}
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>
