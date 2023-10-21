@@ -21,7 +21,7 @@ import { Clock } from "lucide-react";
 
 export function TimePicker({ field }: { field: any }) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(field.value || "");
+  const [value, setValue] = React.useState("");
   const times = generateTimeStrings();
 
   return (
