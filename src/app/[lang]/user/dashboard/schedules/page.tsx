@@ -274,7 +274,7 @@ export default function Schedules() {
                             <DatePicker
                               setter={handleOnChange}
                               name="collectionDate"
-                              defaultValue={schedule.collect.date}
+                              // defaultValue={schedule.collect.date}
                             />
                           </div>
                           <div className="grid grid-cols-1 gap-2">
@@ -302,7 +302,7 @@ export default function Schedules() {
                             <DatePicker
                               setter={handleOnChange}
                               name="deliveryDate"
-                              defaultValue={schedule.deliver.date}
+                              // defaultValue={schedule.deliver.date}
                             />
                           </div>
 
