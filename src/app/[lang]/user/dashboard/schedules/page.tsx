@@ -255,12 +255,12 @@ export default function Schedules() {
                       <DialogTrigger asChild>
                         <div className="flex gap-2 hover:text-[hsl(var(--primary-600))] group cursor-pointer">
                           <Edit className="w-4 h-4 group-hover:stroke-[hsl(var(--primary-600))]" />
-                          Progress
+                          Schedule
                         </div>
                       </DialogTrigger>
                       <DialogContent className="sm:max-w-[425px]">
                         <DialogHeader>
-                          <DialogTitle>Edit progress</DialogTitle>
+                          <DialogTitle>Edit Schedule</DialogTitle>
                           <DialogDescription>
                             Make changes to serivce progress by selecting
                             status.
@@ -274,6 +274,7 @@ export default function Schedules() {
                             <DatePicker
                               setter={handleOnChange}
                               name="collectionDate"
+                              defaultValue={schedule.collect.date}
                             />
                           </div>
                           <div className="grid grid-cols-1 gap-2">
@@ -282,7 +283,7 @@ export default function Schedules() {
                             </label>
                             <TimePicker
                               field={{
-                                value: null,
+                                value: schedule.collect.time,
                                 onChange: (e: any) => {
                                   handleOnChange({
                                     target: {
@@ -301,6 +302,7 @@ export default function Schedules() {
                             <DatePicker
                               setter={handleOnChange}
                               name="deliveryDate"
+                              defaultValue={schedule.deliver.date}
                             />
                           </div>
 
@@ -310,7 +312,7 @@ export default function Schedules() {
                             </label>
                             <TimePicker
                               field={{
-                                value: null,
+                                value: schedule.deliver.time,
                                 onChange: (e: any) => {
                                   handleOnChange({
                                     target: {

@@ -16,11 +16,13 @@ import {
 export default function DatePicker({
   setter,
   name,
+  defaultValue
 }: {
   setter: any;
   name: string;
+  defaultValue: string;
 }) {
-  const [date, setDate] = React.useState<Date>();
+  const [date, setDate] = React.useState<Date>(new Date(defaultValue));
   return (
     <Popover>
       <PopoverTrigger asChild>
