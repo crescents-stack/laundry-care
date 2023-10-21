@@ -1,5 +1,6 @@
 "use client";
 
+import ErrorMessage from "@/components/core/shared/error-message";
 import DatePicker from "@/components/custom/datepicker";
 import TimePicker from "@/components/custom/timepicker";
 import { Badge } from "@/components/ui/badge";
@@ -34,7 +35,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { Calendar, Clock, Edit, MapPin, Phone, Trash } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 const headers = [
   // "ID",
@@ -50,36 +51,8 @@ const headers = [
 
 export default function Schedules() {
   const [schedules, setSchedules] = useState<any>([]);
-  const [formData, setFormData] = useState<any>(null);
-  const [errors, setErrors] = useState({});
   const [spinner, setSpinner] = useState(false);
 
-  const handleOnChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-  const handleOnSubmit = (data: any) => {
-    const validationErrors = validation(formData);
-    if (Object.keys(validationErrors).length === 0) {
-      console.log(data);
-      const collectionDate = new Date(formData.collectionDate);
-      const deliveryDate = new Date(formData.deliveryDate);
-      const collect = {
-        date: collectionDate.toLocaleDateString(),
-        time: formData.collectionTime,
-      };
-      const deliver = {
-        date: deliveryDate.toLocaleDateString(),
-        time: formData.deliveryTime,
-      };
-      UpdateProgress({ _id: data._id, collect, deliver });
-    }
-    setErrors(validationErrors);
-  };
-  const validation = (data: any) => {
-    let obj: any = {};
-    return obj;
-  };
   const FetchScheduleAPI = async () => {
     setSpinner(true);
     try {
@@ -111,52 +84,18 @@ export default function Schedules() {
     FetchScheduleAPI();
   }, []);
 
-  const UpdateProgress = async (data: any) => {
-    setSpinner(true);
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.put(
-        `${process.env.BACKEND_URL}/schedules/user`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response);
-      if (response.status === 200) {
-        setSchedules([
-          ...schedules.map((element: any) => {
-            if (element._id === data._id) {
-              element = { ...element, ...data };
-            }
-            return element;
-          }),
-        ]);
-        toast({
-          variant: "default",
-          title: "Updating schedules",
-          description: response.data.message || "Successful!",
-        });
-      }
-      setSpinner(false);
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Fetching schedules",
-        description: error.response.message || "Something went wrong!",
-      });
-      setSpinner(false);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-5 h-full">
       <h3>Schedules</h3>
       <div className="border h-full rounded-lg overflow-x-auto">
         <Table>
-          <TableCaption>All the recent schedules</TableCaption>
+          <TableCaption>
+            {spinner
+              ? "Loading..."
+              : schedules.length
+              ? "All the recent schedules"
+              : "No schedule found!"}
+          </TableCaption>
           <TableHeader>
             <TableRow className="bg-[hsl(var(--primary-50))]">
               {headers.map((head: any, index: number) => {
@@ -251,91 +190,11 @@ export default function Schedules() {
                     </Badge>
                   </TableCell>
                   <TableCell className="min-w-[100px] flex flex-col justify-center gap-2">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <div className="flex gap-2 hover:text-[hsl(var(--primary-600))] group cursor-pointer">
-                          <Edit className="w-4 h-4 group-hover:stroke-[hsl(var(--primary-600))]" />
-                          Schedule
-                        </div>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                          <DialogTitle>Edit Schedule</DialogTitle>
-                          <DialogDescription>
-                            Make changes to serivce progress by selecting
-                            status.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="grid gap-4 py-4">
-                          <div className="grid grid-cols-1 gap-2">
-                            <label className="font-semibold">
-                              Collection Date
-                            </label>
-                            <DatePicker
-                              setter={handleOnChange}
-                              name="collectionDate"
-                              defaultValue={schedule.collect.date}
-                            />
-                          </div>
-                          <div className="grid grid-cols-1 gap-2">
-                            <label className="font-semibold">
-                              Collection Time
-                            </label>
-                            <TimePicker
-                              field={{
-                                value: schedule.collect.time || null,
-                                onChange: (e: any) => {
-                                  handleOnChange({
-                                    target: {
-                                      name: "collectionTime",
-                                      value: e,
-                                    },
-                                  });
-                                },
-                              }}
-                            />
-                          </div>
-                          <div className="grid grid-cols-1 gap-2">
-                            <label className="font-semibold">
-                              Delivery Date
-                            </label>
-                            <DatePicker
-                              setter={handleOnChange}
-                              name="deliveryDate"
-                              defaultValue={schedule.deliver.date}
-                            />
-                          </div>
-
-                          <div className="grid grid-cols-1 gap-2">
-                            <label className="font-semibold">
-                              Delivery Time
-                            </label>
-                            <TimePicker
-                              field={{
-                                value: schedule.collect.time || null,
-                                onChange: (e: any) => {
-                                  handleOnChange({
-                                    target: {
-                                      name: "deliveryTime",
-                                      value: e,
-                                    },
-                                  });
-                                },
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <DialogFooter>
-                          {spinner ? (
-                            <ButtonLoading className="" />
-                          ) : (
-                            <Button onClick={() => handleOnSubmit(schedule)}>
-                              Update
-                            </Button>
-                          )}
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
+                    <UpdateDialog
+                      schedule={schedule}
+                      schedules={schedules}
+                      setSchedules={setSchedules}
+                    />
                     <div className="flex gap-2 text-red-500 cursor-pointer">
                       <Trash className="w-4 h-4 stroke-red-500" />
                       Service
@@ -350,3 +209,194 @@ export default function Schedules() {
     </div>
   );
 }
+
+const UpdateDialog = ({
+  schedule,
+  schedules,
+  setSchedules,
+}: {
+  schedule: any;
+  schedules: any;
+  setSchedules: any;
+}) => {
+  const [formData, setFormData] = useState<any>({
+    collectionDate: schedule.collect.date,
+    collectionTime: schedule.collect.time,
+    deliveryDate: schedule.deliver.date,
+    deliveryTime: schedule.deliver.time,
+  });
+  const [errors, setErrors] = useState({});
+  const [spinner, setSpinner] = useState(false);
+
+  const handleOnChange = (e: any) => {
+    const { name, value } = e.target;
+    console.log({ name, value });
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleOnSubmit = (data: any) => {
+    const validationErrors = validation(formData);
+    if (Object.keys(validationErrors).length === 0) {
+      console.log(data);
+      const collectionDate = new Date(formData.collectionDate);
+      const deliveryDate = new Date(formData.deliveryDate);
+      const collect = {
+        date: collectionDate.toLocaleDateString(),
+        time: formData.collectionTime,
+      };
+      const deliver = {
+        date: deliveryDate.toLocaleDateString(),
+        time: formData.deliveryTime,
+      };
+      UpdateProgress({ _id: data._id, collect, deliver });
+    }
+    setErrors(validationErrors);
+  };
+  const validation = (data: any) => {
+    console.log(data);
+    let obj: any = {};
+    if (!data.collectionDate.trim()) {
+      obj.collectionDate = "Collection date required!";
+    }
+    if (!data.collectionTime.trim()) {
+      obj.collectionTime = "Collection time required!";
+    }
+    if (!data.deliveryDate.trim()) {
+      obj.deliveryDate = "Delivery date required!";
+    }
+    if (!data.deliveryTime.trim()) {
+      obj.deliveryTime = "Delivery date required!";
+    }
+    return obj;
+  };
+  const UpdateProgress = async (data: any) => {
+    setSpinner(true);
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.put(
+        `${process.env.BACKEND_URL}/schedules/user`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        setSchedules([
+          ...schedules.map((element: any) => {
+            if (element._id === data._id) {
+              element = { ...element, ...data };
+            }
+            return element;
+          }),
+        ]);
+        toast({
+          variant: "default",
+          title: "Updating schedules",
+          description: response.data.message || "Successful!",
+        });
+      }
+      setSpinner(false);
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Fetching schedules",
+        description: error.response.message || "Something went wrong!",
+      });
+      setSpinner(false);
+    }
+  };
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <div className="flex gap-2 hover:text-[hsl(var(--primary-600))] group cursor-pointer">
+          <Edit className="w-4 h-4 group-hover:stroke-[hsl(var(--primary-600))]" />
+          Schedule
+        </div>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit Schedule</DialogTitle>
+          <DialogDescription>
+            Make changes to serivce progress by selecting status.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-1 gap-2">
+            <label className="font-semibold">Collection Date</label>
+            <DatePicker
+              setter={handleOnChange}
+              name="collectionDate"
+              defaultValue={schedule.collect.date}
+            />
+            <ErrorMessage errors={errors} name="collectionDate" />
+          </div>
+          <div className="grid grid-cols-1 gap-2">
+            <label className="font-semibold">Collection Time</label>
+            <TimePicker
+              field={{
+                value: schedule.collect.time,
+                onChange: (e: any) => {
+                  handleOnChange({
+                    target: {
+                      name: "collectionTime",
+                      value: e,
+                    },
+                  });
+                },
+              }}
+            />
+            <ErrorMessage errors={errors} name="collectionTime" />
+          </div>
+          <div className="grid grid-cols-1 gap-2">
+            <label className="font-semibold">Delivery Date</label>
+            <DatePicker
+              setter={handleOnChange}
+              name="deliveryDate"
+              defaultValue={schedule.deliver.date}
+            />
+            <ErrorMessage errors={errors} name="deliveryDate" />
+          </div>
+
+          <div className="grid grid-cols-1 gap-2">
+            <label className="font-semibold">Delivery Time</label>
+            <TimePicker
+              field={{
+                value: schedule.deliver.time,
+                onChange: (e: any) => {
+                  handleOnChange({
+                    target: {
+                      name: "deliveryTime",
+                      value: e,
+                    },
+                  });
+                },
+              }}
+            />
+            <ErrorMessage errors={errors} name="deliveryTime" />
+          </div>
+        </div>
+        <DialogFooter>
+          {spinner ? (
+            <ButtonLoading className="" />
+          ) : (
+            <Button
+              onClick={() => {
+                setFormData({
+                  collectionDate: schedule.collect.date,
+                  collectionTime: schedule.collect.time,
+                  deliveryDate: schedule.deliver.date,
+                  deliveryTime: schedule.deliver.time,
+                });
+                handleOnSubmit(schedule);
+              }}
+            >
+              Update
+            </Button>
+          )}
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
